@@ -11,9 +11,9 @@ namespace WAP_Assignment.Controllers
         //
         // GET: /Home/
 
-        public String Index()
+        public ActionResult Index()
         {
-            return "Ahoi!";
+            return View();
         }
 
     }
