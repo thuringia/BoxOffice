@@ -6,8 +6,23 @@
   outline: 0; }
 
 body {
-  background: linear-gradient(top, #063559, #0d5a7f) no-repeat;
+  background: #87e0fd;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #063559 0%, #0d5a7f 100%) no-repeat;
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #063559), color-stop(100%, #0d5a7f)) no-repeat;
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #063559 0%, #0d5a7f) no-repeat;
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #063559 0%, #0d5a7f 100%) no-repeat;
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #063559 0%, #0d5a7f 100%) no-repeat;
+  /* IE10+ */
+  background: linear-gradient(top, #063559 0%, #0d5a7f 100%) no-repeat;
+  /* W3C */
   background-color: #0d5a7f !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= '#063559', endColorstr='#0D5A7F',GradientType=0 ) no-repeat;
+  /* IE6-8 */
   color: rgba(250, 250, 250, 0.9);
   font-family: museo-sans;
   font-size: 12pt;
