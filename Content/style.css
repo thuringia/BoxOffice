@@ -1,34 +1,17 @@
+/* Mixins */
+/* Variablen */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0; }
+
 body {
-  font-size: .85em;
-  font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
-  color: #232323;
-  background-color: #fff; }
-
-header,
-footer,
-nav,
-section {
-  display: block; }
-
-/* Styles for basic forms
------------------------------------------------------------*/
-fieldset {
-  border: 1px solid #ddd;
-  padding: 0 1.4em 1.4em 1.4em;
-  margin: 0 0 1.5em 0; }
-
-legend {
-  font-size: 1.2em;
-  font-weight: bold; }
-
-textarea {
-  min-height: 75px; }
-
-.editor-label {
-  margin: 1em 0 0 0; }
-
-.editor-field {
-  margin: 0.5em 0 0 0; }
+  background: linear-gradient(top, #063559, #0d5a7f) no-repeat;
+  background-color: #0d5a7f !important;
+  color: white;
+  font-family: museo-sans;
+  font-size: 12pt;
+  font-weight: 300; }
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
