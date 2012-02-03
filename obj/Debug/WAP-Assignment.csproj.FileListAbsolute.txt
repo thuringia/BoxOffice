@@ -1,7 +1,0 @@
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\bin\WAP-Assignment.dll
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\bin\WAP-Assignment.pdb
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\bin\EntityFramework.dll
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\bin\EntityFramework.xml
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\obj\Debug\WAP-Assignment.dll
-C:\Users\robbie\documents\visual studio 2010\Projects\WAP-Assignment\WAP-Assignment\obj\Debug\WAP-Assignment.pdb
