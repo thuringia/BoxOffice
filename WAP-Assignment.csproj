@@ -72,7 +72,6 @@
     <Compile Include="Models\AssignmentEntities.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Person.cs" />
