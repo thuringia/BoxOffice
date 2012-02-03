@@ -96,7 +96,8 @@ In addition to the paper-copy that you hand-in you should also hand-in a CD cont
 
 You will be expected to produce a **1500 (approx.)** word referenced report on the following:
 	
-	When developing and deploying web applications you will face a number of technical issues that you will have to overcome. These issues include performance, security, and configuration and maintenance.
+	When developing and deploying web applications you will face a number of technical issues that you will have to overcome.
+	These issues include performance, security, and configuration and maintenance.
 	Investigate and discuss these issues in terms of the problems that they may present to you as a developer and describe the methods by which ASP.NET addresses them.
 
 #### Part 2   Functional Testing
@@ -130,19 +131,19 @@ You will also be expected to hand in (not part of the word count):
 
 The criteria below should be read in the context of the methods you were shown as part of the module.
 
-### 70   100
+### 70 - 100
 
 The web design documentation will exhibit an exhaustive level of detail with an excellent level of clarity and conciseness. Database designs will be clear and accurate showing a high level of knowledge, analysis and application.
 
-### 60   69
+### 60 - 69
 
 The web design documentation will exhibit a high level of detail with a high level of clarity and conciseness. Database designs will be clear and accurate showing a good level of knowledge, analysis and application.
 
-### 50   59
+### 50 - 59
 
 The web design documentation will exhibit good detail in a clearly presented manner. Database designs will be clear and have a high level of accuracy showing evidence of knowledge, analysis and application.
 
-### 40   49
+### 40 - 49
 
 The web design documentation will exhibit enough detail and with sufficient clarity to communicate the basic design of the web application. Database designs will provide evidence of an understanding of the data structures required to satisfy the requirements of the assignment, showing evidence of knowledge and application.
 
@@ -287,23 +288,56 @@ The additional functionality is worth an additional 40% of the marks available f
 		<td>1</td>
 	</tr>
 	<tr>
-		<td>Rate a DVD (logged in   previous rental only)</td>
+		<td>Rate a DVD (logged in - previous rental only)</td>
 		<td>1</td>
 	</tr>
 	<tr>
-		<td>Post comments on DVD (logged in   previous rental only)</td>
+		<td>Post comments on DVD (logged in - previous rental only)</td>
 		<td>1</td>
 	</tr>
 	<tr>
-		<td>Edit comments on DVD (logged in   own comments only)</td>
+		<td>Edit comments on DVD (logged in - own comments only)</td>
 		<td>1</td>
 	</tr>
 	<tr>
-		<td>View comments on a DVD/td>
+		<td>View comments on a DVD</td>
 		<td>1</td>
 	</tr>
 	<tr>
 		<td>Flag comment for moderation</td>
+		<td>1</td>
+	</tr>
+</table>
+ 
+#### Administrator
+
+<table border>
+	<tr>
+		<td>Functionality</td>
+		<td>Mark (out of)</td>
+    </tr>
+	<tr>
+		<td>Post DVD of the week available to all</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>Set DVD availability date</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>View flagged comments</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>View flagged comments in context</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>Message individual members (picked up on next log in)</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>Message all members (picked up on next log in)</td>
 		<td>1</td>
 	</tr>
 
@@ -312,74 +346,136 @@ The additional functionality is worth an additional 40% of the marks available f
 		<td></td>
 	</tr>
 </table>
- 
-#### Administrator
- 
-Functionality	Mark (out of)	   
-Post DVD of the week available to all	1	   
-Set DVD availability date	1	   
-View flagged comments	1	   
-View flagged comments in context	1	   
-Message individual members (picked up on next log in)	1	   
-Message all members (picked up on next log in)	1	 
-Discretionary Marks
+
+### Discretionary Marks
+
 The discretionary marks are worth an additional 20% of the marks available for the implementation section of the assignment.
+
+<table border>
+	<tr>
+		<td>Element</td>
+		<td>Mark (out of)</td>
+    </tr>
+	<tr>
+		<td>Use of server side programming</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>Use(s) of Ajax</td>
+		<td>100</td>
+	</tr>
+</table>
+
+#### 70 - 100
+
+* Use of server-side programming will exhibit a high level of knowledge, analysis and application based on substantial independent research.
+* Use of Ajax will exhibit a high level of knowledge, analysis and application based on substantial independent research.
+
+#### 60 - 69
+
+* Use of server-side programming will exhibit a good level of knowledge, analysis and application based on some independent research. 
+* Use of Ajax will exhibit a good level of knowledge, analysis and application based on some independent research. 
+
+#### 50 - 59
+
+* Use of server-side programming will exhibit evidence of knowledge, analysis and application based on an understanding of the subject area.
+* Use of Ajax will exhibit evidence of knowledge, analysis and application based on an understanding of the subject area.
+
+#### 40 - 49
+* Use of server-side programming will exhibit evidence of knowledge and application based on material provided as part of the module.	
+* Use of Ajax will exhibit evidence of knowledge and application based on material provided as part of the module.	
+
+## Marking Criteria   Report 
+
+### Part 1 - Evaluation (35%)
+
+<table border>
+	<tr>
+		<td>Report Element</td>
+		<td>Mark (out of)</td>
+		<td>Weighting</td>
+	</tr>
+	<tr>
+		<td>Introduction - What the report is about, why it is important, how it is organised.</td>
+		<td>100</td>
+		<td>5%</td>
+	</tr>
+	<tr>
+		<td>Main Body - Investigation of security, performance and configuration and maintenance when developing and maintaining web applications.<br/>Description of how ASP.NET addresses them.</td>
+		<td>100</td>
+		<td>18%</td>
+	</tr>
+	<tr>
+		<td>Conclusion - Summary of the main findings, including a substantiated assessment of the effectiveness of ASP.NET in addressing the issues described.</td>
+		<td>100</td>
+		<td>8%</td>
+	</tr>
+	<tr>
+		<td>Quality of references (Harvard referencing will be used).</td>
+		<td>100</td>
+		<td>4%</td>
+	</tr>
+	<tr>
+		<td>Total for the report</td>
+		<td>-</td>
+		<td>35%</td>
+	</tr>
+</table>
  
-Element	Mark (out of)	   
-Use of server side programming	100	   
-Use(s) of Ajax	100	 
-70   100
-Use of server-side programming will exhibit a high level of knowledge, analysis and application based on substantial independent research.
-Use of Ajax will exhibit a high level of knowledge, analysis and application based on substantial independent research.
-60   69
-Use of server-side programming will exhibit a good level of knowledge, analysis and application based on some independent research. 
-Use of Ajax will exhibit a good level of knowledge, analysis and application based on some independent research. 
-50   59
-Use of server-side programming will exhibit evidence of knowledge, analysis and application based on an understanding of the subject area.
-Use of Ajax will exhibit evidence of knowledge, analysis and application based on an understanding of the subject area.
-40   49
-Use of server-side programming will exhibit evidence of knowledge and application based on material provided as part of the module.	
-Use of Ajax will exhibit evidence of knowledge and application based on material provided as part of the module.	
-Marking Criteria   Report 
-Part 1 - Evaluation (35%)
- 
-Report Element	Mark (out of)	Weighting	   
-Introduction   What the report is about, why it is important, how it is organised.	100		5%	   
-Main Body   Investigation of security, performance and configuration and maintenance when developing and maintaining web applications   description of how ASP.NET addresses them.	100		18%	   
-Conclusion   Summary of the main findings, including a substantiated assessment of the effectiveness of ASP.NET in addressing the issues described.	100		8%	   
-Quality of references (Harvard referencing will be used).	100		4%	   
-Total for the report			35%	 
-70   100
-The introduction will be clear and concise in stating what the report is about and why the topic is important within the general context of web application development and maintenance. The introduction should indicate the main areas of discussion as a  general overview  of what is to be written within this context. 
-The main body will be clear and concise in justifying the need to address performance, security, and configuration and maintenance when developing and maintaining web applications. The description of ASP.NET s approach to addressing these issues will be clear, concise and strictly to the point.  A high level of reading in the area will be exhibited with all sources correctly referenced.
-The conclusion will be clear and concise in summarising the main findings/discussion points. A conclusion will be reached upon the ability and effectiveness with which ASP.NET addresses the issues under discussion. Justification of this conclusion will be based solely upon content already introduced in the body of the report.
-References will be peer-reviewed where appropriate and will show quality and depth of reading in the area. 
-60   69
-The introduction will be clear in stating what the report is about and why the topic is important within the general context of web application development and maintenance. The main areas of discussion will be outlined.
-The main body will be clear and concise in describing the need to address performance, security, and configuration and maintenance when developing and maintaining web applications. The description of ASP.NET s approach to addressing these issues will be clear and concise. Reading in the area will be exhibited with all sources correctly referenced.
-The conclusion will be clear and concise in summarising the main findings/discussion points. A conclusion will be reached upon the ability and effectiveness of ASP.NET. Justification of this conclusion will primarily draw upon content already introduced in the body of the report.
-References will be peer-reviewed where appropriate and will show reading in the area. 
-50   59
-The introduction will state what the report is about and why it is important within the general context of web application development.
-The main body will outline the need to address performance, security, and configuration and maintenance when developing and maintaining web applications. The description of ASP.NET s approach to addressing these issues will be clear. Reading in the area will be exhibited with sources referenced.
-The conclusion will summarise the report findings. A conclusion will be reached about the ability and effectiveness of ASP.NET.
-References will be of good quality and will show reading in the area. 
-40   49
-The introduction will state what the report is about.
-The main body will discuss ASP.NET in terms of developing and maintaining web applications. There will be a general description of the approach of ASP.NET to the issues under discussion. The discussion should show evidence of reading in the area with all sources referenced.
-The conclusion will summarise the report findings and a conclusion on the usefulness of ASP.NET will be reached.
-References will be correctly used and will show reading in the area. 
-Part 2   Testing (5%)
- 
-Element	Mark (out of)	   
-Functional testing	100	 
-70   100
+#### 70 - 100
+
+* The introduction will be clear and concise in stating what the report is about and why the topic is important within the general context of web application development and maintenance. The introduction should indicate the main areas of discussion as a  general overview  of what is to be written within this context. 
+* The main body will be clear and concise in justifying the need to address performance, security, and configuration and maintenance when developing and maintaining web applications. The description of ASP.NET s approach to addressing these issues will be clear, concise and strictly to the point.  A high level of reading in the area will be exhibited with all sources correctly referenced.
+* The conclusion will be clear and concise in summarising the main findings/discussion points. A conclusion will be reached upon the ability and effectiveness with which ASP.NET addresses the issues under discussion. Justification of this conclusion will be based solely upon content already introduced in the body of the report.
+* References will be peer-reviewed where appropriate and will show quality and depth of reading in the area. 
+
+#### 60 - 69
+
+* The introduction will be clear in stating what the report is about and why the topic is important within the general context of web application development and maintenance. The main areas of discussion will be outlined.
+* The main body will be clear and concise in describing the need to address performance, security, and configuration and maintenance when developing and maintaining web applications. The description of ASP.NET s approach to addressing these issues will be clear and concise. Reading in the area will be exhibited with all sources correctly referenced.
+* The conclusion will be clear and concise in summarising the main findings/discussion points. A conclusion will be reached upon the ability and effectiveness of ASP.NET. Justification of this conclusion will primarily draw upon content already introduced in the body of the report.
+* References will be peer-reviewed where appropriate and will show reading in the area. 
+
+#### 50 - 59
+
+* The introduction will state what the report is about and why it is important within the general context of web application development.
+* The main body will outline the need to address performance, security, and configuration and maintenance when developing and maintaining web applications. The description of ASP.NET s approach to addressing these issues will be clear. Reading in the area will be exhibited with sources referenced.
+* The conclusion will summarise the report findings. A conclusion will be reached about the ability and effectiveness of ASP.NET.
+* References will be of good quality and will show reading in the area. 
+
+#### 40 - 49
+* The introduction will state what the report is about.
+* The main body will discuss ASP.NET in terms of developing and maintaining web applications. There will be a general description of the approach of ASP.NET to the issues under discussion. The discussion should show evidence of reading in the area with all sources referenced.
+* The conclusion will summarise the report findings and a conclusion on the usefulness of ASP.NET will be reached.
+* References will be correctly used and will show reading in the area. 
+
+### Part 2   Testing (5%)
+
+<table border>
+	<tr>
+		<td>Element</td>
+		<td>Mark (out of)</td>
+	</tr>
+	<tr>
+		<td>Functional testing</td>
+		<td>100</td>
+	</tr>
+</table>
+
+#### 70 - 100
+
 Exhaustive testing will have been planned and carried out.
-60   69
+
+#### 60 - 69
+
 Testing on all functionality will have been planned and carried out.
-50   59
+
+#### 50 - 59
+
 A good level of testing will have been planned and carried out. 
-40   49
+
+#### 40 - 49
+
 Testing has been done well where carried out. 
 
-The University Regulations regarding extenuating circumstances and plagiarism will apply.
+**The University Regulations regarding extenuating circumstances and plagiarism will apply.**
