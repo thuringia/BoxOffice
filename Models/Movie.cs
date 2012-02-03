@@ -21,7 +21,6 @@ namespace WAP_Assignment.Models
         public int votes { get; set; }
         public float rating { get; set; }
         public bool rating_by_moviedb { get; set; }
-        public bool language { get; set; }
         public string tagline { get; set; }
         public string certification { get; set; }
         public DateTime released { get; set; }
