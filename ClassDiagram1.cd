@@ -21,13 +21,6 @@
       <FileName>Models\Country.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WAP_Assignment.Models.Genre">
-    <Position X="3.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Genre.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WAP_Assignment.Models.Image">
     <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
