@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WAP_Assignment.Models;
 
 namespace WAP_Assignment.Controllers
 {
@@ -24,9 +25,10 @@ namespace WAP_Assignment.Controllers
 
         //        
         // GET: /Store/Details        
-        public string Details()
+        public ActionResult Details(int id)
         {
-            return "Hello from Store.Details()";
+            var movie = new Movie { Title = "Movie " + id };
+            return View(movie);
         }
 
     }
