@@ -9,6 +9,8 @@ namespace WAP_Assignment.Controllers
 {
     public class StoreController : Controller
     {
+        AssignmentEntities db = new AssignmentEntities();
+
         //      
         // GET: /Store/        
         public string Index()
@@ -27,8 +29,7 @@ namespace WAP_Assignment.Controllers
         // GET: /Store/Details        
         public ActionResult Details(int id)
         {
-            var movie = new Movie { Title = "Movie " + id };
-            return View(movie);
+            return View();
         }
 
     }
