@@ -34,5 +34,7 @@ namespace WAP_Assignment.Models
         public bool isAdmin { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

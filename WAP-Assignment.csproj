@@ -73,6 +73,7 @@
     <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\AssignmentEntities.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\DVD.cs" />
     <Compile Include="Models\Image.cs" />

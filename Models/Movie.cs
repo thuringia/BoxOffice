@@ -40,6 +40,11 @@ namespace WAP_Assignment.Models
         /// </summary>
         public float Rating { get; set; }
 
+        /// <summary>
+        /// The Comments for that movie
+        /// </summary>
+        public virtual ICollection<Comment> Comments { get; set; }
+
         #endregion
 
         #region Fields as used by themovidb.org

@@ -11,6 +11,8 @@ namespace WAP_Assignment.Models
         public DbSet<Adress> Adresses { get; set; }
         
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
         
         public DbSet<Country> Countries { get; set; }
 
@@ -21,6 +23,8 @@ namespace WAP_Assignment.Models
         public DbSet<Movie> Movies { get; set; }
         
         public DbSet<Person> Persons { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<Rental> Rentals { get; set; }
         
