@@ -8,23 +8,24 @@ namespace WAP_Assignment.Models
 {
     public class Person
     {
-        public string name { get; set; }
+        public string Name { get; set; }
         
-        public string character { get; set; }
+        public string Character { get; set; }
         
-        public string job { get; set; }
+        public string Job { get; set; }
         
-        [Key]
-        public int id { get; set; }
+        public int PersonID { get; set; }
         
         // public ??? thumb { get; set; }
         
-        public string department { get; set; }
+        public string Department { get; set; }
         
-        public string url { get; set; }
+        public string Url { get; set; }
         
-        public string order { get; set; }
+        public string Order { get; set; }
         
-        public string cast_id { get; set; }
+        public string Cast_id { get; set; }
+
+        public IEnumerable<Movie> Movies { get; set; }
     }
 }

@@ -8,11 +8,11 @@ namespace WAP_Assignment.Models
 {
     public class Country
     {
-        public string name { get; set; }
+        public string Name { get; set; }
         
         [Key]
-        public string code { get; set; }
+        public string Code { get; set; }
         
-        public string url { get; set; }
+        public string Url { get; set; }
     }
 }

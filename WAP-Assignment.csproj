@@ -77,6 +77,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\Studio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

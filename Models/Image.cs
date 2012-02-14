@@ -8,13 +8,12 @@ namespace WAP_Assignment.Models
 {
     public class Image
     {
-        public string type { get; set; }
+        public string Type { get; set; }
         
-        public string url { get; set; }
+        public string Url { get; set; }
         
-        public string size { get; set; }
+        public string Size { get; set; }
         
-        [Key]
-        public string id { get; set; }
+        public string ImageID { get; set; }
     }
 }

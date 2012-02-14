@@ -8,11 +8,10 @@ namespace WAP_Assignment.Models
 {
     public class Studio
     {
-        public string name { get; set; }
+        public string Name { get; set; }
         
-        public string url { get; set; }
+        public string Url { get; set; }
         
-        [Key]
-        public int id { get; set; }
+        public int StudioID { get; set; }
     }
 }

@@ -17,25 +17,23 @@ namespace WAP_Assignment.Models
         /// The amount of discs available of that movie
         /// </summary>
         [Required]
-        public int amount { get; set; }
+        public int Amount { get; set; }
         
         /// <summary>
         /// The price of one rental
         /// </summary>
         [Required]
-        public decimal price { get; set; }
+        public decimal Price { get; set; }
 
         /// <summary>
         /// The number of votes by users of MovieBox
         /// </summary>
-        [ScaffoldColumn(false)]
-        public int votes { get; set; }
+        public int Votes { get; set; }
 
         /// <summary>
         /// The rating of the movie by users of MovieBox
         /// </summary>
-        [ScaffoldColumn(false)]
-        public float rating { get; set; }
+        public float Rating { get; set; }
 
         #endregion
 
@@ -44,88 +42,84 @@ namespace WAP_Assignment.Models
         /// <summary>
         /// Indicates whether a movie is considered adult material and has to be blocked from underage users
         /// </summary>
-        public bool adult { get; set; }
+        public bool Adult { get; set; }
 
         /// <summary>
         /// Shows that a movie has been translated, indicating international availability
         /// </summary>
-        [ScaffoldColumn(false)]
-        public bool translated { get; set; }
+        public bool Translated { get; set; }
 
         /// <summary>
         /// A movie's original language
         /// </summary>
         [Required]
-        public string language { get; set; }
+        public string Language { get; set; }
         
         /// <summary>
         /// A movie's original name
         /// </summary>
-        public string original_name { get; set; }
+        public string Original_name { get; set; }
         
         /// <summary>
         /// A movie's name, may change because of translation
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
         
         /// <summary>
         /// An alternative name for the movie
         /// </summary>
-        public string alternative_name { get; set; }
+        public string Alternative_name { get; set; }
         
         /// <summary>
         /// The media type, in this case it's always movie
         /// </summary>
-        public string type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// The movie's unique ID on themoviedb.org
         /// </summary>
-        [Key]
-        [ScaffoldColumn(false)]
-        public int id { get; set; }
+        public int MovieID { get; set; }
 
         /// <summary>
         /// The movie's ID on imdb.com
         /// </summary>
-        [ScaffoldColumn(false)]
-        public string imdb_id { get; set; }
+        public string Imdb_id { get; set; }
         
         /// <summary>
         /// URL referring to the movie's info page on themoviedb.org
         /// </summary>
-        public string url { get; set; }
+        public string Url { get; set; }
         
         /// <summary>
         /// A synopsis of the movie's contents
         /// </summary>
-        public string overview { get; set; }
+        public string Overview { get; set; }
         
-        [ScaffoldColumn(false)]
-        public int votes_by_moviedb { get; set; }
         
-        [ScaffoldColumn(false)]
-        public float rating_by_moviedb { get; set; }
+        public int Votes_by_moviedb { get; set; }
         
-        public string tagline { get; set; }
         
-        public string certification { get; set; }
+        public float Rating_by_moviedb { get; set; }
         
-        public DateTime released { get; set; }
+        public string Tagline { get; set; }
         
-        public string homepage { get; set; }
+        public string Certification { get; set; }
         
-        public string trailer { get; set; }
+        public DateTime Released { get; set; }
         
-        public List<Category> categories { get; set; }
+        public string Homepage { get; set; }
         
-        public List<Studio> studios { get; set; }
+        public string Trailer { get; set; }
         
-        public List<Country> countries { get; set; }
-        
-        public List<Image> images { get; set; }
-        
-        public List<Person> cast { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+
+        public IEnumerable<Studio> Studios { get; set; }
+
+        public IEnumerable<Country> Countries { get; set; }
+
+        public IEnumerable<Image> Images { get; set; }
+
+        public IEnumerable<Person> Cast { get; set; }
         #endregion
     }
 }
