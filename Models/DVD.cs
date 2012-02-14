@@ -12,7 +12,7 @@ namespace WAP_Assignment.Models
     {
         public int DvdID { get; set; }
         public int MovieID { get; set; }
-        public IEnumerable<Rental> Rentals { get; set; }
+        public virtual ICollection<Rental> Rentals { get; set; }
         public string State { get; set; }
     }
 }
