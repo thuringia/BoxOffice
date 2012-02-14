@@ -32,5 +32,7 @@ namespace WAP_Assignment.Models
         public int Phone { get; set; }
 
         public bool isAdmin { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }

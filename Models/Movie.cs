@@ -31,6 +31,11 @@ namespace WAP_Assignment.Models
         public int Votes { get; set; }
 
         /// <summary>
+        /// Navigation property for the ratings placed by the users 
+        /// </summary>
+        public virtual ICollection<Rating> Ratings { get; set; }
+
+        /// <summary>
         /// The rating of the movie by users of MovieBox
         /// </summary>
         public float Rating { get; set; }
