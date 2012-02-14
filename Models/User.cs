@@ -38,5 +38,7 @@ namespace WAP_Assignment.Models
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }
+
+        public virtual ICollection<Movie> Queue { get; set; }
     }
 }
