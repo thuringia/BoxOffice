@@ -110,16 +110,16 @@ namespace WAP_Assignment.Models
         public string Homepage { get; set; }
         
         public string Trailer { get; set; }
-        
-        public IEnumerable<Category> Categories { get; set; }
 
-        public IEnumerable<Studio> Studios { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
 
-        public IEnumerable<Country> Countries { get; set; }
+        public virtual ICollection<Studio> Studios { get; set; }
 
-        public IEnumerable<Image> Images { get; set; }
+        public virtual ICollection<Country> Countries { get; set; }
 
-        public IEnumerable<Person> Cast { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
+
+        public virtual ICollection<Person> Cast { get; set; }
         #endregion
     }
 }

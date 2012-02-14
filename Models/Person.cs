@@ -26,6 +26,6 @@ namespace WAP_Assignment.Models
         
         public string Cast_id { get; set; }
 
-        public IEnumerable<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }
