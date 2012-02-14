@@ -70,6 +70,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\AssignmentEntities.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
