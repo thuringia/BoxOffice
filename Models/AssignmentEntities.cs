@@ -19,6 +19,8 @@ namespace WAP_Assignment.Models
         public DbSet<DVD> DVDs { get; set; }
         
         public DbSet<Image> Images { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
         
         public DbSet<Movie> Movies { get; set; }
         

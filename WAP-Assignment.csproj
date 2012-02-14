@@ -77,6 +77,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\DVD.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Rating.cs" />
