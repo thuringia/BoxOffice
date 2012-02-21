@@ -23,8 +23,12 @@ namespace WAP_Assignment.Models
         [Required]
         public DateTime DateOfBirth { get; set; }
 
+        /// <summary>
+        /// A user's password, has to be at least 6 characters long
+        /// </summary>
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(100, MinimumLength = 6)]
         public string Password { get; set; }
 
         public int AdressID { get; set; }
