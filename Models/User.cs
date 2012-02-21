@@ -17,18 +17,21 @@ namespace WAP_Assignment.Models
         public string Username { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public int AdressID { get; set; }
         [Required]
         public virtual Adress Adress { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }
 
         public bool isAdmin { get; set; }
