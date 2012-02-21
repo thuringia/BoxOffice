@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MvpRestApiLib.NogginBox.MvcExtras.Providers;
 
 namespace WAP_Assignment
 {
@@ -40,6 +41,7 @@ namespace WAP_Assignment
             // sending-json-to-an-asp-net-mvc-action-method-argument.aspx
             // This must be added to accept JSON as request
             ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+            ValueProviderFactories.Factories.Add(new XmlValueProviderFactory());
         }
     }
 }
