@@ -35,6 +35,11 @@ namespace WAP_Assignment
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            // Source: http://haacked.com/archive/2010/04/15/
+            // sending-json-to-an-asp-net-mvc-action-method-argument.aspx
+            // This must be added to accept JSON as request
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
         }
     }
 }
