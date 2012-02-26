@@ -64,12 +64,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\AssignmentEntities.cs" />
     <Compile Include="Models\Category.cs" />
@@ -88,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\assignment.mdf" />
-    <Content Include="App_Data\assignment.sdf" />
     <Content Include="App_Data\assignment_log.ldf">
       <DependentUpon>assignment.mdf</DependentUpon>
     </Content>
@@ -127,11 +128,15 @@
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizer-2.5.3.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.validate.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.validate.min.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Content\style.css">
@@ -146,22 +151,31 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\TemplateStuff\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\TemplateStuff\MicrosoftAjax.js" />
+    <Content Include="Scripts\TemplateStuff\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\TemplateStuff\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\TemplateStuff\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\TemplateStuff\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\TemplateStuff\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="MvpRestApiLib\MvpRestApiLib.csproj">
+      <Project>{FB23CC9C-805D-45CD-A7CB-401CC8B1911D}</Project>
+      <Name>MvpRestApiLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
