@@ -28,6 +28,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-
+App_Data/
+bin/
 obj/
 obj/Debug/
