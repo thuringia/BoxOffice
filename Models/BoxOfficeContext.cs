@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace WAP_Assignment.Models
 {
-    public class AssignmentEntities : DbContext
+    public class BoxOfficeContext : DbContext
     {
         public DbSet<Adress> Adresses { get; set; }
         
