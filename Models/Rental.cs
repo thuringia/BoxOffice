@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WAP_Assignment.Models
+namespace BoxOffice.Models
 {
     public class Rental
     {

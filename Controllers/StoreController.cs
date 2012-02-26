@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WAP_Assignment.Models;
+using BoxOffice.Models;
 
-namespace WAP_Assignment.Controllers
+namespace BoxOffice.Controllers
 {
     public class StoreController : Controller
     {
-        AssignmentEntities db = new AssignmentEntities();
+        BoxOfficeContext db = new BoxOfficeContext();
 
         //      
         // GET: /Store/        

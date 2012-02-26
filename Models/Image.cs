@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace WAP_Assignment.Models
+namespace BoxOffice.Models
 {
     public class Image
     {

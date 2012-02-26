@@ -5,13 +5,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WAP_Assignment.Models;
+using BoxOffice.Models;
 
-namespace WAP_Assignment.Controllers
+namespace BoxOffice.Controllers
 { 
     public class StoreManagerController : Controller
     {
-        private AssignmentEntities db = new AssignmentEntities();
+        private BoxOfficeContext db = new BoxOfficeContext();
 
         //
         // GET: /StoreManager/

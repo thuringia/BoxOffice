@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace WAP_Assignment.Models
+namespace BoxOffice.Models
 {
     public class Comment
     {
