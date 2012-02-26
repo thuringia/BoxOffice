@@ -19,6 +19,6 @@ namespace BoxOffice.Models
 
         public DateTime DueDate { get; set; }
 
-        public DateTime DateReturned { get; set; }
+        public DateTime? DateReturned { get; set; }
     }
 }

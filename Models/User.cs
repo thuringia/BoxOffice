@@ -32,12 +32,12 @@ namespace BoxOffice.Models
         public string Password { get; set; }
 
         public int AdressID { get; set; }
-        [Required]
         public virtual Adress Adress { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }
 
+        [Required]
         public bool isAdmin { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }

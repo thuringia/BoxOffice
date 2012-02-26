@@ -22,6 +22,6 @@ namespace BoxOffice.Models
 
         public DateTime Date { get; set; }
 
-        public int Flag { get; set; }
+        public int? Flag { get; set; }
     }
 }

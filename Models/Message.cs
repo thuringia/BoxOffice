@@ -16,9 +16,9 @@ namespace BoxOffice.Models
         public virtual ICollection<User> Users { get; set; }
 
         [Required]
-        public string From { get; set; }
+        public int FromUserID { get; set; }
 
-        public string To { get; set; }
+        public int ToUserID { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

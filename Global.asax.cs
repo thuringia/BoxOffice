@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MvpRestApiLib.NogginBox.MvcExtras.Providers;
+using System.Data.Entity;
+using BoxOffice.Models;
+using BoxOffice.Bootstrap;
+
 
 namespace BoxOffice
 {
@@ -42,6 +46,8 @@ namespace BoxOffice
             // This must be added to accept JSON as request
             ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
             ValueProviderFactories.Factories.Add(new XmlValueProviderFactory());
+
+            Database.SetInitializer<BoxOfficeContext>(new Bootstrap.Bootstrap());
         }
     }
 }

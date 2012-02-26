@@ -20,11 +20,12 @@ namespace BoxOffice.Models
         
         public string Department { get; set; }
         
+        [DataType(DataType.Url)]
         public string Url { get; set; }
         
-        public string Order { get; set; }
+        public int Order { get; set; }
         
-        public string Cast_id { get; set; }
+        public int Cast_id { get; set; }
 
         public int MovieID { get; set; }
         public virtual Movie Movie { get; set; }
