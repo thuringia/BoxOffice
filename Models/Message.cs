@@ -18,7 +18,7 @@ namespace BoxOffice.Models
         [Required]
         public int FromUserID { get; set; }
 
-        public int ToUserID { get; set; }
+        public int? ToUserID { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

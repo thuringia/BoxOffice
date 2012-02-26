@@ -10,12 +10,6 @@ namespace BoxOffice.Models
 {
     public class Adress
     {
-        /// <summary>
-        /// Describe the relationship between User <-> Adress => 1:1
-        /// </summary>
-        public int UserID { get; set; }
-        public virtual User User { get; set; }
-
         public int AdressID { get; set; }
 
         [Required]

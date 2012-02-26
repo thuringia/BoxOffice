@@ -26,8 +26,5 @@ namespace BoxOffice.Models
         public int Order { get; set; }
         
         public int Cast_id { get; set; }
-
-        public int MovieID { get; set; }
-        public virtual Movie Movie { get; set; }
     }
 }

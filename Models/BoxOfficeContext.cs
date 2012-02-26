@@ -8,7 +8,7 @@ namespace BoxOffice.Models
 {
     public class BoxOfficeContext : DbContext
     {
-        public DbSet<Adress> Adresses { get; set; }
+        //public DbSet<Adress> Adresses { get; set; }
         
         public DbSet<Category> Categories { get; set; }
 

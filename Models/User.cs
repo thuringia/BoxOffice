@@ -31,8 +31,21 @@ namespace BoxOffice.Models
         [StringLength(100, MinimumLength = 6)]
         public string Password { get; set; }
 
-        public int AdressID { get; set; }
-        public virtual Adress Adress { get; set; }
+        //public int AdressID { get; set; }
+        //public virtual Adress Adress { get; set; }
+        [Required]
+        public string Street { get; set; }
+
+        [Required]
+        [MaxLength(7)]
+        public string Number { get; set; }
+
+        [Required]
+        [MaxLength(8)]
+        public string Zip { get; set; }
+
+        [Required]
+        public string City { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }

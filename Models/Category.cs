@@ -15,8 +15,5 @@ namespace BoxOffice.Models
         public string Url { get; set; }
         
         public int CategoryID { get; set; }
-
-        public int MovieID { get; set; }
-        public virtual Movie Movie { get; set; }
     }
 }

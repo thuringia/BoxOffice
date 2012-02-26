@@ -16,8 +16,5 @@ namespace BoxOffice.Models
         public string Size { get; set; }
         
         public string ImageID { get; set; }
-
-        public int MovieID { get; set; }
-        public Movie Movie { get; set; }
     }
 }
