@@ -13,5 +13,7 @@ namespace WAP_Assignment.Models
         public string Url { get; set; }
         
         public int StudioID { get; set; }
+
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

@@ -10,10 +10,14 @@ namespace WAP_Assignment.Models
     {
         public string Type { get; set; }
         
+        [DataType(DataType.ImageUrl)]
         public string Url { get; set; }
         
         public string Size { get; set; }
         
         public string ImageID { get; set; }
+
+        public int MovieID { get; set; }
+        public Movie Movie { get; set; }
     }
 }

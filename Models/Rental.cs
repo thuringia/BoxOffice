@@ -18,5 +18,7 @@ namespace WAP_Assignment.Models
         public DateTime DateOfRental { get; set; }
 
         public DateTime DueDate { get; set; }
+
+        public DateTime DateReturned { get; set; }
     }
 }

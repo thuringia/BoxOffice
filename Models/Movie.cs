@@ -11,22 +11,17 @@ namespace WAP_Assignment.Models
     [Bind (Exclude = "id") ]
     public class Movie
     {
-        #region Fields required by MovieBox
-
-        /// <summary>
-        /// The amount of discs available of that movie
-        /// </summary>
-        [Required]
-        public int Amount { get; set; }
+        #region Fields required by BoxOffice
         
         /// <summary>
         /// The price of one rental
         /// </summary>
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         /// <summary>
-        /// The number of votes by users of MovieBox
+        /// The number of votes by users of BoxOffice
         /// </summary>
         public int Votes { get; set; }
 
@@ -36,7 +31,7 @@ namespace WAP_Assignment.Models
         public virtual ICollection<Rating> Ratings { get; set; }
 
         /// <summary>
-        /// The rating of the movie by users of MovieBox
+        /// The rating of the movie by users of BoxOffice
         /// </summary>
         public float Rating { get; set; }
 
@@ -44,6 +39,11 @@ namespace WAP_Assignment.Models
         /// The Comments for that movie
         /// </summary>
         public virtual ICollection<Comment> Comments { get; set; }
+
+        /// <summary>
+        /// The physical DVDs of this movie.
+        /// </summary>
+        public virtual ICollection<DVD> DVDs { get; set; }
 
         #endregion
 
@@ -62,7 +62,6 @@ namespace WAP_Assignment.Models
         /// <summary>
         /// A movie's original language
         /// </summary>
-        [Required]
         public string Language { get; set; }
         
         /// <summary>
