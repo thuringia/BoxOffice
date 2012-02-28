@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace BoxOffice.Models
 {
-    public class Bootstrap : DropCreateDatabaseAlways<BoxOfficeContext>
+    public class Bootstrap : DropCreateDatabaseIfModelChanges<BoxOfficeContext>
     {
         protected override void Seed(BoxOfficeContext context)
         {
