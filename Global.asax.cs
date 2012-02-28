@@ -26,6 +26,11 @@ namespace BoxOffice
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "SingleUser",
+                "Users/{UserID}",
+                new { controller = "Users", action = "SingleUser" });
+
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
