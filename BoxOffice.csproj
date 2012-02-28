@@ -90,6 +90,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\ASPNETDB_log.ldf">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
     <Content Include="App_Data\boxoffice.mdf" />
     <Content Include="App_Data\boxoffice.sdf" />
     <Content Include="App_Data\boxoffice_log.ldf">
@@ -124,7 +128,7 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="ModelClassesDiagram.cd" />
+    <None Include="ModelClassesDiagram-Movie.cd" />
     <None Include="Readme.md" />
     <Content Include="Scripts\cssfx.js" />
     <Content Include="Scripts\cssfx.min.js" />
