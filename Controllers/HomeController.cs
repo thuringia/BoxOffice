@@ -16,7 +16,7 @@ namespace BoxOffice.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View();
         }
 
     }
