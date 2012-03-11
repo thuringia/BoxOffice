@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BoxOffice.Models.Movie>
+
+@{
+    ViewBag.Title = "BoxOffice Administrative Interface - Movies";
+}
+
+@section js {
+<script type="text/javascript" src="@Url.Content("~/Content/admin.js")"></script>
+}
+
+@section subMenu {
+<ul>
+    <li> <a href="@Url.Action("Movies")>All Movies</a> </li>
+    <li> <a href="@Url.Action("Genres")">Genres</a> </li>
+</ul>
+}
+
+<table>
+    <thead>
+        <tr><th> </th></tr>
+        <tr><th>Title</th></tr>
+        <tr><th>Studios</th></tr>
+        <tr><th>Genre</th></tr>
+        <tr><th># of DVDs (rented)</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr><td>@Html.DisplayFor(s => item.Name)</td></tr>
+            <tr><td>@Html.DisplayFor(s => item.Studios.ToList())</td></tr>
+            <tr><td>@Html.DisplayFor(s => item.Categories.ToList())</td></tr>
+            <tr><td>@Html.DisplayFor(s => item.DVDs.Count()) (@Html.DisplayFor(s => item.DVDs.ToList().FindAll(a => a.State == "rented").Count())</td></tr>
+        }
+    </tbody>
+</table>
