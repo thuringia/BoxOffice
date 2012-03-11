@@ -66,6 +66,38 @@ body {
 nav ul li a.first {
   padding-left: 0px; }
 
+/* CSS Transitions
+-----------------------------------------------------------*/
+.masonry, .masonry .masonry-brick {
+  -webkit-transition-duration: 0.7s;
+  -moz-transition-duration: 0.7s;
+  -o-transition-duration: 0.7s;
+  transition-duration: 0.7s; }
+
+.masonry {
+  -webkit-transition-property: height;
+  -moz-transition-property: height;
+  -o-transition-property: height;
+  transition-property: height;
+  -webkit-transition-property: width;
+  -moz-transition-property: width;
+  -o-transition-property: width;
+  transition-property: width; }
+
+.masonry .masonry-brick {
+  -webkit-transition-property: top;
+  -moz-transition-property: top;
+  -o-transition-property: top;
+  transition-property: top;
+  -webkit-transition-property: right;
+  -moz-transition-property: right;
+  -o-transition-property: right;
+  transition-property: right;
+  -webkit-transition-property: left;
+  -moz-transition-property: left;
+  -o-transition-property: left;
+  transition-property: left; }
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {

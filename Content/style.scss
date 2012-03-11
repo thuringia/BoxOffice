@@ -85,6 +85,64 @@ nav ul li a.first {
 			padding-left: 0px;
 			}
 
+/* CSS Transitions
+-----------------------------------------------------------*/
+@mixin transitionDuration ($duration) {
+	-webkit-transition-duration: $duration;
+     -moz-transition-duration: $duration;
+       -o-transition-duration: $duration;
+          transition-duration: $duration;
+}
+
+@mixin transitionProperty ($height, $width, $top, $right, $left) {
+	@if $height == true {
+		-webkit-transition-property: height;
+		-moz-transition-property: height;
+		-o-transition-property: height;
+		transition-property: height;
+	}
+
+	@if $width == true {
+		-webkit-transition-property: width;
+		-moz-transition-property: width;
+		-o-transition-property: width;
+		transition-property: width;
+	}
+
+	@if $top == true {
+		-webkit-transition-property: top;
+		-moz-transition-property: top;
+		-o-transition-property: top;
+		transition-property: top;
+	}
+	
+	@if $right == true {
+		-webkit-transition-property: right;
+		-moz-transition-property: right;
+		-o-transition-property: right;
+		transition-property: right;
+	}
+
+	@if $left == true {
+		-webkit-transition-property: left;
+		-moz-transition-property: left;
+		-o-transition-property: left;
+		transition-property: left;
+	}
+} 
+
+.masonry, .masonry .masonry-brick {
+	@include transitionDuration(0.7s);
+}
+
+.masonry {
+	@include transitionProperty(true, true, false, false, false);
+}
+
+.masonry .masonry-brick {
+	@include transitionProperty(false, false, true, true, true);
+ }
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error
