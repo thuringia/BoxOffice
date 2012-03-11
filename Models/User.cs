@@ -23,14 +23,6 @@ namespace BoxOffice.Models
         [Required]
         public DateTime DateOfBirth { get; set; }
 
-        /// <summary>
-        /// A user's password, has to be at least 6 characters long
-        /// </summary>
-        [Required]
-        [DataType(DataType.Password)]
-        [StringLength(100, MinimumLength = 6)]
-        public string Password { get; set; }
-
         //public int AdressID { get; set; }
         //public virtual Adress Adress { get; set; }
         [Required]
@@ -50,15 +42,12 @@ namespace BoxOffice.Models
         [DataType(DataType.PhoneNumber)]
         public int Phone { get; set; }
 
-        [Required]
-        public bool isAdmin { get; set; }
-
         public virtual ICollection<Rating> Ratings { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }
 
-        public virtual ICollection<Movie> Queue { get; set; }
+        public virtual ICollection<Rental> Queue { get; set; }
     }
 }

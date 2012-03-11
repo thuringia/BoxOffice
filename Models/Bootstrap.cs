@@ -10,6 +10,26 @@ namespace BoxOffice.Models
     {
         protected override void Seed(BoxOfficeContext context)
         {
+            var person = new Person
+            {
+                PersonID = 2293,
+                Name = "Frank Miller"
+            };
+            context.Persons.Add(person);
+            context.SaveChanges();
+
+            var castMember = new CastMember
+            {
+                Job = "Director",
+                PersonID = 2293,
+                Department = "Directing",
+                Url = "http://www.themoviedb.org/person/2293",
+                Order = 0,
+                Cast_id = 1
+            };
+            context.CastMembers.Add(castMember);
+            context.SaveChanges();
+
             var movie = new Movie
             {
                 Price = 9.99M,
@@ -35,12 +55,18 @@ namespace BoxOffice.Models
             context.Movies.Add(movie);
             context.SaveChanges();
 
+            movie.Cast.Add(castMember);
+            context.SaveChanges();
+
             var categories = new List<Category> {
                 new Category { CategoryID = 80, Name = "Crime", Url = "http://themoviedb.org/genre/crime", Type = "genre" },
                 new Category { CategoryID = 18, Type = "genre", Url = "http://themoviedb.org/genre/drama", Name = "Drama" },
                 new Category { CategoryID = 53, Name = "Thriller", Url = "http://themoviedb.org/genre/thriller", Type = "genre" }  
             };
             categories.ForEach(s => context.Categories.Add(s));
+            context.SaveChanges();
+
+            categories.ForEach(s => movie.Categories.Add(s));
             context.SaveChanges();
 
             var studio = new Studio
@@ -52,6 +78,10 @@ namespace BoxOffice.Models
             context.Studios.Add(studio);
             context.SaveChanges();
 
+            movie.Studios.Add(studio);
+            studio.Movies.Add(movie);
+            context.SaveChanges();
+
             var country = new Country
             {
                 Name = "United States of America",
@@ -59,6 +89,10 @@ namespace BoxOffice.Models
                 Url = "http://www.themoviedb.org/country/us"
             };
             context.Countries.Add(country);
+            context.SaveChanges();
+
+            movie.Countries.Add(country);
+            country.Movies.Add(movie);
             context.SaveChanges();
 
             var image = new Image
@@ -71,40 +105,8 @@ namespace BoxOffice.Models
             context.Images.Add(image);
             context.SaveChanges();
 
-            var person = new Person
-            {
-                Name = "Frank Miller",
-                Job = "Director",
-                PersonID = 2293,
-                Department = "Directing",
-                Url = "http://www.themoviedb.org/person/2293",
-                Order = 0,
-                Cast_id = 1
-            };
-            context.Persons.Add(person);
+            movie.Images.Add(image);
             context.SaveChanges();
-
-            //var adresses = new List<Adress>
-            //{
-            //    new Adress
-            //    {
-            //        AdressID = 1,
-            //        Street = "Foo Street",
-            //        Number = "1",
-            //        Zip = "12345",
-            //        City = "Foocity"
-            //    },
-            //    new Adress
-            //    {
-            //        AdressID = 2,
-            //        Street = "Bar Road",
-            //        Number = "1",
-            //        Zip = "54321",
-            //        City = "Bar Town"
-            //    }
-            //};
-            //adresses.ForEach(s => context.Adresses.Add(s));
-            //context.SaveChanges();
 
             var users = new List<User>
             {
@@ -114,12 +116,10 @@ namespace BoxOffice.Models
                     Username = "foo",
                     Email = "foo@bar.com",
                     DateOfBirth = DateTime.Parse("1988-02-13"),
-                    Password = "foobar",
                     Street = "Foo",
                     Number = "1",
                     Zip = "12345",
-                    City = "Foo",
-                    isAdmin = false
+                    City = "Foo"
                 },
                 new User
                 {
@@ -127,12 +127,10 @@ namespace BoxOffice.Models
                     Username = "bar",
                     Email = "bar@foo.com",
                     DateOfBirth = DateTime.Parse("1988-02-13"),
-                    Password = "foobar",
                     Street = "Foo",
                     Number = "1",
                     Zip = "12345",
-                    City = "Foo",
-                    isAdmin = false
+                    City = "Foo"
                 }
             };
             users.ForEach(s => context.Users.Add(s));
@@ -149,6 +147,9 @@ namespace BoxOffice.Models
             context.Comments.Add(comment);
             context.SaveChanges();
 
+            users[0].Comments.Add(comment);
+            context.SaveChanges();
+
             var dvds = new List<DVD>{};
             for (int i = 1; i < 6; i++)
             {
@@ -163,6 +164,9 @@ namespace BoxOffice.Models
             dvds.ForEach(s => context.DVDs.Add(s));
             context.SaveChanges();
 
+            dvds.ForEach(s => movie.DVDs.Add(s));
+            context.SaveChanges();
+
             var rental = new Rental
             {
                 RentalID = 1,
@@ -172,6 +176,10 @@ namespace BoxOffice.Models
                 DueDate = DateTime.Now
             };
             context.Rentals.Add(rental);
+            context.SaveChanges();
+
+            users[0].Queue.Add(rental);
+            dvds[0].Rentals.Add(rental);
             context.SaveChanges();
 
             var msg = new Message
@@ -186,6 +194,9 @@ namespace BoxOffice.Models
             context.Messages.Add(msg);
             context.SaveChanges();
 
+            users.ForEach(s => s.Messages.Add(msg));
+            context.SaveChanges();
+
             var rating = new Rating
             {
                 RatingID = 1,
@@ -194,6 +205,10 @@ namespace BoxOffice.Models
                 Date = DateTime.Now
             };
             context.Ratings.Add(rating);
+            context.SaveChanges();
+
+            users[0].Ratings.Add(rating);
+            movie.Ratings.Add(rating);
             context.SaveChanges();
 
             base.Seed(context);

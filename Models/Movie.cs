@@ -128,7 +128,7 @@ namespace BoxOffice.Models
 
         public virtual ICollection<Image> Images { get; set; }
 
-        public virtual ICollection<Person> Cast { get; set; }
+        public virtual ICollection<CastMember> Cast { get; set; }
         #endregion
     }
 }

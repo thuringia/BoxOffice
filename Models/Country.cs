@@ -14,5 +14,7 @@ namespace BoxOffice.Models
         public string Code { get; set; }
         
         public string Url { get; set; }
+
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }
