@@ -17,6 +17,11 @@ namespace BoxOffice.Controllers
 
         //
         // GET: /Users/
+        /// <summary>
+        /// Get a list of all users
+        /// </summary>
+        /// <returns></returns>
+
         [EnableJson, EnableXml]
         public ViewResult Index()
         {
@@ -24,37 +29,33 @@ namespace BoxOffice.Controllers
         }
 
         //
-        // GET: /Users/Details/5
-
-        public ViewResult Details(int id)
-        {
-            User user = db.Users.Find(id);
-            return View(user);
-        }
-
-        //
-        // GET: /Users/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        } 
-
-        //
-        // POST: /Users/Create
-
+        // DELETE: /Users/{id}
         [EnableJson, EnableXml]
-        [HttpPost]
-        public ActionResult Create(User user)
+        [HttpDelete]
+        //[Authorize(Roles="Admin")]
+        public ActionResult Index(int id)
         {
-            if (ModelState.IsValid)
+            var name = db.Users.Find(id).Username;
+
+            try
             {
-                db.Users.Add(user);
+                db.Users.Remove(db.Users.Find(id));
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
-            return View(user);
+            try
+            {
+                Membership.DeleteUser(name);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return RedirectToAction("Index");
         }
         
         //
@@ -74,35 +75,65 @@ namespace BoxOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                var oldName = db.Entry(user).Entity.Username;
+                var newName = user.Username;
+
+                var oldMail = db.Entry(user).Entity.Email;
+                var newMail = user.Email;
+
+                if (!oldName.Equals(newName))
+                {
+                    ModelState.AddModelError("", "The username may not be changed");
+                }
+                else
+                {
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    
+                    // check if Email changed, if yes update Membership record
+                    var mUser = Membership.GetUser(oldName);
+                    if (!mUser.Email.Equals(newMail))
+                    {
+                        mUser.Email = user.Email; 
+                    }
+                }
+                
                 return RedirectToAction("Index");
             }
             return View(user);
         }
 
-        //
-        // GET: /Users/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            User user = db.Users.Find(id);
-            return View(user);
+        /// <summary>
+        /// Method to add a new user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>UserID</returns>
+        private int addUser (User user) {
+            if (ModelState.IsValid)
+            {
+                // find highest UserID
+                var id = db.Users.Last().UserID;
+
+                // increment id
+                id++;
+
+                // add id to new user
+                user.UserID = id;
+
+                // add user to db
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                return id;
+            }
+            else
+            {
+                ModelState.AddModelError("", "ERROR");
+                return 0;
+            }
         }
 
-        //
-        // POST: /Users/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {            
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        
+        #region login
         //
         // GET: /Users/Login
 
@@ -179,7 +210,11 @@ namespace BoxOffice.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    var id = addUser(new User {
+                        Username = model.UserName,
+                        Email = model.Email
+                    });
+                    return Redirect("/Users/"+ id);
                 }
                 else
                 {
@@ -284,7 +319,9 @@ namespace BoxOffice.Controllers
             }
         }
         #endregion
-    
+
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
