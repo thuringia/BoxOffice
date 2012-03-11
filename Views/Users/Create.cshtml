@@ -41,14 +41,11 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Street)
         </div>
+
         <div class="editor-field">
             @Html.EditorFor(model => model.Street)
             @Html.ValidationMessageFor(model => model.Street)
@@ -88,10 +85,6 @@
 
         <div class="editor-label">
             @Html.LabelFor(model => model.isAdmin)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.isAdmin)
-            @Html.ValidationMessageFor(model => model.isAdmin)
         </div>
 
         <p>

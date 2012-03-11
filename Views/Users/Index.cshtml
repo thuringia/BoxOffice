@@ -21,9 +21,6 @@
             DateOfBirth
         </th>
         <th>
-            Password
-        </th>
-        <th>
             Street
         </th>
         <th>
@@ -37,9 +34,6 @@
         </th>
         <th>
             Phone
-        </th>
-        <th>
-            isAdmin
         </th>
         <th></th>
     </tr>
@@ -56,9 +50,6 @@
             @Html.DisplayFor(modelItem => item.DateOfBirth)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Street)
         </td>
         <td>
@@ -72,9 +63,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isAdmin)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
