@@ -104,15 +104,16 @@ namespace BoxOffice.Controllers
 
         
         //
-        // GET: /Account/Login
+        // GET: /Users/Login
 
+        [EnableJson, EnableXml]
         public ActionResult Login()
         {
             return View();
         }
 
         //
-        // POST: /Account/Login
+        // POST: /Users/Login
 
         [EnableJson, EnableXml]
         [HttpPost]
@@ -156,6 +157,7 @@ namespace BoxOffice.Controllers
         //
         // GET: /Account/Register
 
+        [EnableJson, EnableXml]
         public ActionResult Register()
         {
             return View();
@@ -165,6 +167,7 @@ namespace BoxOffice.Controllers
         // POST: /Account/Register
 
         [HttpPost]
+        [EnableJson, EnableXml]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -281,8 +284,7 @@ namespace BoxOffice.Controllers
             }
         }
         #endregion
-    }
-
+    
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
