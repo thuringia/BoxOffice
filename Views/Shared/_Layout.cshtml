@@ -17,6 +17,8 @@
 
     <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" class="cssfx"/>
     
+    @RenderSection("js", false)
+
 </head>
 
 <body>
@@ -26,12 +28,13 @@
     <header>
         <nav>
             <ul>
-                <li ><a class="first" href="/">Q</a> </li>
-                <li> <a href="@Url.Action("Index", "Home")">Home</a> </li>
-                <li> <a href="@Url.Action("Index", "Movies")">Movies</a> </li>
-                <li> <a href="@Url.Action("index","Genres")">Genres</a> </li>
-                <li> <a href="@Url.Action("Me","Users")"></a></li>
+                <li ><a id="search" class="first" href="/">Q</a> </li>
+                <li> <a id="home" href="@Url.Action("Index", "Home")">Home</a> </li>
+                <li> <a id="movies" href="@Url.Action("Index", "Movies")">Movies</a> </li>
+                <li> <a id="genres" href="@Url.Action("index","Genres")">Genres</a> </li>
+                <li> <a id="me" href="@Url.Action("Me","Users")"></a></li>
             </ul>
+            @RenderSection("subMenu", false)
         </nav>
     </header>
     
