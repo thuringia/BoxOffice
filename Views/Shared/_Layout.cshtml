@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
@@ -20,17 +20,22 @@
 </head>
 
 <body>
+
+    <h1 id="logo">BoxOffice</h1>
+
     <header>
-        <h1>BoxOffice</h1>
         <nav>
             <ul>
-                <li class="first"><a href="/">Home</a> </li>
-                <li><a href="/Store/">Store</a> </li>
+                <li ><a class="first" href="/">Q</a> </li>
+                <li> <a href="@Url.Action("Index", "Home")">Home</a> </li>
+                <li> <a href="@Url.Action("Index", "Movies")">Movies</a> </li>
+                <li> <a href="@Url.Action("index","Genres")">Genres</a> </li>
+                <li> <a href="@Url.Action("Me","Users")"></a></li>
             </ul>
         </nav>
     </header>
     
-    <section>
+    <section id="body">
         @RenderBody()
     </section>
 
