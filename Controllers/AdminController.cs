@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BoxOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         //
