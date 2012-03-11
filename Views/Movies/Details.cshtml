@@ -1,0 +1,115 @@
+﻿@model BoxOffice.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Movie</legend>
+
+    <div class="display-label">Price</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">Votes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Votes)
+    </div>
+
+    <div class="display-label">Rating</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rating)
+    </div>
+
+    <div class="display-label">Adult</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Adult)
+    </div>
+
+    <div class="display-label">Translated</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Translated)
+    </div>
+
+    <div class="display-label">Language</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Language)
+    </div>
+
+    <div class="display-label">Original_name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Original_name)
+    </div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Alternative_name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Alternative_name)
+    </div>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label">Imdb_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Imdb_id)
+    </div>
+
+    <div class="display-label">Url</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Url)
+    </div>
+
+    <div class="display-label">Overview</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Overview)
+    </div>
+
+    <div class="display-label">Votes_by_moviedb</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Votes_by_moviedb)
+    </div>
+
+    <div class="display-label">Rating_by_moviedb</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rating_by_moviedb)
+    </div>
+
+    <div class="display-label">Tagline</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tagline)
+    </div>
+
+    <div class="display-label">Certification</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Certification)
+    </div>
+
+    <div class="display-label">Released</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Released)
+    </div>
+
+    <div class="display-label">Homepage</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Homepage)
+    </div>
+
+    <div class="display-label">Trailer</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Trailer)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.MovieID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
