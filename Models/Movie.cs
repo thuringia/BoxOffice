@@ -57,7 +57,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// Shows that a movie has been translated, indicating international availability
         /// </summary>
-        public bool Translated { get; set; }
+        public bool? Translated { get; set; }
 
         /// <summary>
         /// A movie's original language
