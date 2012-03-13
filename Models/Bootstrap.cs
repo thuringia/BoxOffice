@@ -20,6 +20,7 @@ namespace BoxOffice.Models
 
             var castMember = new CastMember
             {
+                CastMemberID = 0,
                 Job = "Director",
                 PersonID = 2293,
                 Department = "Directing",
