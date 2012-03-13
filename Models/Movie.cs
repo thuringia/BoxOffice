@@ -130,5 +130,10 @@ namespace BoxOffice.Models
 
         public virtual ICollection<CastMember> Cast { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return this.Name + " whith " + this.DVDs.Count() + " DVDs for " + this.Price;
+        }
     }
 }
