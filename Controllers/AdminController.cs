@@ -42,9 +42,16 @@ namespace BoxOffice.Controllers
 
                 if (response != null)
                 {
-                    var movie = tmdb.GetMovieInfo(response.First().Id);
+                    var m = tmdb.GetMovieInfo(response.First().Id);
+                    var movie = persistMovie(m, add.DVDs, add.Price);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(add);
                 }
             }
+            return View(add);
         }
 
         /// <summary>
@@ -52,7 +59,7 @@ namespace BoxOffice.Controllers
         /// </summary>
         /// <param name="tmdbMovie"></param>
         /// <returns></returns>
-        private bool persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price)
+        private Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price)
         {
             // Lists to fill
             List<Category> categories = new List<Category>();
@@ -274,7 +281,7 @@ namespace BoxOffice.Controllers
             
             #endregion
 
-            return true;
+            return movie;
         }
 
     }
