@@ -52,14 +52,16 @@ namespace BoxOffice.Controllers
         /// </summary>
         /// <param name="tmdbMovie"></param>
         /// <returns></returns>
-        private bool persistMovie(TmdbMovie tmdbMovie)
+        private bool persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price)
         {
+            // Lists to fill
             List<Category> categories = new List<Category>();
             List<Image> images = new List<Image>();
             List<Person> persons = new List<Person>();
             List<CastMember> cast = new List<CastMember>();
             List<Studio> studios = new List<Studio>();
             List<Country> countries = new List<Country>();
+            List<DVD> dvds = new List<DVD>();
 
             var movie = new Movie();
 
@@ -102,7 +104,9 @@ namespace BoxOffice.Controllers
             db.SaveChanges();
 
             #endregion
-            
+
+            #region category
+
             // Check if category exists already
             foreach (var item in tmdbMovie.Genres)
             {   
@@ -130,6 +134,8 @@ namespace BoxOffice.Controllers
                 Type = s.Type,
                 Url = s.Url
             }));
+
+            #endregion
 
             # region studio
 
@@ -212,8 +218,60 @@ namespace BoxOffice.Controllers
                 }
             }
 
+            images.ForEach(s => db.Images.Add(s));
+            db.SaveChanges();
 
+            #endregion
 
+            #region dvd
+
+            for (int i = 0; i < dvdi; i++)
+            {
+                dvds.Add(new DVD
+                {
+                    DvdID = db.DVDs.Last().DvdID + 1,
+                    State = "new"
+                });
+            }
+            dvds.ForEach(s => db.DVDs.Add(s));
+            db.SaveChanges();
+
+            #endregion
+
+            #region movie
+
+            movie.Adult = tmdbMovie.Adult;
+            movie.Alternative_name = tmdbMovie.AlternativeName;
+            cast.ForEach(s =>  movie.Cast.Add(s));
+            categories.ForEach(s => movie.Categories.Add(s));
+            movie.Certification = tmdbMovie.Certification;
+            countries.ForEach(s => movie.Countries.Add(s));
+            dvds.ForEach(s => movie.DVDs.Add(s));
+            movie.Homepage = tmdbMovie.Homepage;
+            images.ForEach(s => movie.Images.Add(s));
+            movie.Rating_by_moviedb = float.Parse(tmdbMovie.Rating);
+            movie.Released = DateTime.Parse(tmdbMovie.Released);
+            studios.ForEach(s => movie.Studios.Add(s));
+            movie.Tagline = tmdbMovie.Tagline;
+            movie.Trailer = tmdbMovie.Trailer;
+            movie.Translated = tmdbMovie.Translated;
+            movie.Type = tmdbMovie.Type;
+            movie.Url = tmdbMovie.Url;
+            movie.Votes_by_moviedb = int.Parse(tmdbMovie.Votes);
+
+            db.Movies.Add(movie);
+            db.SaveChanges();
+
+            dvds.ForEach(s => s.MovieID = movie.MovieID);
+            dvds.ForEach(s => s.Movie = movie);
+            db.SaveChanges();
+
+            countries.ForEach(s => s.Movies.Add(movie));
+            db.SaveChanges();
+
+            studios.ForEach(s => s.Movies.Add(movie));
+            db.SaveChanges();
+            
             #endregion
 
             return true;
