@@ -10,6 +10,7 @@ namespace BoxOffice.Models
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
 
         [MaxLength(30)]
