@@ -46,10 +46,23 @@ body {
 	//color: white;
 	@include font(12pt,rgba(250,250,250,0.9),300);
 
+	h1:not(#logo) {
+		text-transform: lowercase;
+	}
+
+	h2 {
+		text-transform: lowercase;
+	}
+
+	h3 {
+		tex-transform: lowercase;
+	}
+
 	#logo {
 		position:absolute;
 		top: 25px;
 		left: 25px;
+		text-transform: none;
 	}
 
 	header, #body {
@@ -72,6 +85,7 @@ body {
 				@include font(14pt, rgba(250,250,250,0.9), 500);
 				text-decoration: none;
 				padding-left: 25px;
+				text-transform: lowercase;
 			}			
 		}
 	}
