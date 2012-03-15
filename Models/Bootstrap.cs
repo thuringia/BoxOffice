@@ -363,7 +363,7 @@ namespace BoxOffice.Models
                 Rating_by_moviedb = 6.8f,
                 Tagline = "There is no justice without sin.",
                 Certification = "R",
-                Released = DateTime.Parse("2005-04-04"),
+                DateReleased = DateTime.Parse("2005-04-04"),
                 Homepage = "http://www.sincitythemovie.com/",
                 Trailer = "http://www.youtube.com/watch?v=80",
                 Categories = new List<Category>(),

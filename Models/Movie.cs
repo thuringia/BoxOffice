@@ -115,6 +115,7 @@ namespace BoxOffice.Models
         public string Certification { get; set; }
         
         public DateTime? Released { get; set; }
+        public DateTime? DateReleased { get; set; }
         
         public string Homepage { get; set; }
         
