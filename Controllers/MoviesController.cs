@@ -419,13 +419,24 @@ namespace BoxOffice.Controllers
 
             for (int i = 0; i < dvdi; i++)
             {
-                dvds.Add(new DVD
+                // create new DVD object
+                var dvd = new DVD
                 {
+                    Rentals = new List<Rental>(),
                     State = "new"
-                });
+                };
+
+                // add dvd to db
+                db.DVDs.Add(dvd);
+
+                // set relationships
+                dvd.MovieID = movie.MovieID;
+                dvd.Movie = movie;
+                movie.DVDs.Add(dvd);
+
+                // save changes
+                db.SaveChanges();
             }
-            dvds.ForEach(s => db.DVDs.Add(s));
-            db.SaveChanges();
 
             #endregion
             
