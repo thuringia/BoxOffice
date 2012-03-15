@@ -203,7 +203,7 @@ namespace BoxOffice.Controllers
             movie.Cast = cast;
             movie.Categories = categories;
             movie.Certification = tmdbMovie.Certification;
-            movie.Comments = new List<Comment>;
+            movie.Comments = new List<Comment>();
             movie.Countries = countries;
             movie.DateReleased = DateTime.Parse(tmdbMovie.Released);
             movie.DVDs = dvds;
