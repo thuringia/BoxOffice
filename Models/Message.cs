@@ -22,7 +22,7 @@ namespace BoxOffice.Models
         public int? ToUserID { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime DateSent { get; set; }
 
         [Required]
         public string Text { get; set; }
