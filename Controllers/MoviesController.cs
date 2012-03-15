@@ -411,21 +411,7 @@ namespace BoxOffice.Controllers
             db.SaveChanges();
 
             #endregion
-
-            #region foreign key updates
-
-            dvds.ForEach(s => s.MovieID = movie.MovieID);
-            dvds.ForEach(s => s.Movie = movie);
-            db.SaveChanges();
-
-            countries.ForEach(s => s.Movies.Add(movie));
-            db.SaveChanges();
-
-            studios.ForEach(s => s.Movies.Add(movie));
-            db.SaveChanges();
-
-            #endregion
-
+            
             return movie;
         }
 
