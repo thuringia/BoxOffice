@@ -235,10 +235,12 @@ namespace BoxOffice.Controllers
             {
                 cast.Add(new CastMember
                 {
-                    Cast_id = item.Id,
+                    Cast_id = item.CastId,
+                    CastMemberID = item.Id,
                     Character = item.Character,
                     Department = item.Department,
                     Job = item.Job,
+                    Movie = movie,
                     MovieID = movie.MovieID,
                     Name = item.Name,
                     Order = item.Order,
@@ -246,6 +248,7 @@ namespace BoxOffice.Controllers
                 });
             }
             cast.ForEach(s => db.CastMembers.Add(s));
+            cast.ForEach(s => movie.Cast.Add(s));
             db.SaveChanges();
 
             #endregion
