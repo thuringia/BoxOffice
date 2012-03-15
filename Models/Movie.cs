@@ -52,7 +52,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// Indicates whether a movie is considered adult material and has to be blocked from underage users
         /// </summary>
-        public bool Adult { get; set; }
+        public bool? Adult { get; set; }
 
         /// <summary>
         /// Shows that a movie has been translated, indicating international availability
@@ -108,13 +108,13 @@ namespace BoxOffice.Models
         public int Votes_by_moviedb { get; set; }
         
         
-        public float Rating_by_moviedb { get; set; }
+        public float? Rating_by_moviedb { get; set; }
         
         public string Tagline { get; set; }
         
         public string Certification { get; set; }
         
-        public DateTime Released { get; set; }
+        public DateTime? Released { get; set; }
         
         public string Homepage { get; set; }
         
