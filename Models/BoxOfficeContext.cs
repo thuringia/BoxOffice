@@ -26,7 +26,7 @@ namespace BoxOffice.Models
         
         public DbSet<Movie> Movies { get; set; }
         
-        public DbSet<Person> Persons { get; set; }
+        //public DbSet<Person> Persons { get; set; }
 
         public DbSet<Rating> Ratings { get; set; }
 
