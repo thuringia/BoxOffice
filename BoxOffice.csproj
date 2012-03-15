@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -98,9 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\ASPNETDB_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="App_Data\boxoffice.mdf" />
     <Content Include="App_Data\boxoffice_log.ldf">
       <DependentUpon>boxoffice.mdf</DependentUpon>
@@ -160,7 +158,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>style.scss</DependentUpon>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -232,8 +232,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>2583</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2583/</IISUrl>
