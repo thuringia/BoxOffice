@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace BoxOffice.Models
 {
@@ -10,6 +11,7 @@ namespace BoxOffice.Models
     /// </summary>
     public class DVD
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DvdID { get; set; }
 
         public int MovieID { get; set; }
