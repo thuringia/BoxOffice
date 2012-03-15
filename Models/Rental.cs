@@ -10,10 +10,10 @@ namespace BoxOffice.Models
         public int RentalID { get; set; }
 
         public int DvdID { get; set; }
-        public virtual ICollection<DVD> Dvd { get; set; }
+        public virtual DVD Dvd { get; set; }
 
         public int UserID { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual User User { get; set; }
 
         public DateTime DateOfRental { get; set; }
 
