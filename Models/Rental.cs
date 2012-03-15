@@ -42,7 +42,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// The date the DVD was sent to the renter
         /// </summary>
-        public DateTime DateSent { get; set; }
+        public DateTime? DateSent { get; set; }
 
         /// <summary>
         /// The date the DVD is due to be returned
