@@ -192,10 +192,12 @@ namespace BoxOffice.Controllers
             List<Country> countries = new List<Country>();
             List<DVD> dvds = new List<DVD>();
 
-            var movie = new Movie();
-
             #region movie
+            
+            // create new movie object
+            var movie = new Movie();        
 
+            // set properties
             movie.Adult = tmdbMovie.Adult;
             movie.Alternative_name = tmdbMovie.AlternativeName;
             movie.Cast = cast;
@@ -224,7 +226,10 @@ namespace BoxOffice.Controllers
             movie.Url = tmdbMovie.Url;
             movie.Votes_by_moviedb = int.Parse(tmdbMovie.Votes);
 
+            // add movie to db
             db.Movies.Add(movie);
+
+            // save changes
             db.SaveChanges();
 
             #endregion
