@@ -379,22 +379,39 @@ namespace BoxOffice.Controllers
             // check if images exist, if not add them
             foreach (var item in tmdbMovie.Posters)
             {
-                var p = db.Images.Find(item.ImageInfo.Id);
+                // try to find the image
+                var i = db.Images.Find(item.ImageInfo.Id);
 
-                if (p == null)
+                // if image not found, create it
+                if (i == null)
                 {
-                    images.Add(new Image
+                    i = new Image
                     {
-                        ImageID = item.ImageInfo.Id,
-                        Size = item.ImageInfo.Size,
-                        Type = item.ImageInfo.Type,
+                        ImageID = i.ImageID,
+                        Size = i.Size,
+                        Type = item.ImageInfo.Size,
                         Url = item.ImageInfo.Url
-                    });
+                    };
+
+                    // add image to db
+                    db.Images.Add(i);
+
+                    // set relationships
+                    movie.Images.Add(i);
+
+                    // save changes
+                    db.SaveChanges();
+                }
+                // if image is found (shouldn't happen), set relationships
+                else
+                {
+                    // add image to movie
+                    movie.Images.Add(i);
+
+                    // save changes
+                    db.SaveChanges();
                 }
             }
-
-            images.ForEach(s => db.Images.Add(s));
-            db.SaveChanges();
 
             #endregion
 
