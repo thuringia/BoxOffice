@@ -292,29 +292,36 @@ namespace BoxOffice.Controllers
             // check if studio exists
             foreach (var item in tmdbMovie.Studios)
             {
-                var s = db.Studios.Find(item.Id);
+                // try to find the studio
+                var id = db.Studios.Find(item.Id);
 
-                if (s == null)
+                // if null, add new studio
+                if (id == null)
                 {
-                    studios.Add(new Studio
+                    var s = new Studio
                     {
+                        Movies = new List<Movie>(),
                         Name = item.Name,
                         StudioID = item.Id,
                         Url = item.Url
-                    });
-                }
-            }
-            studios.ForEach(s => db.Studios.Add(s));
-            db.SaveChanges();
+                    };
 
-            // store all studios in list
-            studios.Clear();
-            tmdbMovie.Studios.ForEach(s => studios.Add(new Studio
-            {
-                Name = s.Name,
-                StudioID = s.Id,
-                Url = s.Url
-            }));
+                    db.Studios.Add(s);
+                    s.Movies.Add(movie);
+                    movie.Studios.Add(s);
+
+                    db.SaveChanges();
+
+                }
+                // if the studio exists already, set the relationships
+                else
+	            {
+                    id.Movies.Add(movie);
+                    movie.Studios.Add(id);
+
+                    db.SaveChanges();
+	            }
+            }
 
             #endregion
 
