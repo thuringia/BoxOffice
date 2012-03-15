@@ -11,6 +11,7 @@ namespace BoxOffice.Models
     /// </summary>
     public class Message
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MessageID { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
