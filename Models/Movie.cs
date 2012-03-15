@@ -104,37 +104,74 @@ namespace BoxOffice.Models
         /// </summary>
         public string Overview { get; set; }
         
-        
+        /// <summary>
+        /// the # of votes as delivered by TMDB
+        /// </summary>
         public int Votes_by_moviedb { get; set; }
         
-        
+        /// <summary>
+        /// this movie's rating as reported by TMDB
+        /// </summary>
         public float? Rating_by_moviedb { get; set; }
         
+        /// <summary>
+        /// this movie's tagline
+        /// </summary>
         public string Tagline { get; set; }
         
+        /// <summary>
+        /// this movies content rating
+        /// </summary>
         public string Certification { get; set; }
         
-        public DateTime? Released { get; set; }
+        /// <summary>
+        /// the date this movie's been released
+        /// </summary>
         public DateTime? DateReleased { get; set; }
         
+        /// <summary>
+        /// this movies homepage
+        /// </summary>
         public string Homepage { get; set; }
         
+        /// <summary>
+        /// this movies trailer
+        /// </summary>
         public string Trailer { get; set; }
 
+        /// <summary>
+        /// this movie's categories
+        /// </summary>
         public virtual ICollection<Category> Categories { get; set; }
 
+        /// <summary>
+        /// this movie's production studios
+        /// </summary>
         public virtual ICollection<Studio> Studios { get; set; }
 
+        /// <summary>
+        /// this movie's production country
+        /// </summary>
         public virtual ICollection<Country> Countries { get; set; }
 
+        /// <summary>
+        /// this movie's images
+        /// </summary>
         public virtual ICollection<Image> Images { get; set; }
 
+        /// <summary>
+        /// this movie's cast members
+        /// </summary>
         public virtual ICollection<CastMember> Cast { get; set; }
         #endregion
 
+        /// <summary>
+        /// returns a compact string representation of this movie
+        /// </summary>
+        /// <returns>NAME with DVDs.Count DVDs for PRICE </returns>
         public override string ToString()
         {
-            return this.Name + " whith " + this.DVDs.Count() + " DVDs for " + this.Price;
+            return this.Name + " with " + this.DVDs.Count() + " DVDs for " + this.Price;
         }
     }
 }
