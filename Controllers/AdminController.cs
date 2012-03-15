@@ -13,8 +13,6 @@ namespace BoxOffice.Controllers
     {
         private BoxOfficeContext db = new BoxOfficeContext();
 
-        
-
         //
         // GET: /Admin/
 
