@@ -259,30 +259,31 @@ namespace BoxOffice.Controllers
             foreach (var item in tmdbMovie.Genres)
             {
                 var id = db.Categories.Find(item.Id);
+
+                // Add new category
                 if (id == null)
                 {
-                    categories.Add(new Category
+                    var c = new Category
                     {
                         CategoryID = item.Id,
+                        Movies = new List<Movie>(),
                         Name = item.Name,
                         Type = item.Type,
                         Url = item.Url
-                    });
+                    };
+                    db.Categories.Add(c);
+                    c.Movies.Add(movie);
+                    movie.Categories.Add(c);
+                    db.SaveChanges();
                 }
+                else
+	            {
+                    var c = db.Categories.Find(id);
+                    c.Movies.Add(movie);
+                    movie.Categories.Add(c);
+                    db.SaveChanges();
+	            }
             }
-
-            categories.ForEach(s => db.Categories.Add(s));
-            db.SaveChanges();
-
-            // Add all categories
-            categories.Clear();
-            tmdbMovie.Genres.ForEach(s => categories.Add(new Category
-            {
-                CategoryID = s.Id,
-                Name = s.Name,
-                Type = s.Type,
-                Url = s.Url
-            }));
 
             #endregion
 
