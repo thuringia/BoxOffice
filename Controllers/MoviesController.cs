@@ -206,7 +206,7 @@ namespace BoxOffice.Controllers
             movie.Homepage = tmdbMovie.Homepage;
             images.ForEach(s => movie.Images.Add(s));
             movie.Rating_by_moviedb = float.Parse(tmdbMovie.Rating);
-            movie.Released = DateTime.Parse(tmdbMovie.Released);
+            movie.DateReleased = DateTime.Parse(tmdbMovie.Released);
             studios.ForEach(s => movie.Studios.Add(s));
             movie.Tagline = tmdbMovie.Tagline;
             movie.Trailer = tmdbMovie.Trailer;
