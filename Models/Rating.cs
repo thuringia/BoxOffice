@@ -10,6 +10,7 @@ namespace BoxOffice.Models
 {
     public class Rating
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RatingID { get; set; }
 
         public int MovieID { get; set; }
