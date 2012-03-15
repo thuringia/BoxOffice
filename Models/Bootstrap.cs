@@ -110,6 +110,7 @@ namespace BoxOffice.Models
 
             users[0].Queue.Add(rental);
             dvds[0].Rentals.Add(rental);
+            dvds[0].State = "rented";
             context.SaveChanges();
         }
 
