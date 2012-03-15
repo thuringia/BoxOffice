@@ -36,10 +36,19 @@ namespace BoxOffice.Models
         /// </summary>
         public virtual User User { get; set; }
 
+        /// <summary>
+        /// the comments text
+        /// </summary>
         public string Message { get; set; }
 
+        /// <summary>
+        /// the date the comment was posted
+        /// </summary>
         public DateTime Date { get; set; }
 
+        /// <summary>
+        /// the number of times this comment was flagged by other users
+        /// </summary>
         public int? Flag { get; set; }
     }
 }
