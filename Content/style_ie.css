@@ -37,7 +37,7 @@ body {
   /* Inset text effect based on: */
   /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
   text-shadow: 0px 2px 3px #666; }
-  body h1:not(#logo) {
+  body h1 {
     text-transform: lowercase; }
   body h2 {
     text-transform: lowercase; }
@@ -46,7 +46,8 @@ body {
   body #logo {
     position: absolute;
     top: 25px;
-    left: 25px; }
+    left: 25px;
+    text-transform: none; }
   body header, body #body {
     width: 900px;
     margin: 0 auto; }
@@ -65,9 +66,10 @@ body {
         /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
         text-shadow: 0px 2px 3px #666;
         text-decoration: none;
-        padding-left: 25px; }
-      body nav ul li a:not(#search) {
+        padding-left: 25px;
         text-transform: lowercase; }
+      body nav ul li #search {
+        text-transform: none; }
   body #body {
     padding-top: 15px; }
 

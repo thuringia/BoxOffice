@@ -104,6 +104,11 @@
       <DependentUpon>boxoffice.mdf</DependentUpon>
     </Content>
     <Content Include="Content\admin.js" />
+    <Content Include="Content\style_ie.css">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>style_ie.scss</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -134,6 +139,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Content\ErlerDingbats.ttf" />
+    <None Include="Content\style_ie.scss">
+      <Generator>ScssGenerator</Generator>
+      <LastGenOutput>style_ie.css</LastGenOutput>
+    </None>
     <None Include="ModelClassesDiagram.cd" />
     <None Include="Readme.md" />
     <Content Include="Scripts\cssfx.js" />
@@ -198,6 +207,7 @@
     <Content Include="Views\Movies\Create.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
     <Content Include="Views\Movies\Delete.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="MvpRestApiLib\MvpRestApiLib.csproj">
