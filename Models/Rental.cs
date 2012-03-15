@@ -7,6 +7,7 @@ namespace BoxOffice.Models
 {
     public class Rental
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RentalID { get; set; }
 
         public int DvdID { get; set; }
