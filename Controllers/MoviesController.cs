@@ -330,29 +330,42 @@ namespace BoxOffice.Controllers
             // check if country exists, if not add it
             foreach (var item in tmdbMovie.Countries)
             {
+                // try to find the country in the db
                 var c = db.Countries.Find(item.Code);
 
+                // if not found add it
                 if (c == null)
                 {
-                    countries.Add(new Country
+                    // create new Country object
+                    c = new Country
                     {
                         Code = item.Code,
+                        Movies = new List<Movie>(),
                         Name = item.Name,
                         Url = item.Url
-                    });
-                }
-            }
-            countries.ForEach(s => db.Countries.Add(s));
-            db.SaveChanges();
+                    };
 
-            // store all studios
-            countries.Clear();
-            tmdbMovie.Countries.ForEach(s => countries.Add(new Country
-            {
-                Code = s.Code,
-                Name = s.Name,
-                Url = s.Url
-            }));
+                    // add new object to db
+                    db.Countries.Add(c);
+
+                    // set relationships
+                    c.Movies.Add(movie);
+                    movie.Countries.Add(c);
+
+                    // save changes
+                    db.SaveChanges();
+                }
+                // if found, set relationships
+                else
+	            {
+                    // set relationships
+                    c.Movies.Add(movie);
+                    movie.Countries.Add(c);
+
+                    // save changes
+                    db.SaveChanges();
+	            }
+            }
 
             #endregion
 
