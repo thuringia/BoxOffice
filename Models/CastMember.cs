@@ -10,8 +10,7 @@ namespace BoxOffice.Models
     {
         public int CastMemberID { get; set; }
 
-        public int PersonID { get; set; }
-        public virtual Person Person { get; set; }
+        public string Name { get; set; }
 
         public string Character { get; set; }
         
@@ -27,5 +26,6 @@ namespace BoxOffice.Models
         public int Order { get; set; }
         
         public int Cast_id { get; set; }
+
     }
 }
