@@ -26,5 +26,10 @@ namespace BoxOffice.Models
         /// </summary>
         [Required]
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Should this movie be promoted as the new movie of the week?
+        /// </summary>
+        public bool MovieOfTheWeek { get; set; }
     }
 }

@@ -93,7 +93,7 @@ namespace BoxOffice.Controllers
                 if (response != null)
                 {
                     var m = tmdb.GetMovieInfo(response.First().Id);
-                    var movie = persistMovie(m, add.DVDs, add.Price);
+                    var movie = persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
                     return RedirectToAction("Index");
                 }
                 else
@@ -174,12 +174,29 @@ namespace BoxOffice.Controllers
         }
 
         /// <summary>
+        /// Sets the new movie of the week
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MovieOfTheWeek(Movie movie)
+        {
+            var old = db.Movies.Find(movie.MovieID);
+            old.MovieOfTheWeek = false;
+
+            movie.MovieOfTheWeek = true;
+
+            db.SaveChanges();
+
+            return View();
+        }
+
+        /// <summary>
         /// Saves a movie from TheMovieDB to BoxOffices db
         /// </summary>
         /// <param name="tmdbMovie"></param>
         /// <returns></returns>
         private Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price, bool MovieOfTheWeek)
-        private Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price)
         {
             // Lists to fill
             List<Category> categories = new List<Category>();
@@ -217,6 +234,7 @@ namespace BoxOffice.Controllers
             movie.Price = price;
             movie.Rating_by_moviedb = float.Parse(tmdbMovie.Rating);
             movie.Ratings = new List<Rating>();
+            movie.RentalCount = 0;
             movie.Studios = studios;
             movie.Tagline = tmdbMovie.Tagline;
             movie.Trailer = tmdbMovie.Trailer;
