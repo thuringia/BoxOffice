@@ -1,9 +1,5 @@
 /* Mixins */
 /* Variablen */
-@font-face {
-  font-family: "Erler-Dingbats";
-  src: url("/Content/ErlerDingbats.ttf"); }
-
 * {
   margin: 0;
   padding: 0;
