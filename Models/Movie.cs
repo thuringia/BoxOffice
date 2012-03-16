@@ -50,6 +50,16 @@ namespace BoxOffice.Models
         /// </summary>
         public bool? MovieOfTheWeek { get; set; }
 
+        /// <summary>
+        /// The number of times this movie has been rented
+        /// </summary>
+        public int RentalCount { get; set; }
+
+        /// <summary>
+        /// The date this movie was added to BoxOffice
+        /// </summary>
+        public DateTime DateAdded { get; set; }
+
         #endregion
 
         #region Fields as used by themovidb.org

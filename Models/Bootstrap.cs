@@ -348,6 +348,8 @@ namespace BoxOffice.Models
             var movie = new Movie
             {
                 Price = 9.99M,
+                RentalCount = 0,
+                DateAdded = DateTime.Now,
 
                 Cast = new List<CastMember>(),
                 Adult = false,

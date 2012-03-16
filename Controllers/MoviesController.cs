@@ -178,6 +178,7 @@ namespace BoxOffice.Controllers
         /// </summary>
         /// <param name="tmdbMovie"></param>
         /// <returns></returns>
+        private Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price, bool MovieOfTheWeek)
         private Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price)
         {
             // Lists to fill
@@ -201,6 +202,7 @@ namespace BoxOffice.Controllers
             movie.Certification = tmdbMovie.Certification;
             movie.Comments = new List<Comment>();
             movie.Countries = countries;
+            movie.DateAdded = DateTime.Now;
             movie.DateReleased = DateTime.Parse(tmdbMovie.Released);
             movie.DVDs = dvds;
             movie.Homepage = tmdbMovie.Homepage;
@@ -208,6 +210,7 @@ namespace BoxOffice.Controllers
             movie.Imdb_id = tmdbMovie.ImdbId;
             movie.Language = tmdbMovie.Language;
             movie.MovieID = tmdbMovie.Id;
+            movie.MovieOfTheWeek = MovieOfTheWeek;
             movie.Name = tmdbMovie.Name;
             movie.Original_name = tmdbMovie.OriginalName;
             movie.Overview = tmdbMovie.Overview;
