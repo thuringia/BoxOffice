@@ -32,3 +32,4 @@ App_Data/
 bin/
 obj/
 obj/Debug/
+*.dll
