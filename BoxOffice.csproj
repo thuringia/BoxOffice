@@ -28,7 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -161,6 +161,8 @@
   <ItemGroup>
     <Content Include="App_Data\boxoffice.mdf" />
     <Content Include="Content\admin.js" />
+    <Content Include="Content\fonts\segoe_wp_light.typeface.js" />
+    <Content Include="Content\fonts\segoe_wp_regular.typeface.js" />
     <Content Include="Content\style.css">
       <DependentUpon>style.scss</DependentUpon>
     </Content>
@@ -194,6 +196,12 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\metro\images\ui-icons_000000_0.png" />
+    <Content Include="Content\themes\metro\images\ui-icons_525252_0.png" />
+    <Content Include="Content\themes\metro\images\ui-icons_fafafa_0.png" />
+    <Content Include="Content\themes\metro\images\ui-icons_fafafa_1.png" />
+    <Content Include="Content\themes\metro\images\ui-icons_ffffff_0.png" />
+    <Content Include="Content\themes\metro\jquery-ui-1.8.16.custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\cssfx.js" />
@@ -219,6 +227,9 @@
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\selectivizr-min.js" />
+    <Content Include="Scripts\selectivizr.js" />
+    <Content Include="Scripts\typeface-0.15.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -254,14 +265,14 @@
     <Content Include="Views\Shared\_Layout-TEMPLATE.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\ErlerDingbats.ttf" />
+    <None Include="Content\fonts\ErlerDingbats.ttf" />
+    <None Include="Content\fonts\SegoeWP-Light.ttf" />
+    <None Include="Content\fonts\SegoeWP.ttf" />
     <None Include="Content\style.scss" />
     <None Include="Content\style_ie.scss" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -272,6 +283,10 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <None Include="Readme.md" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Movies.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -295,9 +310,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>49799</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49448/</IISUrl>
+          <IISUrl>http://localhost:1234/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
