@@ -1,34 +1,34 @@
 ﻿/* Mixins */
 @mixin font($size, $color, $weight) {
 	color: $color;
+	
 	font: {
 		family: museo-sans;
 		size: $size;
 		weight: $weight;
 	}
+
 	/* Inset text effect based on: */
 	/* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
-	text-shadow: 0px 2px 3px #666;
+	/* text-shadow: 0px 2px 3px #666; */
+	
+	/* pseudo anti-aliasing for fonts */
+	text-shadow: 0 0 1px rgba(0,0,0,0.3);
 }
 
 @mixin gradient($startColor, $endColor) {
 	background: #87e0fd; /* Old browsers */
-	background: -moz-linear-gradient(top,  $startColor 0%, $endColor 100%) no-repeat; /* FF3.6+ */
+	background: -moz-linear-gradient(top, $startColor 0%, $endColor 100%) no-repeat; /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(100%,$endColor)) no-repeat; /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  $startColor 0%,$endColor) no-repeat; /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  $startColor 0%,$endColor 100%) no-repeat; /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  $startColor 0%,$endColor 100%) no-repeat; /* IE10+ */
-	background: linear-gradient(top,  $startColor 0%,$endColor 100%) no-repeat; /* W3C */
+	background: -webkit-linear-gradient(top, $startColor 0%,$endColor) no-repeat; /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* IE10+ */
+	background: linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* W3C */
 }
 
 /* Variablen */
 $bgStart: #063559;
 $bgEnd: #0D5A7F;
-
-@font-face {
-    font-family: "Erler-Dingbats";
-    src: url("/Content/ErlerDingbats.ttf");
-}
 
 * {
 	margin: 0;
@@ -39,12 +39,23 @@ $bgEnd: #0D5A7F;
 	box-sizing: border-box;
 }
 
+/* ajax login/registration dialog */
+.modal-popup {
+    font-size: 0.7em;
+}
+
+    .modal-popup input[type="text"],
+    .modal-popup input[type="password"] {
+        width: 90%;
+    }
+
 body {
+	$pageWidth: 900px;
 	@include gradient($bgStart, $bgEnd);
 	background-color: $bgEnd !important;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr= '#063559', endColorstr='#0D5A7F',GradientType=0 ) no-repeat; /* IE6-8 */
+	
 	//color: white;
-	@include font(12pt,rgba(250,250,250,0.9),300);
+	@include font(1em,rgba(250,250,250,0.9),300);
 
 	h1:not(#logo) {
 		text-transform: lowercase;
@@ -62,10 +73,28 @@ body {
 		position:absolute;
 		top: 25px;
 		left: 25px;
+		font-size: 2em;
 	}
 
-	header, #body {
-		width: 900px;
+	#login {
+		position: absolute;
+		top: 25px;
+		right: 25px;
+		text-transform: lowercase;
+
+		ul li{
+			display: inline;
+	
+			a {
+				@include font(1.75em, rgba(250,250,250,0.9), 500);
+				text-decoration: none;
+				padding-left: 2em;
+			}
+		}
+	}
+
+	header, #body, footer {
+		width: $pageWidth;
 		margin: 0 auto;
 	}
 
@@ -81,7 +110,7 @@ body {
 			display: inline;
 	
 			a {
-				@include font(14pt, rgba(250,250,250,0.9), 500);
+				@include font(1.75em, rgba(250,250,250,0.9), normal);
 				text-decoration: none;
 				padding-left: 25px;
 			}
@@ -95,11 +124,71 @@ body {
 	#body {
 		padding-top: 15px;
 	}
+
+	footer {
+		@include font(0.75em, rgba(250,250,250,0.9), 300);
+		text-align: center;
+	}
 }
 
 nav ul li a.first {
 			padding-left: 0px;
 			}
+
+/* Dialog Styling
+-----------------------------------------------------------*/
+.ui-dialog-titlebar {
+	text-transform: lowercase;
+}
+
+.modal-popup {
+
+	.title h1 {
+		display: none;
+	}
+
+	#loginForm {
+		padding-left: 7px;
+	}
+
+	form {
+		padding-top: 20px;
+		font-family: museo-sans !important;
+		
+		ol {
+			list-style: none;
+
+			li {
+				clear: both;
+				padding-bottom: 30px;
+
+				label {
+					width: 100px;
+					float: left;
+					text-transform: lowercase;
+				}
+
+				input {
+					width: 400px !important;
+					float:left;
+					margin-left: 25px;
+
+					&[type="checkbox"] {
+						width: 13px !important;
+					}
+				}
+
+				.field-validation-error span {
+					position: relative;
+					left: 0px;
+					float: left;
+					padding: 5px 0 10px 0;
+					text-transform: lowercase;
+				}
+			}
+		}
+	}
+}
 
 /* CSS Transitions
 -----------------------------------------------------------*/

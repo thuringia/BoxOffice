@@ -11,15 +11,18 @@
         <link href="/Content/style_ie.css" rel="stylesheet" type="text/css" class="cssfx" media="screen"/>
 	<![endif]-->
     <script type="text/javascript" src="http://use.typekit.com/irl4iyd.js"></script>
-    <script type="text/javascript">    try { Typekit.load(); } catch (e) { }</script>
-    <script src="@Url.Content("~/Scripts/cssfx.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">    try { Typekit.load(); } catch (e) { }</script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- CssFx for automatic generation of vendor-specific css prefixes -->
+    <script src="@Url.Content("~/Scripts/cssfx.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
-    <script src"@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.masonry.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/AjaxLogin.js")"></script>
 
     <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" class="cssfx" media="screen"/>
+    <link href="@Url.Content("~/Content/themes/metro/jquery-ui-1.8.16.custom.css")" rel="stylesheet" type="text/css" />
     
     @RenderSection("js", required: false)
 
@@ -41,18 +44,18 @@
                 <li> <a id="home" href="@Url.Action("Index", "Home")">Home</a> </li>
                 <li> <a id="movies" href="@Url.Action("Index", "Movies")">Movies</a> </li>
                 <li> <a id="genres" href="@Url.Action("index","Genres")">Genres</a> </li>
-                <li> <a id="me" href="@Url.Action("Me","Users")"></a></li>
+                <li> <a id="me" href="@Url.Action("Me","Users")">Me</a></li>
             </ul>
             @RenderSection("subMenu", false)
         </nav>
     </header>
     
-    <section id="body">
+    <section id="body" class=" ">
         @RenderBody()
     </section>
 
     <footer>
-        (c) 2012 Robert Wawrzyniak - All rights reserved
+        <p class=" ">&copy; 2012 Robert Wawrzyniak &mdash; All rights reserved</p>
     </footer>
 
 </body>

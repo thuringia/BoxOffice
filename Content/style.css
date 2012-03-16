@@ -8,6 +8,14 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+/* ajax login/registration dialog */
+.modal-popup {
+  font-size: 0.7em; }
+
+.modal-popup input[type="text"],
+.modal-popup input[type="password"] {
+  width: 90%; }
+
 body {
   background: #87e0fd;
   /* Old browsers */
@@ -24,15 +32,15 @@ body {
   background: linear-gradient(top, #063559 0%, #0d5a7f 100%) no-repeat;
   /* W3C */
   background-color: #0d5a7f !important;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= '#063559', endColorstr='#0D5A7F',GradientType=0 ) no-repeat;
-  /* IE6-8 */
   color: rgba(250, 250, 250, 0.9);
   font-family: museo-sans;
-  font-size: 12pt;
+  font-size: 1em;
   font-weight: 300;
   /* Inset text effect based on: */
   /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
-  text-shadow: 0px 2px 3px #666; }
+  /* text-shadow: 0px 2px 3px #666; */
+  /* pseudo anti-aliasing for fonts */
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3); }
   body h1:not(#logo) {
     text-transform: lowercase; }
   body h2 {
@@ -42,8 +50,28 @@ body {
   body #logo {
     position: absolute;
     top: 25px;
-    left: 25px; }
-  body header, body #body {
+    left: 25px;
+    font-size: 2em; }
+  body #login {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    text-transform: lowercase; }
+    body #login ul li {
+      display: inline; }
+      body #login ul li a {
+        color: rgba(250, 250, 250, 0.9);
+        font-family: museo-sans;
+        font-size: 1.75em;
+        font-weight: 500;
+        /* Inset text effect based on: */
+        /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
+        /* text-shadow: 0px 2px 3px #666; */
+        /* pseudo anti-aliasing for fonts */
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+        padding-left: 2em; }
+  body header, body #body, body footer {
     width: 900px;
     margin: 0 auto; }
   body header {
@@ -55,20 +83,67 @@ body {
       body nav ul li a {
         color: rgba(250, 250, 250, 0.9);
         font-family: museo-sans;
-        font-size: 14pt;
-        font-weight: 500;
+        font-size: 1.75em;
+        font-weight: normal;
         /* Inset text effect based on: */
         /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
-        text-shadow: 0px 2px 3px #666;
+        /* text-shadow: 0px 2px 3px #666; */
+        /* pseudo anti-aliasing for fonts */
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
         text-decoration: none;
         padding-left: 25px; }
       body nav ul li a:not(#search) {
         text-transform: lowercase; }
   body #body {
     padding-top: 15px; }
+  body footer {
+    color: rgba(250, 250, 250, 0.9);
+    font-family: museo-sans;
+    font-size: 0.75em;
+    font-weight: 300;
+    /* Inset text effect based on: */
+    /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
+    /* text-shadow: 0px 2px 3px #666; */
+    /* pseudo anti-aliasing for fonts */
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    text-align: center; }
 
 nav ul li a.first {
   padding-left: 0px; }
+
+/* Dialog Styling
+-----------------------------------------------------------*/
+.ui-dialog-titlebar {
+  text-transform: lowercase; }
+
+.modal-popup .title h1 {
+  display: none; }
+.modal-popup #loginForm {
+  padding-left: 7px; }
+.modal-popup form {
+  padding-top: 20px;
+  font-family: museo-sans !important; }
+  .modal-popup form ol {
+    list-style: none; }
+    .modal-popup form ol li {
+      clear: both;
+      padding-bottom: 30px; }
+      .modal-popup form ol li label {
+        width: 100px;
+        float: left;
+        text-transform: lowercase; }
+      .modal-popup form ol li input {
+        width: 400px !important;
+        float: left;
+        margin-left: 25px; }
+        .modal-popup form ol li input[type="checkbox"] {
+          width: 13px !important; }
+      .modal-popup form ol li .field-validation-error span {
+        position: relative;
+        left: 0px;
+        float: left;
+        padding: 5px 0 10px 0;
+        text-transform: lowercase; }
 
 /* CSS Transitions
 -----------------------------------------------------------*/

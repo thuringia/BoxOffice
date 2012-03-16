@@ -38,7 +38,8 @@
     };
 
     var formSubmitHandler = function (e) {
-        var $form = $(this);
+        //var $form = $(this);
+        var $form = $('form');
 
         // We check if jQuery.validator exists on the form
         if (!$form.valid || $form.valid()) {
@@ -59,7 +60,7 @@
         }
 
         // Prevent the normal behavior since we opened the dialog
-        e.preventDefault();
+        //e.preventDefault();
     };
 
     var loadAndShowDialog = function (id, link, url) {
@@ -81,7 +82,26 @@
                         resizable: true,
                         draggable: true,
                         width: link.data('dialog-width') || 600,
-                        beforeClose: function () { resetForm($(this).find('form')); }
+                        beforeClose: function () { resetForm($(this).find('form')); },
+                        buttons: {
+                            Login: function () {
+                                if (id == "#loginLink") {
+                                    formSubmitHandler();
+                                }
+                            },
+                            Register: function () {
+                                if (id == "#registerLink") {
+                                    formSubmitHandler();
+                                }
+                                else {
+                                    dialogs["#registerLink"].dialog('open');
+                                    $(this).dialog("close");
+                                }
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
                     })
                     .find('form') // Attach logic on forms
                         .submit(formSubmitHandler)

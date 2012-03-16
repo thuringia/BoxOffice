@@ -1,26 +1,22 @@
 @model BoxOffice.Models.RegisterModel
-
 @{
     ViewBag.Title = "Register";
 }
+<div id="loginForm">
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+        <h2>Use the form below to create a new account.</h2>
+    </hgroup>
+    <p class="message-info  ">
+        Passwords are required to be a minimum of @Membership.MinRequiredPasswordLength
+        characters in length.
+    </p>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @using (Html.BeginForm((string)ViewBag.FormAction, "Account"))
+    {
+        @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Use the form below to create a new account.</h2>
-</hgroup>
-
-<p class="message-info">
-    Passwords are required to be a minimum of @Membership.MinRequiredPasswordLength characters in length.
-</p>
-
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-@using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
-    @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
-
-    <fieldset>
-        <legend>Registration Form</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -43,6 +39,19 @@
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
-    </fieldset>
-}
+        
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-dialog-buttonset">
+                <button style="display: none;" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false"><span class="ui-button-text">Register</span>
+                </button>
+                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false"><span class="ui-button-text">Register</span>
+                </button>
+                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false"><span class="ui-button-text">Cancel</span>
+                </button>
+            </div>
+        </div>        
+    }
+</div>

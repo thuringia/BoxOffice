@@ -3,20 +3,17 @@
 @{
     ViewBag.Title = "Log in";
 }
+<div id="loginForm">
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+        <h2>Enter your user name and password below.</h2>
+    </hgroup>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @using (Html.BeginForm((string)ViewBag.FormAction, "Account"))
+    {
+        @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Enter your user name and password below.</h2>
-</hgroup>
-
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-@using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
-    @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
-
-    <fieldset>
-        <legend>Log in Form</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -29,13 +26,26 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
             <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                @Html.CheckBoxFor(m => m.RememberMe)
             </li>
         </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
-}
+        
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-dialog-buttonset">
+                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false">
+                    <span class="ui-button-text">Login</span>
+                </button>
+                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false">
+                    <span class="ui-button-text">Register</span>
+                </button>
+                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false">
+                    <span class="ui-button-text">Cancel</span>
+                </button>
+            </div>
+        </div>
+    }
+</div>
