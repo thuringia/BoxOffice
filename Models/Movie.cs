@@ -45,6 +45,11 @@ namespace BoxOffice.Models
         /// </summary>
         public virtual ICollection<DVD> DVDs { get; set; }
 
+        /// <summary>
+        /// Marks this movie as the movie of the week
+        /// </summary>
+        public bool MovieOfTheWeek { get; set; }
+
         #endregion
 
         #region Fields as used by themovidb.org
