@@ -48,7 +48,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// Marks this movie as the movie of the week
         /// </summary>
-        public bool MovieOfTheWeek { get; set; }
+        public bool? MovieOfTheWeek { get; set; }
 
         #endregion
 
