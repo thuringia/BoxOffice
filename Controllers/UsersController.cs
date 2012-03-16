@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BoxOffice.Models;
-using MvpRestApiLib;
 using System.Web.Security;
 
 namespace BoxOffice.Controllers
@@ -21,8 +20,6 @@ namespace BoxOffice.Controllers
         /// Get a list of all users
         /// </summary>
         /// <returns></returns>
-
-        [EnableJson, EnableXml]
         public ViewResult Index()
         {
             return View(db.Users.ToList());
@@ -30,7 +27,6 @@ namespace BoxOffice.Controllers
 
         //
         // DELETE: /Users/{id}
-        [EnableJson, EnableXml]
         [HttpDelete]
         //[Authorize(Roles="Admin")]
         public ActionResult Index(int id)
@@ -135,28 +131,51 @@ namespace BoxOffice.Controllers
 
         #region login
         //
-        // GET: /Users/Login
+        // GET: /Account/Login
 
-        [EnableJson, EnableXml]
+        [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            return ContextDependentView();
         }
 
         //
-        // POST: /Users/Login
+        // POST: /Account/JsonLogin
 
-        [EnableJson, EnableXml]
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LogOnModel model, string returnUrl)
+        public JsonResult JsonLogin(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    return Json(new { success = true, redirect = returnUrl });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+            }
+
+            // If we got this far, something failed
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
+
+        //
+        // POST: /Account/Login
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Login(LoginModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Membership.ValidateUser(model.UserName, model.Password))
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
@@ -176,9 +195,10 @@ namespace BoxOffice.Controllers
         }
 
         //
-        // GET: /Account/Logout
+        // GET: /Account/LogOff
 
-        public ActionResult Logout()
+        [Authorize]
+        public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
 
@@ -188,33 +208,57 @@ namespace BoxOffice.Controllers
         //
         // GET: /Account/Register
 
-        [EnableJson, EnableXml]
+        [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return ContextDependentView();
+        }
+
+        //
+        // POST: /Account/JsonRegister
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult JsonRegister(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                MembershipCreateStatus createStatus;
+                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+
+                if (createStatus == MembershipCreateStatus.Success)
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                }
+            }
+
+            // If we got this far, something failed
+            return Json(new { errors = GetErrorsFromModelState() });
         }
 
         //
         // POST: /Account/Register
 
+        [AllowAnonymous]
         [HttpPost]
-        [EnableJson, EnableXml]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    var id = addUser(new User {
-                        Username = model.UserName,
-                        Email = model.Email
-                    });
-                    return Redirect("/Users/"+ id);
+                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -250,7 +294,7 @@ namespace BoxOffice.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
                     changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 }
                 catch (Exception)
@@ -275,9 +319,29 @@ namespace BoxOffice.Controllers
         //
         // GET: /Account/ChangePasswordSuccess
 
-        public ActionResult ChangePasswordSuccess()
+        [Authorize]       public ActionResult ChangePasswordSuccess()
         {
             return View();
+        }
+
+        private ActionResult ContextDependentView()
+        {
+            string actionName = ControllerContext.RouteData.GetRequiredString("action");
+            if (Request.QueryString["content"] != null)
+            {
+                ViewBag.FormAction = "Json" + actionName;
+                return PartialView();
+            }
+            else
+            {
+                ViewBag.FormAction = actionName;
+                return View();
+            }
+        }
+
+        private IEnumerable<string> GetErrorsFromModelState()
+        {
+            return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
 
         #region Status Codes

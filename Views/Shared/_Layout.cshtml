@@ -19,13 +19,18 @@
 
     <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" class="cssfx" media="screen"/>
     
-    @RenderSection("js", false)
+    @RenderSection("js", required: false)
 
+    <meta name="viewport" content="width=device-width" />
 </head>
 
 <body>
 
     <h1 id="logo">BoxOffice</h1>
+
+    <section id="login">
+        @Html.Partial("_LoginPartial")
+    </section>
 
     <header>
         <nav>
@@ -43,6 +48,10 @@
     <section id="body">
         @RenderBody()
     </section>
+
+    <footer>
+        (c) 2012 Robert Wawrzyniak - All rights reserved
+    </footer>
 
 </body>
 

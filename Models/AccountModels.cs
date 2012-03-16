@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Web.Mvc;
 using System.Web.Security;
 
 namespace BoxOffice.Models
@@ -27,7 +26,7 @@ namespace BoxOffice.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LogOnModel
+    public class LoginModel
     {
         [Required]
         [Display(Name = "User name")]

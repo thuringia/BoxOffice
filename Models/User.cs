@@ -13,7 +13,7 @@ namespace BoxOffice.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
 
-        [MaxLength(30)]
+        [StringLength(30)]
         public string Username { get; set; }
 
         [DataType(DataType.EmailAddress)]
@@ -25,10 +25,10 @@ namespace BoxOffice.Models
         //public virtual Adress Adress { get; set; }
         public string Street { get; set; }
 
-        [MaxLength(7)]
+        [StringLength(7)]
         public string Number { get; set; }
 
-        [MaxLength(8)]
+        [StringLength(8)]
         public string Zip { get; set; }
 
         public string City { get; set; }

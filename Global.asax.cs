@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
-using MvpRestApiLib.NogginBox.MvcExtras.Providers;
-using System.Data.Entity;
 using BoxOffice.Models;
-
 
 namespace BoxOffice
 {
@@ -25,17 +27,17 @@ namespace BoxOffice
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    "SingleUser",
-            //    "Users/{UserID}",
-            //    new { controller = "Users", action = "SingleUser" });
-
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
 
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
         }
 
         protected void Application_Start()
@@ -44,14 +46,13 @@ namespace BoxOffice
 
             AreaRegistration.RegisterAllAreas();
 
+            // Use LocalDB for Entity Framework by default
+            Database.DefaultConnectionFactory = new SqlConnectionFactory("Data Source=(localdb)\v11.0; Integrated Security=True; MultipleActiveResultSets=True");
+
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            // Source: http://haacked.com/archive/2010/04/15/
-            // sending-json-to-an-asp-net-mvc-action-method-argument.aspx
-            // This must be added to accept JSON as request
-            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
-            ValueProviderFactories.Factories.Add(new XmlValueProviderFactory());
+            BundleTable.Bundles.RegisterTemplateBundles();
         }
     }
 }

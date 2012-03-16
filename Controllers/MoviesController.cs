@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BoxOffice.Models;
-using MvpRestApiLib;
 using TheMovieDb;
 
 namespace BoxOffice.Controllers
@@ -37,7 +36,6 @@ namespace BoxOffice.Controllers
         // DELETE: /Movies/{id}
         
         [HttpDelete]
-        [EnableJson, EnableXml]
         //[Authorize(Roles="Admin")]
         public ActionResult Index(int id)
         {
@@ -63,7 +61,6 @@ namespace BoxOffice.Controllers
         // PUT: /Movies/{id}
 
         [HttpPut]
-        [EnableJson, EnableXml]
         //[Authorize(Roles="Admin")]
         public ActionResult Index(Movie movie)
         {
@@ -186,7 +183,6 @@ namespace BoxOffice.Controllers
             // Lists to fill
             List<Category> categories = new List<Category>();
             List<Image> images = new List<Image>();
-            List<Person> persons = new List<Person>();
             List<CastMember> cast = new List<CastMember>();
             List<Studio> studios = new List<Studio>();
             List<Country> countries = new List<Country>();

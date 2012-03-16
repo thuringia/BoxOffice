@@ -8,8 +8,6 @@ namespace BoxOffice.Models
 {
     public class BoxOfficeContext : DbContext
     {
-        //public DbSet<Adress> Adresses { get; set; }
-
         public DbSet<CastMember> CastMembers { get; set; }
         
         public DbSet<Category> Categories { get; set; }
@@ -26,8 +24,6 @@ namespace BoxOffice.Models
         
         public DbSet<Movie> Movies { get; set; }
         
-        //public DbSet<Person> Persons { get; set; }
-
         public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<Rental> Rentals { get; set; }
