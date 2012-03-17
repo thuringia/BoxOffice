@@ -161,8 +161,6 @@
   <ItemGroup>
     <Content Include="App_Data\boxoffice.mdf" />
     <Content Include="Content\admin.js" />
-    <Content Include="Content\fonts\segoe_wp_light.typeface.js" />
-    <Content Include="Content\fonts\segoe_wp_regular.typeface.js" />
     <Content Include="Content\style.css">
       <DependentUpon>style.scss</DependentUpon>
     </Content>
@@ -270,9 +268,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\fonts\ErlerDingbats.ttf" />
-    <None Include="Content\fonts\SegoeWP-Light.ttf" />
-    <None Include="Content\fonts\SegoeWP.ttf" />
     <None Include="Content\style.scss" />
     <None Include="Content\style_ie.scss" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -287,6 +282,9 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Movies.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Admin\MovieOfTheWeekPartial.cshtml" />
+    <Content Include="Views\Admin\HotMoviesPartial.cshtml" />
+    <Content Include="Views\Shared\_TilePartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
