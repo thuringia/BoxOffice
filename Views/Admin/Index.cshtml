@@ -9,8 +9,77 @@
 
 <h2>Dashboard</h2>
 
-@Html.Partial("MovieOfTheWeekPartial");
+@* ViewData["movieOfTheWeek"] *@
+@{
+    var m = (BoxOffice.Models.Movie)ViewData["movieOfTheWeek"];
+    var i = m.Images.ToList();    
+}
+<section id="movieOfTheWeekSection">
+    <section class="tile">
+        <div class="tileContent">
+            <div class="tileText">
+                <img class="tilePic" src="@i[0].Url"/>
+                <p class="tileDescription">@Html.Display(m.Name)</p>
+            </div>
+            <!-- tile text -->
+        </div>
+        <!-- tileContent -->
+    </section>
+</section>
 
-@Html.Partial("HotMoviesPartial");
+<section id="hotMoviesSection">
+    @foreach (var item in (List<BoxOffice.Models.Movie>)ViewData["hotMovies"])
+    {
+        var imgs = item.Images.ToList();
+        
+        <section class="tile">
+            <div class="tileContent">
+                <div class="tileText">
+                    <img class="tilePic" src="@imgs[0].Url" />
+                    <p class="tileDescription">@Html.Display(item.Name)</p>
+                </div>
+                <!-- tile text -->
+            </div>
+            <!-- tileContent -->
+        </section>
+    }
+</section>
 
-<section id="flaggedCommentsSection"></section>
+@{
+    var comments = (List<BoxOffice.Models.Comment>)ViewData["flaggedComments"];
+}
+<section id="flaggedCommentsSection">
+    <table>
+        <thead>
+            <tr>
+                <td>Username</td>
+            </tr>
+            <tr>
+                <td>Movie</td>
+            </tr>
+            <tr>
+                <td>Comment</td>
+            </tr>
+            <tr>
+                <td>Flags</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in comments)
+            {
+                <tr>
+                    <td>@Html.Display(item.User.Username)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Display(item.Movie.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Display(item.Message)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Display(item.Flag.ToString())</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
