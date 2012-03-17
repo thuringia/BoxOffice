@@ -113,7 +113,7 @@ namespace BoxOffice.Controllers
                 if (response != null)
                 {
                     var m = tmdb.GetMovieInfo(response.First().Id);
-                    var movie = persistMovie(m, add.DVDs, add.Price);
+                    var movie = persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
                     return movie;
                 }
                 else
