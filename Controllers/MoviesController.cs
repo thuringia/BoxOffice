@@ -71,6 +71,49 @@ namespace BoxOffice.Controllers
             return View(movie);
         }
 
+        //
+        // POST: /Movies/Rent/{id}
+
+        [HttpPost]
+        //[Authorize(Roles="User")
+        public JsonResult Rent(int id)
+        {
+            var movies = from m in db.Movies
+                         where m.MovieID == id
+                         select m;
+
+            var movieToRent = movies.First();
+
+            var dvdsOfMovie = from d in db.DVDs
+                              where (d.MovieID == movieToRent.MovieID)
+                              && (d.State == "available")
+                              select d;
+
+            if (dvdsOfMovie == null)
+            {
+                return Json(new { errors = "No DVDs available."});
+            }
+            else
+            {
+                var rental = new Rental
+                {
+                    DateOfRental = DateTime.Now,
+                    DateDue = DateTime.Now.AddDays(14),
+                    Dvd = dvdsOfMovie.First(),
+                    DvdID = dvdsOfMovie.First().DvdID,
+                    User = (from u in db.Users
+                            where u.Username == User.Identity.Name
+                            select u).First(),
+                    UserID = (from u in db.Users
+                              where u.Username == User.Identity.Name
+                              select u).First().UserID
+                };
+                return Json(new { success = true });
+            }
+
+            return Json(new { errors = "Rental failed. Please try again." });
+        }
+
 
         //
         // GET: /Movies/Create
@@ -107,69 +150,6 @@ namespace BoxOffice.Controllers
             }
             // If we got this far, something failed
             return Json(new { errors = GetErrorsFromModelState() });
-        }
-
-        public Movie AddMovieTest(AddMovieModel add)
-        {
-            if (ModelState.IsValid)
-            {
-                var response = tmdb.MovieSearch(add.Name);
-
-                if (response != null)
-                {
-                    var m = tmdb.GetMovieInfo(response.First().Id);
-                    var movie = persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
-                    return movie;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            return null;
-        }
-        
-        //
-        // GET: /Movies/Edit/5
- 
-        public ActionResult Edit(int id)
-        {
-            Movie movie = db.Movies.Find(id);
-            return View(movie);
-        }
-
-        //
-        // POST: /Movies/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(Movie movie)
-        {
-            if (editMovie(movie))
-            {
-                return RedirectToAction("Index");
-            }
-            return View(movie);
-        }
-
-        //
-        // GET: /Movies/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            Movie movie = db.Movies.Find(id);
-            return View(movie);
-        }
-
-        //
-        // POST: /Movies/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {            
-            Movie movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

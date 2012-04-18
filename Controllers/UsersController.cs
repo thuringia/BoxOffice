@@ -226,9 +226,16 @@ namespace BoxOffice.Controllers
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
                 Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                Roles.AddUserToRole(model.UserName, "User");
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    var newUser = new User
+                    {
+                        Username = model.UserName,
+                        Email = model.Email
+                    };
+                    db.Users.Add(newUser);
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     return Json(new { success = true });
                 }
@@ -254,9 +261,16 @@ namespace BoxOffice.Controllers
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
                 Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                Roles.AddUserToRole(model.UserName, "User");
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    var newUser = new User
+                    {
+                        Username = model.UserName,
+                        Email = model.Email
+                    };
+                    db.Users.Add(newUser);
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     return RedirectToAction("Index", "Home");
                 }

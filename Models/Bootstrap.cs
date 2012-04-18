@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Data.Objects;
+using System.Globalization;
+using TheMovieDb;
 
 namespace BoxOffice.Models
 {
@@ -12,31 +14,51 @@ namespace BoxOffice.Models
     /// </summary>
     public class Bootstrap : DropCreateDatabaseAlways<BoxOfficeContext>
     {
+        private TheMovieDb.TmdbApi tmdb = new TmdbApi("b0f4c9d847ceda92061d4090b470dc10");
+
         protected override void  Seed(BoxOfficeContext context)
         {
-            var movie = SeedMovie(context);
+            var mc = new BoxOffice.Controllers.MoviesController();
+            var add = new AddMovieModel
+            {
+                Name = "SinCity",
+                MovieOfTheWeek = true,
+                DVDs = 10,
+                Price = 9.99M
+            };
+            var t = tmdb.MovieSearch("SinCity");
+            mc.persistMovie(t.First(), add.DVDs, add.Price, add.MovieOfTheWeek);
 
-            SeedCastMember(context, movie);
+            var movie = from m in context.Movies
+                        where m.Name == "SinCity"
+                        select m;
 
-            SeedCategories(context, movie);
+            //var movie = SeedMovie(context);
 
-            SeedStudio(context, movie);
+            //SeedCastMember(context, movie);
 
-            SeedCountry(context, movie);
+            //SeedCategories(context, movie);
 
-            SeedImage(context, movie);
+            //SeedStudio(context, movie);
+
+            //SeedCountry(context, movie);
+
+            //SeedImage(context, movie);
 
             var users = SeedUsers(context);
 
-            SeedComments(context, movie, users);
+            SeedComments(context, movie.First(), users);
 
-            var dvds = SeedDVDs(context, movie);
+            //var dvds = SeedDVDs(context, movie);
+            var dvds = from d in context.DVDs
+                       where d.MovieID == movie.First().MovieID
+                       select d;
 
-            SeedRentals(context, users, dvds);
+            SeedRentals(context, users, dvds.ToList());
 
             SeedMessages(context, users);
 
-            SeedRatings(context, movie, users);
+            SeedRatings(context, movie.First(), users);
 
             base.Seed(context);
         }
@@ -99,10 +121,12 @@ namespace BoxOffice.Models
             var rental = new Rental
             {
                 RentalID = 1,
-                DvdID = 1,
+                DvdID = dvds.First().DvdID,
                 UserID = 1,
                 DateOfRental = DateTime.Now,
                 DateDue = DateTime.Today.AddDays(7),
+                DateReturned = null,
+                DateSent = null,
                 Dvd = context.DVDs.Find(1),
                 User = context.Users.Find(1)
             };
@@ -178,7 +202,7 @@ namespace BoxOffice.Models
                 {
                     Username = "foo",
                     Email = "foo@bar.com",
-                    DateOfBirth = DateTime.Parse("1988-02-13"),
+                    DateOfBirth = DateTime.ParseExact("1988-02-13", @"yyyy-MM-dd", CultureInfo.InvariantCulture),
                     Street = "Foo",
                     Number = "1",
                     Zip = "12345",
@@ -191,7 +215,7 @@ namespace BoxOffice.Models
                 {
                     Username = "bar",
                     Email = "bar@foo.com",
-                    DateOfBirth = DateTime.Parse("1988-02-13"),
+                    DateOfBirth = DateTime.ParseExact("1988-02-13", @"yyyy-MM-dd", CultureInfo.InvariantCulture),
                     Street = "Foo",
                     Number = "1",
                     Zip = "12345",
@@ -366,7 +390,7 @@ namespace BoxOffice.Models
                 Rating_by_moviedb = 6.8f,
                 Tagline = "There is no justice without sin.",
                 Certification = "R",
-                DateReleased = DateTime.Parse("2005-04-04"),
+                DateReleased = DateTime.ParseExact("2005-04-04", @"yyyy-MM-dd", CultureInfo.InvariantCulture),
                 Homepage = "http://www.sincitythemovie.com/",
                 Trailer = "http://www.youtube.com/watch?v=80",
                 Categories = new List<Category>(),

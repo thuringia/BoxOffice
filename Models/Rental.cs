@@ -37,21 +37,25 @@ namespace BoxOffice.Models
         /// <summary>
         /// The date the rental was issued
         /// </summary>
+        [DataType(DataType.DateTime)]
         public DateTime DateOfRental { get; set; }
 
         /// <summary>
         /// The date the DVD was sent to the renter
         /// </summary>
+        [DataType(DataType.DateTime)]
         public DateTime? DateSent { get; set; }
 
         /// <summary>
         /// The date the DVD is due to be returned
         /// </summary>
+        [DataType(DataType.DateTime)]
         public DateTime DateDue { get; set; }
 
         /// <summary>
         /// The date the DVD actually returned
         /// </summary>
+        [DataType(DataType.DateTime)]
         public DateTime? DateReturned { get; set; }
     }
 }

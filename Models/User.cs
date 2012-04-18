@@ -19,6 +19,7 @@ namespace BoxOffice.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime DateOfBirth { get; set; }
 
         //public int AdressID { get; set; }
