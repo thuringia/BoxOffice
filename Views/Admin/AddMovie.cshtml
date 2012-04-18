@@ -1,27 +1,55 @@
 ﻿@model BoxOffice.Models.AddMovieModel
 
-<tr>
-    <td>
-        @Html.EditorFor(model => model.Name)
-        @Html.ValidationMessageFor(model => model.Name)
-    </td>
-    <td>
-        @Html.EditorFor(model => model.DVDs)
-        @Html.ValidationMessageFor(model => model.DVDs)
-    </td>
-    <td>
-        @Html.EditorFor(model => model.Price)
-        @Html.ValidationMessageFor(model => model.Price)
-    </td>
-    <td>
-        @Html.EditorFor(model => model.MovieOfTheWeek)
-        @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
-    </td>
-    <td>
-@if (ViewContext.RouteData.Values["Action"].ToString() == "Edit") {
-        <button class="editRow">Save</button><button class="cancelEditRow">Cancel</button>
-} else {
-        <button class="createRow">Create</button><button class="cancelCreateRow">Cancel</button>
+@{
+    ViewBag.Title = "AddMovie";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-    </td>
-</tr>
+
+<h2>AddMovie</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm(ViewBag.FormAction as String,"Admin")) {
+    @Html.ValidationSummary(true, "Movie creation was unsuccessful. Please correct the errors and try again.")
+
+    <fieldset>
+        <legend>AddMovieModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DVDs)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DVDs)
+            @Html.ValidationMessageFor(model => model.DVDs)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MovieOfTheWeek)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MovieOfTheWeek)
+            @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+    }
