@@ -15,6 +15,7 @@
     var i = m.Images.ToList();    
 }
 <section id="movieOfTheWeekSection">
+    <p>Movie of the Week</p>
     <section class="tile">
         <div class="tileContent">
             <div class="tileText">
@@ -28,6 +29,8 @@
 </section>
 
 <section id="hotMoviesSection">
+    <p>Hot Movies</p>
+
     @foreach (var item in (List<BoxOffice.Models.Movie>)ViewData["hotMovies"])
     {
         var imgs = item.Images.ToList();
