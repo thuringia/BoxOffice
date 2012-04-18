@@ -91,7 +91,7 @@
     };
 
     // List of link ids to have an ajax dialog
-    var links = ['#loginLink', '#registerLink'];
+    var links = ['#addMovieLink', '#removeMovieLink'];
 
     $.each(links, function (i, id) {
         $(id).click(function (e) {
