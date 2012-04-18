@@ -64,16 +64,16 @@
     };
 
     var loadAndShowDialog = function (id, link, url) {
-        var separator = url.indexOf('?') >= 0 ? '&' : '?';
 
+        var separator = url.indexOf('?') >= 0 ? '&' : '?';
         // Save an empty jQuery in our cache for now.
         dialogs[id] = $();
 
         // Load the dialog with the content=1 QueryString in order to get a PartialView
         $.get(url + separator + 'content=1')
-            .done(function (content) {
-                dialogs[id] = $('<div class="modal-popup">' + content + '</div>')
-                    .hide() // Hide the dialog for now so we prevent flicker
+           .done(function (content) {
+               dialogs[id] = $('<div class="modal-popup">' + content + '</div>')
+                   .hide() // Hide the dialog for now so we prevent flicker
                     .appendTo(document.body)
                     .filter('div') // Filter for the div tag only, script tags could surface
                     .dialog({ // Create the jQuery UI dialog
@@ -82,31 +82,12 @@
                         resizable: true,
                         draggable: true,
                         width: link.data('dialog-width') || 600,
-                        beforeClose: function () { resetForm($(this).find('form')); },
-                        buttons: {
-                            Login: function () {
-                                if (id == "#loginLink") {
-                                    formSubmitHandler();
-                                }
-                            },
-                            Register: function () {
-                                if (id == "#registerLink") {
-                                    formSubmitHandler();
-                                }
-                                else {
-                                    dialogs["#registerLink"].dialog('open');
-                                    $(this).dialog("close");
-                                }
-                            },
-                            Cancel: function () {
-                                $(this).dialog("close");
-                            }
-                        }
+                        beforeClose: function () { resetForm($(this).find('form')); }
                     })
-                    .find('form') // Attach logic on forms
-                        .submit(formSubmitHandler)
+                   .find('form') // Attach logic on forms
+                       .submit(formSubmitHandler)
                     .end();
-            });
+           });
     };
 
     // List of link ids to have an ajax dialog

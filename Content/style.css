@@ -118,7 +118,7 @@ nav ul li a.first {
 
 .modal-popup .title h1 {
   display: none; }
-.modal-popup #loginForm {
+.modal-popup #loginForm, .modal-popup #registerForm {
   padding-left: 7px; }
 .modal-popup form {
   padding-top: 20px;
@@ -144,6 +144,8 @@ nav ul li a.first {
         float: left;
         padding: 5px 0 10px 0;
         text-transform: lowercase; }
+  .modal-popup form input {
+    float: right; }
 
 /* CSS Transitions
 -----------------------------------------------------------*/

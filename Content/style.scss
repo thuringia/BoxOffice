@@ -147,7 +147,7 @@ nav ul li a.first {
 		display: none;
 	}
 
-	#loginForm {
+	#loginForm, #registerForm {
 		padding-left: 7px;
 	}
 
@@ -186,6 +186,10 @@ nav ul li a.first {
 					text-transform: lowercase;
 				}
 			}
+		}
+
+		input {
+			float: right;
 		}
 	}
 }

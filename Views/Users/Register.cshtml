@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Register";
 }
-<div id="loginForm">
+<div id="registerForm" class="registerForm">
     <hgroup class="title">
         <h1>@ViewBag.Title.</h1>
         <h2>Use the form below to create a new account.</h2>
@@ -38,20 +38,8 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </li>
-        </ol>
-        
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <div class="ui-dialog-buttonset">
-                <button style="display: none;" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false"><span class="ui-button-text">Register</span>
-                </button>
-                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false"><span class="ui-button-text">Register</span>
-                </button>
-                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false"><span class="ui-button-text">Cancel</span>
-                </button>
-            </div>
-        </div>        
-    }
+        </ol>       
+       
+        <input type="submit"  value=" Register" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text" />     
+}
 </div>
