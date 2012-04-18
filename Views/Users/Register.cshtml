@@ -13,7 +13,7 @@
     </p>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    @using (Html.BeginForm((string)ViewBag.FormAction, "Account"))
+    @using (Html.BeginForm((string)ViewBag.FormAction, "User"))
     {
         @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
 
