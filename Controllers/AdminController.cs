@@ -66,5 +66,37 @@ namespace BoxOffice.Controllers
         {
             return View();
         }
+
+        //
+        // POST: /Admin/AddMovie
+        /// <summary>
+        /// Adds a new movie to BoxOffice's database
+        /// </summary>
+        /// <param name="add">An AddMovieModel containing all necessery information</param>
+        /// <returns>A JSON response, {"success":true} on success, an</returns>
+        [HttpPost]
+        public JsonResult AddMovie(AddMovieModel add, String returnUrl)
+        {
+            var mc = new MoviesController();
+
+            if (ModelState.IsValid)
+            {
+                var tmdb = new TmdbApi("b0f4c9d847ceda92061d4090b470dc10");
+                var response = tmdb.MovieSearch(add.Name);
+
+                if (response != null)
+                {
+                    var m = tmdb.GetMovieInfo(response.First().Id);
+                    var movie = mc.persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
+                    return Json(new { success = true, redirect = returnUrl });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The movie could not be found.");
+                }
+            }
+            // If we got this far, something failed
+            return Json(new { errors = mc.GetErrorsFromModelState() });
+        }
     }
 }
