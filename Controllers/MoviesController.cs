@@ -82,7 +82,11 @@ namespace BoxOffice.Controllers
 
         //
         // POST: /Movies/Create
-
+        /// <summary>
+        /// Adds a new movie to BoxOffice's database
+        /// </summary>
+        /// <param name="add">An AddMovieModel containing all necessery information</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Create(AddMovieModel add)
         {
