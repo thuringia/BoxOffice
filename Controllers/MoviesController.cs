@@ -86,9 +86,9 @@ namespace BoxOffice.Controllers
         /// Adds a new movie to BoxOffice's database
         /// </summary>
         /// <param name="add">An AddMovieModel containing all necessery information</param>
-        /// <returns></returns>
+        /// <returns>A JSON response, {"success":true} on success, an</returns>
         [HttpPost]
-        public ActionResult Create(AddMovieModel add)
+        public JsonResult Create(AddMovieModel add, String returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -98,14 +98,15 @@ namespace BoxOffice.Controllers
                 {
                     var m = tmdb.GetMovieInfo(response.First().Id);
                     var movie = persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
-                    return RedirectToAction("Index");
+                    return Json(new { success = true, redirect = returnUrl });
                 }
                 else
                 {
-                    return View(add);
+                    ModelState.AddModelError("", "The movie could not be found.");
                 }
             }
-            return View(add);
+            // If we got this far, something failed
+            return Json(new { errors = GetErrorsFromModelState() });
         }
 
         public Movie AddMovieTest(AddMovieModel add)
@@ -200,7 +201,7 @@ namespace BoxOffice.Controllers
         /// </summary>
         /// <param name="tmdbMovie"></param>
         /// <returns></returns>
-        private Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price, bool MovieOfTheWeek)
+        public Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price, bool MovieOfTheWeek)
         {
             // Lists to fill
             List<Category> categories = new List<Category>();
@@ -462,6 +463,11 @@ namespace BoxOffice.Controllers
             #endregion
             
             return movie;
+        }
+
+        public IEnumerable<string> GetErrorsFromModelState()
+        {
+            return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
 
     }
