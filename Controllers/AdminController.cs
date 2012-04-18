@@ -56,6 +56,15 @@ namespace BoxOffice.Controllers
             return View(db.Movies.ToList());
         }
 
-
+        //
+        // GET: /Admin/AddMovie
+        /// <summary>
+        /// GETs the AddMovie view
+        /// </summary>
+        /// <returns>AddMovie view</returns>
+        public ActionResult AddMovie()
+        {
+            return View();
+        }
     }
 }
