@@ -202,6 +202,8 @@
     <Content Include="Content\themes\metro\jquery-ui-1.8.16.custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\cssfx.js" />
     <Content Include="Scripts\cssfx.min.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
@@ -227,7 +229,6 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\selectivizr-min.js" />
     <Content Include="Scripts\selectivizr.js" />
-    <Content Include="Scripts\typeface-0.15.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -282,9 +283,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Movies.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
-    <Content Include="Views\Admin\MovieOfTheWeekPartial.cshtml" />
-    <Content Include="Views\Admin\HotMoviesPartial.cshtml" />
     <Content Include="Views\Shared\_TilePartial.cshtml" />
+    <Content Include="Views\Admin\AddMovie.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
