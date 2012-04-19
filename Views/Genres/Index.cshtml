@@ -8,15 +8,10 @@
     $("#genres").addClass("selected");
 </script>
 
-@foreach (var item in Model)
-{
-    <section class="tile">
-        <div class="tileContent">
-            <div class="tileText">
-                <a href="@Url.Action( "Details" , "Genres" , new { id = item.CategoryID})>@item.Name</a>
-            </div>
-            <!-- tile text -->
-        </div>
-        <!-- tileContent -->
-    </section>
-}
+<ul class="metroList">
+    @foreach (var item in Model.OrderBy(g => g.Name))
+    {
+        <li>@Html.ActionLink(item.Name, "Details", new { id = item.CategoryID })</li>
+    }
+</ul>
+
