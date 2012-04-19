@@ -20,7 +20,7 @@ namespace BoxOffice.Models
         public string Email { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         //public int AdressID { get; set; }
         //public virtual Adress Adress { get; set; }

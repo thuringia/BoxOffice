@@ -59,7 +59,7 @@ namespace BoxOffice.Models
         /// The date this movie was added to BoxOffice
         /// </summary>
         [DataType(DataType.DateTime)]
-        public DateTime DateAdded { get; set; }
+        public DateTime? DateAdded { get; set; }
 
         #endregion
 

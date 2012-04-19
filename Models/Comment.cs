@@ -44,7 +44,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// the date the comment was posted
         /// </summary>
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         /// <summary>
         /// the number of times this comment was flagged by other users

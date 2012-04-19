@@ -39,6 +39,6 @@ namespace BoxOffice.Models
         /// <summary>
         /// The date the rental was issued
         /// </summary>
-        public DateTime DateRented { get; set; }
+        public DateTime? DateRented { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace BoxOffice.Models
         /// The date the message was sent
         /// </summary>
         [Required]
-        public DateTime DateSent { get; set; }
+        public DateTime? DateSent { get; set; }
 
         /// <summary>
         /// The message's text
