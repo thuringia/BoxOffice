@@ -38,6 +38,22 @@ namespace BoxOffice
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "MovieSearch",
+                "Movies/Search/{searchTerm}",
+                new
+                {
+                    controller = "Movies",
+                    action = "Search",
+                    searchTerm = ""
+                }
+            );
+            routes.MapRoute(
+                "MovieAjaxSearch",
+                "Movies/ajaxSearch/",
+                new { controller = "Movies", action = "ajaxSearch" }
+            );
         }
 
         protected void Application_Start()
