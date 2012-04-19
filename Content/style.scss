@@ -110,19 +110,27 @@ body {
 			display: inline;
 	
 			a {
-				@include font(1.75em, rgba(250,250,250,0.9), normal);
+				@include font(1.75em, rgba(250,250,250,0.9), 500);
 				text-decoration: none;
 				padding-left: 25px;
-
-				.selected {
-				color: rgba(6, 53, 89, 1.0);
-				}
 			}
 
 			a:not(#search) {
 				text-transform: lowercase;
 			}
+
+			.selected {
+				color: rgba(255, 255, 255, 0.4);
+			}
 		}
+	}
+
+	.hidden {
+		visibility: hidden;
+	}
+
+	.visible {
+		visibility: visible;
 	}
 
 	#searchField {
@@ -151,9 +159,44 @@ body {
 		padding-top: 15px;
 	}
 
+	
+
 	footer {
 		@include font(0.75em, rgba(250,250,250,0.9), 300);
 		text-align: center;
+	}
+}
+
+.tile {
+		
+		.tileContent {
+			
+			.tileText {
+				
+				.tilePic {
+					
+				}
+
+				p, a {
+					@include font(1.75em, rgba(250,250,250,0.9), 300);
+				}
+
+				a {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+.metroList {
+	li {
+		margin: 1em;
+		list-style: none;
+			
+		a {
+			@include font(1.75em, rgba(250,250,250,0.9), 300);
+			text-decoration: none;
+		}
 	}
 }
 
