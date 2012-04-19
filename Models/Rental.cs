@@ -57,5 +57,15 @@ namespace BoxOffice.Models
         /// </summary>
         [DataType(DataType.DateTime)]
         public DateTime? DateReturned { get; set; }
+
+        /// <summary>
+        /// the movie associated with this rental
+        /// </summary>
+        public virtual Movie Movie { get; set; }
+
+        /// <summary>
+        /// the associated movie's MovieID FK
+        /// </summary>
+        public int MovieID { get; set; }
     }
 }
