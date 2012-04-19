@@ -351,7 +351,6 @@ namespace BoxOffice.Models
             var movie = new Movie
             {
                 Price = 9.99M,
-                RentalCount = 0,
                 DateAdded = DateTime.Now,
 
                 Cast = new List<CastMember>(),
@@ -378,7 +377,8 @@ namespace BoxOffice.Models
                 DVDs = new List<DVD>(),
                 Images = new List<Image>(),
                 Ratings = new List<Rating>(),
-                Studios = new List<Studio>()
+                Studios = new List<Studio>(),
+                Rentals = new List<Rental>()
             };
             context.Movies.Add(movie);
             context.SaveChanges();
