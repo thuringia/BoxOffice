@@ -4,33 +4,21 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.Name</h2>
 
-<fieldset>
-    <legend>Category</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Type)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Type)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Url)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Url)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.CategoryID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<section id="movies">
+    <h3>Movies</h3>
+    @foreach (var item in Model.Movies.ToList())
+    {
+        <section class="tile">
+            <div class="tileContent">
+                <div class="tileText">
+                    <img class="tilePic" src="@item.Images.First().Url"/>
+                    <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = item.MovieID })">@item.Name</a>
+                </div>
+                <!-- tile text -->
+            </div>
+            <!-- tileContent -->
+        </section>
+}
+</section>
