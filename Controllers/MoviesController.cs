@@ -56,21 +56,9 @@ namespace BoxOffice.Controllers
                 return true;
             }
             return false;
-        }
+        }      
 
         //
-        // PUT: /Movies/{id}
-
-        [HttpPut]
-        //[Authorize(Roles="Admin")]
-        public ActionResult Index(Movie movie)
-        {
-            if (editMovie(movie))
-            {
-                return View();
-            }
-            return View(movie);
-        }
 
         //
         // POST: /Movies/Rent/{id}
