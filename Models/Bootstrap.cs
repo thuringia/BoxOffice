@@ -5,60 +5,39 @@ using System.Web;
 using System.Data.Entity;
 using System.Data.Objects;
 using System.Globalization;
-using TheMovieDb;
 
 namespace BoxOffice.Models
 {
     /// <summary>
     /// Creates the database schema and seeds some initial data
     /// </summary>
-    public class Bootstrap : DropCreateDatabaseAlways<BoxOfficeContext>
+    public class Bootstrap : DropCreateDatabaseIfModelChanges<BoxOfficeContext>
     {
-        private TheMovieDb.TmdbApi tmdb = new TmdbApi("b0f4c9d847ceda92061d4090b470dc10");
-
         protected override void  Seed(BoxOfficeContext context)
         {
-            var mc = new BoxOffice.Controllers.MoviesController();
-            var add = new AddMovieModel
-            {
-                Name = "SinCity",
-                MovieOfTheWeek = true,
-                DVDs = 10,
-                Price = 9.99M
-            };
-            var t = tmdb.MovieSearch("SinCity");
-            mc.persistMovie(t.First(), add.DVDs, add.Price, add.MovieOfTheWeek);
+            var movie = SeedMovie(context);
 
-            var movie = from m in context.Movies
-                        where m.Name == "SinCity"
-                        select m;
+            SeedCastMember(context, movie);
 
-            //var movie = SeedMovie(context);
+            SeedCategories(context, movie);
 
-            //SeedCastMember(context, movie);
+            SeedStudio(context, movie);
 
-            //SeedCategories(context, movie);
+            SeedCountry(context, movie);
 
-            //SeedStudio(context, movie);
-
-            //SeedCountry(context, movie);
-
-            //SeedImage(context, movie);
+            SeedImage(context, movie);
 
             var users = SeedUsers(context);
 
-            SeedComments(context, movie.First(), users);
+            SeedComments(context, movie, users);
 
-            //var dvds = SeedDVDs(context, movie);
-            var dvds = from d in context.DVDs
-                       where d.MovieID == movie.First().MovieID
-                       select d;
-
+            var dvds = SeedDVDs(context, movie);
+            
             SeedRentals(context, users, dvds.ToList());
 
             SeedMessages(context, users);
 
-            SeedRatings(context, movie.First(), users);
+            SeedRatings(context, movie, users);
 
             base.Seed(context);
         }
