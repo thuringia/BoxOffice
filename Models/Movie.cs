@@ -46,6 +46,11 @@ namespace BoxOffice.Models
         public virtual ICollection<DVD> DVDs { get; set; }
 
         /// <summary>
+        /// The rentals and queue items associated with this movie
+        /// </summary>
+        public virtual ICollection<Rental> Rentals { get; set; }
+
+        /// <summary>
         /// Marks this movie as the movie of the week
         /// </summary>
         public bool? MovieOfTheWeek { get; set; }
