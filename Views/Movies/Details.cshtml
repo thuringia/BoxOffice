@@ -65,7 +65,7 @@
         
         <section id="comments">
             <label>Comments</label>
-            @foreach (var comment in ViewBag["comments"] as List<BoxOffice.Models.Comment>)
+            @foreach (var comment in Model.Comments.ToList())
             {
                 <section class="comment">
                     <label>@comment.User.Username (@comment.Date)</label>
