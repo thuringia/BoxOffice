@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using BoxOffice.Models;
 
@@ -112,7 +113,63 @@ namespace BoxOffice.Controllers
             return Json(new { errors = "Rental failed. Please try again." });
         }
 
+        //
+        // GET: /Movies/ajaxSearch
 
+        /// <summary>
+        /// Controller Action for the search field
+        /// </summary>
+        /// <param name="q">The name to be searched for</param>
+        /// <returns>A list of potential matches</returns>
+        [HttpGet]
+        public JsonResult ajaxSearch(String q)
+        {
+            var movies = (from m in db.Movies
+                          where m.Name.Contains(q)
+                          orderby m.Name
+                          select m).Take(10);
+            List<String> response = new List<string>();
+            movies.ToList().ForEach(m => response.Add(m.Name));
+            return Json(response.ToArray());
+        }
+
+        /// <summary>
+        /// Processes a user's search request
+        /// </summary>
+        /// <param name="searchTerm">The search term</param>
+        /// <returns>a response</returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Search(string searchTerm)
+        {
+            if (searchTerm == string.Empty)
+            {
+                return View();
+            }
+            else
+            {
+                // if the search contains only one result return details
+                // otherwise a list
+                var movies = from a in db.Movies
+                              where a.Name.Contains(searchTerm)
+                              orderby a.Name
+                              select a;
+
+                if (movies.Count() == 0)
+                {
+                    return View("notfound");
+                }
+
+                if (movies.Count() > 1)
+                {
+                    return View("List", movies);
+                }
+                else
+                {
+                    return RedirectToAction("Details",
+                        new { id = movies.First().MovieID });
+                }
+            }
+        }
         //
         // GET: /Movies/Create
 
