@@ -17,7 +17,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// The rental's MovieID FK
         /// </summary>
-        public int DvdID { get; set; }
+        public int? DvdID { get; set; }
 
         /// <summary>
         /// The rental's Movie as navigation property
