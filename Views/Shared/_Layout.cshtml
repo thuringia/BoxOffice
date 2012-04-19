@@ -50,7 +50,7 @@
             @RenderSection("subMenu", false)
         </nav>
         
-        <section id="searchField">
+        <section id="searchField" class="hidden">
             <form action="/Movies/Search" method="post" id="searchForm">
                 <input type="text" name="searchTerm" id="searchTerm" value="" size="10" maxlength="30" />
                 <input type="submit" value="Search" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
