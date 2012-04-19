@@ -25,11 +25,13 @@ $(document).ready(function () {
 function showMovieSearch() {
     if (searchFieldVisible == false) {
         searchFieldVisible = true;
+        $("#searchField").removeClass("hidden");
+        $("#searchField").addClass("visible");
         $("#searchField").animate(
             {
                 opacity: 1
             }, 500, function () {
-            }
+                }
             );
     }
     else {
@@ -38,7 +40,8 @@ function showMovieSearch() {
             {
                 opacity: 0
             }, 500, function () {
+                $("#searchField").removeClass("visible");
+                $("#searchField").addClass("hidden");
             });
-    }
-    
+    }    
 }
