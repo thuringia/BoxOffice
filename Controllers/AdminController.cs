@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BoxOffice.Models;
-using TheMovieDb;
 
 namespace BoxOffice.Controllers
 {
@@ -19,9 +18,9 @@ namespace BoxOffice.Controllers
         public ActionResult Index()
         {                    
             // add movie of the week to ViewData, so we can display it
-            ViewData["movieOfTheWeek"] = from m in db.Movies
+            ViewData["movieOfTheWeek"] = (from m in db.Movies
                                          where m.MovieOfTheWeek == true
-                                         select m;
+                                         select m).First();
 
             // create a dictionary for our rental charts
             var rentalCharts = new Dictionary<Movie, int>();
@@ -37,14 +36,14 @@ namespace BoxOffice.Controllers
             // sort the charts and get the 10 most rented
             ViewData["hotMovies"] = (from m in rentalCharts
                                     orderby m.Value
-                                    select m).Take(10);
+                                    select m).Take(10).ToList();
 
             // get all comments that need administrative action
 
-            ViewData["flaggedComments"] = from c in db.Comments
+            ViewData["flaggedComments"] = (from c in db.Comments
                                           where (c.Flag == 5) || (c.Flag > 5)
                                           orderby c.Flag
-                                          select c;
+                                          select c).ToList();
             return View();
         }
 
@@ -81,7 +80,7 @@ namespace BoxOffice.Controllers
 
             if (ModelState.IsValid)
             {
-                var tmdb = new TmdbApi("b0f4c9d847ceda92061d4090b470dc10");
+                /*
                 var response = tmdb.MovieSearch(add.Name);
 
                 if (response != null)
@@ -94,6 +93,7 @@ namespace BoxOffice.Controllers
                 {
                     ModelState.AddModelError("", "The movie could not be found.");
                 }
+                */
             }
             // If we got this far, something failed
             return Json(new { errors = mc.GetErrorsFromModelState() });
