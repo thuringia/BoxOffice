@@ -58,7 +58,13 @@ namespace BoxOffice.Models
         /// <summary>
         /// The number of times this movie has been rented
         /// </summary>
-        public int RentalCount { get; set; }
+        public int RentalCount
+        {
+            get
+            {
+                return this.Rentals.Count;
+            }
+        }
 
         /// <summary>
         /// The date this movie was added to BoxOffice
