@@ -113,6 +113,10 @@ body {
 				@include font(1.75em, rgba(250,250,250,0.9), normal);
 				text-decoration: none;
 				padding-left: 25px;
+
+				.selected {
+				color: rgba(6, 53, 89, 1.0);
+				}
 			}
 
 			a:not(#search) {

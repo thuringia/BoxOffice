@@ -92,6 +92,8 @@ body {
         text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
         text-decoration: none;
         padding-left: 25px; }
+        body nav ul li a .selected {
+          color: #063559; }
       body nav ul li a:not(#search) {
         text-transform: lowercase; }
   body #searchField {
