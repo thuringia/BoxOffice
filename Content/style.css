@@ -96,7 +96,18 @@ body {
         text-transform: lowercase; }
   body #searchField {
     opacity: 0;
-    background-color: #063559; }
+    background-color: #063559;
+    width: 18em;
+    height: 4em;
+    padding: 0.5em;
+    position: absolute; }
+    body #searchField input {
+      margin: 0 auto; }
+    body #searchField input[type=text] {
+      margin-top: 5%;
+      width: 12em; }
+    body #searchField input[type=submit] {
+      float: right; }
   body #body {
     padding-top: 15px; }
   body footer {

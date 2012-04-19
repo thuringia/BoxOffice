@@ -121,12 +121,26 @@ body {
 		}
 	}
 
-	#search {
-	}
-
 	#searchField {
 		opacity: 0;
 		background-color: rgba(6, 53, 89, 1.0);
+		width: 18em;
+		height: 4em;
+		padding: 0.5em;
+		position: absolute;
+
+		input {
+			margin: 0 auto;
+		}
+
+		input[type=text] {
+			margin-top: 5%;
+			width: 12em;
+		}
+		
+		input[type=submit] {
+			float: right;
+		}
 	}
 	
 	#body {
