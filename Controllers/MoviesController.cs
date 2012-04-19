@@ -59,48 +59,77 @@ namespace BoxOffice.Controllers
         }      
 
         //
+        // GET: /Movies/Rent/{id}
 
-        //
-        // POST: /Movies/Rent/{id}
-
-        [HttpPost]
-        //[Authorize(Roles="User")
+        /// <summary>
+        /// Handles a user's request to add a movie to his queue
+        /// </summary>
+        /// <param name="id">the ID of the desired movie</param>
+        /// <returns>
+        /// {"success":true} if movie was successfully added to queue,
+        /// {"authenticated":false} if the user wasn't logged in during the request,
+        /// {"fail":true} if the movie couldn't be added to the queue
+        /// </returns>
+        [HttpGet]
         public JsonResult Rent(int id)
         {
-            var movies = from m in db.Movies
-                         where m.MovieID == id
-                         select m;
-
-            var movieToRent = movies.First();
-
-            var dvdsOfMovie = from d in db.DVDs
-                              where (d.MovieID == movieToRent.MovieID)
-                              && (d.State == "available")
-                              select d;
-
-            if (dvdsOfMovie == null)
+            if (Request.IsAuthenticated)
             {
-                return Json(new { errors = "No DVDs available."});
+                try
+                {
+                    rentMovie(id);
+                }
+                catch (AddToQueueFailedException)
+                {
+
+                    return Json(new { fail = true });
+                }
+
+                return Json(new { success = true });
             }
             else
             {
-                var rental = new Rental
-                {
-                    DateOfRental = DateTime.Now,
-                    DateDue = DateTime.Now.AddDays(14),
-                    Dvd = dvdsOfMovie.First(),
-                    DvdID = dvdsOfMovie.First().DvdID,
-                    User = (from u in db.Users
-                            where u.Username == User.Identity.Name
-                            select u).First(),
-                    UserID = (from u in db.Users
-                              where u.Username == User.Identity.Name
-                              select u).First().UserID
-                };
-                return Json(new { success = true });
+                return Json(new { authenticated = false });
             }
+        }
 
-            return Json(new { errors = "Rental failed. Please try again." });
+        private void rentMovie(int id)
+        {
+            try
+            {
+                var movie = (from m in db.Movies
+                             where m.MovieID == id
+                             select m).First();
+
+                var newQueueItem = new Rental
+                {
+                    DateDue = null,
+                    DateOfRental = DateTime.Now,
+                    DateReturned = null,
+                    DateSent = null,
+                    Dvd = new DVD(),
+                    DvdID = null
+                };
+                db.Rentals.Add(newQueueItem);
+                db.SaveChanges();
+
+                var user = (from u in db.Users
+                            where u.Username == User.Identity.Name
+                            select u).First();
+
+                user.Queue.Add(newQueueItem);
+                newQueueItem.User = user;
+                newQueueItem.UserID = user.UserID;
+                movie.Rentals.Add(newQueueItem);
+                newQueueItem.Movie = movie;
+                newQueueItem.MovieID = movie.MovieID;
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                
+                throw new AddToQueueFailedException();
+            }
         }
 
         //
