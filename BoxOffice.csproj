@@ -126,6 +126,7 @@
   <ItemGroup>
     <Compile Include="ActionFilters\JsonRequestBehaviorAttribute.cs" />
     <Compile Include="Controllers\GenresController.cs" />
+    <Compile Include="Exceptions\AddToQueueFailedException.cs" />
     <Compile Include="ViewModels\AddMovie.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
