@@ -7,9 +7,11 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using BoxOffice.Models;
+using BoxOffice.ActionFilters;
 
 namespace BoxOffice.Controllers
 { 
+    [JsonRequestBehavior]
     public class MoviesController : Controller
     {
         private BoxOfficeContext db = new BoxOfficeContext();
