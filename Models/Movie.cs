@@ -108,6 +108,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// The movie's unique ID on themoviedb.org
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MovieID { get; set; }
 
         /// <summary>
