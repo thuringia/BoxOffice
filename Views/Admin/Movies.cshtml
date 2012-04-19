@@ -30,7 +30,10 @@
         @foreach (var item in Model)
         {
             <tr><td>@Html.DisplayFor(s => item.Name)</td></tr>
-            <tr><td>@Html.DisplayFor(s => item.Studios.ToList().Take(1))</td></tr>
+            <tr><td>@foreach (var studio in item.Studios.ToList())
+                    {
+                        @Html.DisplayFor(s => studio.Name);
+                    }</td></tr>
             <tr><td>@Html.DisplayFor(s => item.Categories.ToList())</td></tr>
             <tr><td>@Html.DisplayFor(s => item.DVDs.Count()) (@Html.DisplayFor(s => item.DVDs.ToList().FindAll(a => a.State == "rented").Count())</td></tr>
         }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using BoxOffice.Models;
+@{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "BoxOffice Administrative Interface";
 }
@@ -11,14 +12,15 @@
 
 @* ViewData["movieOfTheWeek"] *@
 @{ 
+    var movieOfTheWeek = ViewData["movieOfTheWeek"] as Movie;
 }
 <section id="movieOfTheWeekSection">
     <p>Movie of the Week</p>
     <section class="tile">
         <div class="tileContent">
             <div class="tileText">
-                <img class="tilePic" src=""/>
-                <p class="tileDescription"></p>
+                <img class="tilePic" src="@movieOfTheWeek.Images.First().Url"/>
+                <p class="tileDescription">@movieOfTheWeek.Name</p>
             </div>
             <!-- tile text -->
         </div>
@@ -29,7 +31,7 @@
 <section id="hotMoviesSection">
     <p>Hot Movies</p>
 
-    @*@foreach (var item in (List<BoxOffice.Models.Movie>)ViewData["hotMovies"])
+    @foreach (var item in (List<BoxOffice.Models.Movie>)ViewData["hotMovies"])
     {
         var imgs = item.Images.ToList();
         
@@ -43,12 +45,12 @@
             </div>
             <!-- tileContent -->
         </section>
-    }*@
+    }
 </section>
 
-@*@{
+@{
     var comments = (List<BoxOffice.Models.Comment>)ViewData["flaggedComments"];
-}*@
+}
 <section id="flaggedCommentsSection">
     <table>
         <thead>
@@ -66,7 +68,7 @@
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var item in comments)
+            @foreach (var item in comments)
             {
                 <tr>
                     <td>@Html.Display(item.User.Username)</td>
@@ -80,7 +82,7 @@
                 <tr>
                     <td>@Html.Display(item.Flag.ToString())</td>
                 </tr>
-            }*@
+            }
         </tbody>
     </table>
 </section>
