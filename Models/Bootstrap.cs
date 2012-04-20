@@ -219,7 +219,7 @@ namespace BoxOffice.Models
             var image = new Image
             {
                 Type = "poster",
-                Url = "http://hwcdn.themoviedb.org/posters/68c/4bc904e9017a3c57fe00168c/sin-city-original.jpg",
+                Url = "http://cf2.imgobject.com/t/p/w185/eCJkepVJslq1nEtqURLaC1zLPAL.jpg",
                 Size = "original",
                 ImageID = "4bc904e9017a3c57fe00168c"
             };
