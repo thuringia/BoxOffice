@@ -20,8 +20,8 @@ You have been asked to develop a prototype website for a DVD rental company.
 
 The kind of functionality required for members/visitors is as follows (see marking criteria for more exact instructions):
 
-* Browse details on various categories of rentable DVD s (Action & Adventure, Animation, Comedy, Documentary, Drama, etc.)
-* Keyword search for DVD titles
+* <del>Browse details on various categories of rentable DVD s (Action & Adventure, Animation, Comedy, Documentary, Drama, etc.)</del>
+* <del>Keyword search for DVD titles</del>
 * View DVD of the week
 * Add a DVD to a personal rental list (requires log in)
 * Change the order of DVD s in personal rental list (requires log in)
@@ -30,17 +30,17 @@ The kind of functionality required for members/visitors is as follows (see marki
 * Rate a DVD that has been rented or is currently rented (requires log in)
 * Post comments on a DVD that has been rented or is currently rented  (requires log in)
 * The ability for a member to edit (only) their own comments (requires log in)
-* View comments that other customers have made
+* <del>View comments that other customers have made</del>
 * Flag abusive or inappropriate comments for the administrator s attention
-* Log out
+* <del>Log out</del>
 
 #### Registering for the Site
 
 Visitors should be able to:
 
-* Complete an online form to register as a user of the website   this could include personal details such name, username and contact details (address and telephone number(s))
+* <del>Complete an online form to register as a user of the website   this could include personal details such name, username and contact details (address and telephone number(s))</del>
 * Check to see if the username they want is available
-* Have access to the site once the registration form has been successfully completed
+* <del>Have access to the site once the registration form has been successfully completed</del>
 
 ### Administrator
 
