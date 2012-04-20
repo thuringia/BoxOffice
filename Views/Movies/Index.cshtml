@@ -11,49 +11,53 @@
 
 
 @{
-    var sortedMovies = new Dictionary<string,List<Movie>>();
+    var sortedMovies = new Dictionary<string, List<Movie>>();
     var alphabet = new List<string>
     {
         "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"
     };
-    
+
     // select movies whose title begins with a number
-    var movies = (from g in
-                      (from m in Model
-                       orderby m.Name
-                       select m)
-                  where (g.Name.StartsWith("1")) || (g.Name.StartsWith("2")) || (g.Name.StartsWith("3")) || (g.Name.StartsWith("4")) || (g.Name.StartsWith("5")) || (g.Name.StartsWith("6")) || (g.Name.StartsWith("7")) || (g.Name.StartsWith("8")) || (g.Name.StartsWith("9")) || (g.Name.StartsWith("0"))
-                  select g).ToList();
-    sortedMovies.Add("#",movies);
-    
+    var movies = (from m in
+                      ((from g in Model
+                        where (g.Name.StartsWith("1")) || (g.Name.StartsWith("2")) || (g.Name.StartsWith("3")) || (g.Name.StartsWith("4")) || (g.Name.StartsWith("5")) || (g.Name.StartsWith("6")) || (g.Name.StartsWith("7")) || (g.Name.StartsWith("8")) || (g.Name.StartsWith("9")) || (g.Name.StartsWith("0"))
+                        select g).ToList())
+                  orderby m.Name
+                  select m).ToList();
+    sortedMovies.Add("#", movies);
+
     // now add all other movies, split by their beginning letter
     foreach (var letter in alphabet)
-	{
+    {
         sortedMovies.Add(letter, (from g in
                                       (from m in Model
                                        orderby m.Name
                                        select m)
                                   where g.Name.StartsWith(letter)
                                   select g).ToList());
-	}        
+    }        
 }
 
 @foreach (var letter in sortedMovies.Keys)
 {
-    <section class="section">
+    if (sortedMovies[letter] != null)
+    {
+    <section class="section" id="@letter">
         <h3>@letter</h3>
         @foreach (var movie in sortedMovies[letter])
-	    {
+        {
             <section class="tile">
-            <div class="tileContent">
-                <img class="tilePic" src="@movie.Images.First().Url"/>
-                <div class="tileText">                    
-                    <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">@movie.Name</a>
+                <div class="tileContent">
+                    <img class="tilePic" src="@movie.Images.First().Url"/>
+                    <div class="tileText">
+                        <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">@movie.Name
+                        </a>
+                    </div>
+                    <!-- tile text -->
                 </div>
-                <!-- tile text -->
-            </div>
-            <!-- tileContent -->
-        </section>
-	    }
+                <!-- tileContent -->
+            </section>
+        }
     </section>
+    }
 }
