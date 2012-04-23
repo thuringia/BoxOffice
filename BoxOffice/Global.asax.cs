@@ -54,6 +54,22 @@ namespace BoxOffice
                 "Movies/ajaxSearch/",
                 new { controller = "Movies", action = "ajaxSearch" }
             );
+
+            routes.MapRoute(
+                "AdminSearch",
+                "Admin/Search/{searchTerm}",
+                new
+                {
+                    controller = "Admin",
+                    action = "Search",
+                    searchTerm = ""
+                }
+            );
+            routes.MapRoute(
+                "AdminAjaxSearch",
+                "Admin/ajaxSearch/",
+                new { controller = "Admin", action = "ajaxSearch" }
+            );
         }
 
         protected void Application_Start()

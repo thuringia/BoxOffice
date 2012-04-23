@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BoxOffice.Models;
@@ -97,6 +98,75 @@ namespace BoxOffice.Controllers
             }
             // If we got this far, something failed
             return Json(new { errors = mc.GetErrorsFromModelState() });
+        }
+
+        //
+        // GET: /Movies/ajaxSearch
+
+        /// <summary>
+        /// Controller Action for the search field
+        /// </summary>
+        /// <param name="q">The name to be searched for</param>
+        /// <returns>A list of potential matches</returns>
+        [HttpGet]
+        public JsonResult ajaxSearch(String q)
+        {
+            var requestUrl = "http://api.themoviedb.org/2.1/Movie.search/en/json/b0f4c9d847ceda92061d4090b470dc10/" + q;
+            try
+            {
+                HttpWebRequest request = WebRequest.Create(requestUrl) as HttpWebRequest;
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+                var jsonResponse = new JsonResult();
+                jsonResponse.Data = response.GetResponseStream();
+                return (jsonResponse);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                
+                // if we get here, something failed
+                return Json(new { fail = true });
+            }            
+        }
+
+        /// <summary>
+        /// Processes a user's search request
+        /// </summary>
+        /// <param name="searchTerm">The search term</param>
+        /// <returns>a response</returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Search(string searchTerm)
+        {
+            if (searchTerm == string.Empty)
+            {
+                return View();
+            }
+            else
+            {
+                // if the search contains only one result return details
+                // otherwise a list
+                var movies = from a in db.Movies
+                             where a.Name.Contains(searchTerm)
+                             orderby a.Name
+                             select a;
+
+                if (movies.Count() == 0)
+                {
+                    return View("notfound");
+                }
+
+                if (movies.Count() > 1)
+                {
+                    return View("List", movies);
+                }
+                else
+                {
+                    return RedirectToAction("Details",
+                        new { id = movies.First().MovieID });
+                }
+            }
         }
     }
 }
