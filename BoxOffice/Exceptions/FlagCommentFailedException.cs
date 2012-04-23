@@ -5,6 +5,7 @@ using System.Text;
 
 namespace BoxOffice.Controllers
 {
+    [Serializable]
     class FlagCommentFailedException : Exception
     {
         public override string Message
