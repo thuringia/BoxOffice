@@ -30,6 +30,14 @@ namespace BoxOffice.Models
         /// <summary>
         /// Should this movie be promoted as the new movie of the week?
         /// </summary>
+        [Required]
         public bool MovieOfTheWeek { get; set; }
+
+        /// <summary>
+        /// The movie's ID on themoviedb.org, needed to fetch the metadata
+        /// </summary>
+        [Required]
+        [HiddenInput]
+        public string TMDbID { get; set; }
     }
 }
