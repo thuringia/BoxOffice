@@ -164,7 +164,9 @@
     <Content Include="App_Data\boxoffice_log.ldf">
       <DependentUpon>boxoffice.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\style.css" />
+    <Content Include="Content\style.css">
+      <DependentUpon>style.scss</DependentUpon>
+    </Content>
     <Content Include="Content\style_ie.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -257,7 +259,6 @@
   <ItemGroup>
     <None Include="Content\style.scss" />
     <None Include="Content\style_ie.scss" />
-    <Content Include="Views\Admin\AddMovie.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Movies.cshtml" />
     <Content Include="Views\Genres\Details.cshtml" />
@@ -279,6 +280,8 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\Shared\_AdminMoviesSubMenuPartial.cshtml" />
+    <Content Include="Views\Admin\AddMovie.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
