@@ -11,7 +11,7 @@ namespace BoxOffice.Models
     /// <summary>
     /// Creates the database schema and seeds some initial data
     /// </summary>
-    public class Bootstrap : DropCreateDatabaseAlways<BoxOfficeContext>
+    public class Bootstrap : DropCreateDatabaseIfModelChanges<BoxOfficeContext>
     {
         protected override void  Seed(BoxOfficeContext context)
         {
@@ -33,7 +33,7 @@ namespace BoxOffice.Models
 
             var dvds = SeedDVDs(context, movie);
             
-            SeedRentals(context, users, dvds.ToList());
+            SeedRentals(context, users, dvds.ToList(), movie);
 
             SeedMessages(context, users);
 
@@ -95,25 +95,28 @@ namespace BoxOffice.Models
         /// <param name="context">the database context the be seeded into</param>
         /// <param name="users">the users renting</param>
         /// <param name="dvds">the dvds to be rented</param>
-        private static void SeedRentals(BoxOfficeContext context, List<User> users, List<DVD> dvds)
+        private static void SeedRentals(BoxOfficeContext context, List<User> users, List<DVD> dvds, Movie movie)
         {
             var rental = new Rental
             {
-                RentalID = 1,
                 DvdID = dvds.First().DvdID,
-                UserID = 1,
+                UserID = users.First().UserID,
                 DateOfRental = DateTime.Now,
                 DateDue = DateTime.Today.AddDays(7),
                 DateReturned = null,
                 DateSent = null,
-                Dvd = context.DVDs.Find(1),
-                User = context.Users.Find(1)
+                Dvd = dvds.First(),
+                User = users.First(),
+                Movie = movie,
+                MovieID = movie.MovieID
             };
             context.Rentals.Add(rental);
 
             users[0].Queue.Add(rental);
             dvds[0].Rentals.Add(rental);
             dvds[0].State = "rented";
+            movie.Rentals.Add(rental);
+
             context.SaveChanges();
         }
 
