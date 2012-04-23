@@ -132,9 +132,10 @@ body {
     text-align: center; }
 
 .section {
-  margin-left: 1em; }
+  margin-left: 1em;
+  margin-bottom: 2em; }
   .section h3 {
-    font-weight: 300;
+    font-weight: 500;
     font-size: 1.25em;
     margin-bottom: 0.25em; }
 
