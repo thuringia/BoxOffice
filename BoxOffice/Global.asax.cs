@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using BoxOffice.Models;
 
 namespace BoxOffice
 {
@@ -37,10 +38,28 @@ namespace BoxOffice
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "MovieSearch",
+                "Movies/Search/{searchTerm}",
+                new
+                {
+                    controller = "Movies",
+                    action = "Search",
+                    searchTerm = ""
+                }
+            );
+            routes.MapRoute(
+                "MovieAjaxSearch",
+                "Movies/ajaxSearch/",
+                new { controller = "Movies", action = "ajaxSearch" }
+            );
         }
 
         protected void Application_Start()
         {
+            Database.SetInitializer<BoxOfficeContext>(new Bootstrap());
+
             AreaRegistration.RegisterAllAreas();
 
             // Use LocalDB for Entity Framework by default
