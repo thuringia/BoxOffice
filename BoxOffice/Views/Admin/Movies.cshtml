@@ -7,8 +7,12 @@
 
 @section js {
     <script type="text/javascript">
+    var page = new Array();
+    page[0] = "#movies";
     $(document).ready(function () {
-        $("#movies").addClass("selected");
+        for (var i in page) {
+            $(i).addClass("selected");
+        }
     });
     </script>
 }
@@ -17,7 +21,7 @@
     @Html.Partial("_AdminMoviesSubMenuPartial")
 }
 
-<table>
+<table id="movieTable">
     <thead>
         <tr>
             <th>Title</th>
@@ -31,7 +35,7 @@
         <tr>
             <th># of DVDs (rented)</th>
         </tr>
-    </thead>
+        </thead>
     <tbody>
         @foreach (var item in Model.OrderBy(s => s.Name))
         {
@@ -57,9 +61,9 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayFor(s => item.DVDs.Count()) (@rentedCount)
+                    @Html.DisplayFor(s => item.DVDs.Count) (@rentedCount)
                 </td>
             </tr>
         }
-    </tbody>
+        </tbody>
 </table>
