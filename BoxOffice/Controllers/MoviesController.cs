@@ -38,31 +38,6 @@ namespace BoxOffice.Controllers
         {
             Movie movie = db.Movies.Find(id);
             return View(movie);
-        }
-
-        //
-        // DELETE: /Movies/{id}
-        
-        [HttpDelete]
-        //[Authorize(Roles="Admin")]
-        public ActionResult Index(int id)
-        {
-            db.Movies.Remove(db.Movies.Find(id));
-            db.SaveChanges();
-
-            return View();
-        }
-
-        private bool editMovie(Movie movie)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(movie).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return true;
-            }
-            return false;
         }      
 
         //
