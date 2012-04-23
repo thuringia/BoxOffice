@@ -29,7 +29,7 @@ function showMovieSearch() {
         $(page).removeClass("selected");
 
         // highlight search
-        $("#search").addClass(selected);
+        $("#search").addClass("selected");
 
         // make search fiel visible
         $("#searchField").removeClass("hidden");
