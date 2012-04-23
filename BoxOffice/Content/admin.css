@@ -1,0 +1,14 @@
+#movieTable {
+  width: 50em;
+  margin: 0 auto; }
+  #movieTable thead {
+    width: 50em; }
+    #movieTable thead tr {
+      width: 12.5em;
+      margin: 0 auto; }
+  #movieTable tbody {
+    width: 50em;
+    margin: 0 auto; }
+    #movieTable tbody tr {
+      width: 12.5em;
+      margin: 0 auto; }

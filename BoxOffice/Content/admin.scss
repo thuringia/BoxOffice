@@ -1,0 +1,24 @@
+﻿#movieTable {
+	$tableWidth: 50em;
+	width: $tableWidth;
+	margin: 0 auto;
+
+	thead {
+		width: $tableWidth;
+
+		tr {
+			width: ($tableWidth/4);
+			margin: 0 auto;
+		}
+	}
+
+	tbody {
+		width: $tableWidth;
+		margin: 0 auto;
+
+		tr {
+			width: ($tableWidth/4);
+			margin: 0 auto;
+		}
+	}
+}
