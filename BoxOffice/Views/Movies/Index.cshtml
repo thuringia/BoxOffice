@@ -1,15 +1,11 @@
 ﻿@model IEnumerable<BoxOffice.Models.Movie>
 @using BoxOffice.Models;
-
 @{
     ViewBag.Title = "Movies - BoxOffice";
 }
-
 <script type="text/javascript">
     $("#movies").addClass("selected");
 </script>
-
-
 @{
     var sortedMovies = new Dictionary<string, List<Movie>>();
     var alphabet = new List<string>
@@ -20,7 +16,7 @@
     // select movies whose title begins with a number
     var movies = (from m in
                       ((from g in Model
-                        where (g.Name.StartsWith("1")) || (g.Name.StartsWith("2")) || (g.Name.StartsWith("3")) || (g.Name.StartsWith("4")) || (g.Name.StartsWith("5")) || (g.Name.StartsWith("6")) || (g.Name.StartsWith("7")) || (g.Name.StartsWith("8")) || (g.Name.StartsWith("9")) || (g.Name.StartsWith("0"))
+                        where ((g.Name != null) && ((g.Name.StartsWith("1")) || (g.Name.StartsWith("2")) || (g.Name.StartsWith("3")) || (g.Name.StartsWith("4")) || (g.Name.StartsWith("5")) || (g.Name.StartsWith("6")) || (g.Name.StartsWith("7")) || (g.Name.StartsWith("8")) || (g.Name.StartsWith("9")) || (g.Name.StartsWith("0"))))
                         select g).ToList())
                   orderby m.Name
                   select m).ToList();
@@ -33,14 +29,14 @@
                                       (from m in Model
                                        orderby m.Name
                                        select m)
-                                  where g.Name.StartsWith(letter)
+                                  where g.Name.ToLower().StartsWith(letter)
                                   select g).ToList());
-    }        
+    }
 }
 
 @foreach (var letter in sortedMovies.Keys)
 {
-    if (sortedMovies[letter] != null)
+    if (sortedMovies[letter].Count != 0)
     {
     <section class="section" id="@letter">
         <h3>@letter</h3>
