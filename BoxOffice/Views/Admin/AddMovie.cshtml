@@ -1,8 +1,26 @@
 ﻿@model BoxOffice.Models.AddMovieModel
 
 @{
-    ViewBag.Title = "AddMovie";
+    ViewBag.Title = "Add Movie - BoxOffice";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section js {
+    <script type="text/javascript">
+    var page = new Arr();
+    page[0] = "#movies";
+    page[1] = "#addMovieLink";
+
+    $(document).ready(function () {
+        for (var i in page) {
+            $(i).addClass("selected");
+        }
+    });
+    </script>
+}
+
+@section subMenu {
+    @Html.Partial("_AdminMoviesSubMenuPartial")
 }
 
 <h2>AddMovie</h2>
@@ -10,13 +28,13 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
-@using (Html.BeginForm(ViewBag.FormAction as String,"Admin")) {
-    @Html.ValidationSummary(true, "Movie creation was unsuccessful. Please correct the errors and try again.")
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>AddMovieModel</legend>
 
-        <div class="editor-label">
+        <div class="editor-label" id="addSearchTerm">
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
@@ -48,8 +66,16 @@
             @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
         </div>
 
+        <div>
+            @Html.HiddenFor(model => model.TMDbID)
+        </div>
+
         <p>
             <input type="submit" value="Create" />
         </p>
     </fieldset>
-    }
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
