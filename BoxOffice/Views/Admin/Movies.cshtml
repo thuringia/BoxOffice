@@ -6,7 +6,11 @@
 }
 
 @section js {
-<script type="text/javascript" src="@Url.Content("~/Content/admin.js")"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#movies").addClass("selected");
+    });
+    </script>
 }
 
 @section subMenu {
@@ -15,22 +19,47 @@
 
 <table>
     <thead>
-        <tr><th> </th></tr>
-        <tr><th>Title</th></tr>
-        <tr><th>Studios</th></tr>
-        <tr><th>Genre</th></tr>
-        <tr><th># of DVDs (rented)</th></tr>
+        <tr>
+            <th>Title</th>
+        </tr>
+        <tr>
+            <th>Studios</th>
+        </tr>
+        <tr>
+            <th>Genre</th>
+        </tr>
+        <tr>
+            <th># of DVDs (rented)</th>
+        </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(s => s.Name))
         {
-            <tr><td>@Html.DisplayFor(s => item.Name)</td></tr>
-            <tr><td>@foreach (var studio in item.Studios.ToList())
+            var rentedCount = item.DVDs.ToList().FindAll(a => a.State == "rented").Count();
+            <tr>
+                <td>@Html.DisplayFor(s => item.Name)</td>
+            </tr>
+            <tr>
+                <td>
+                    @foreach (var studio in item.Studios.ToList())
                     {
                         @Html.DisplayFor(s => studio.Name);
-                    }</td></tr>
-            <tr><td>@Html.DisplayFor(s => item.Categories.ToList())</td></tr>
-            <tr><td>@Html.DisplayFor(s => item.DVDs.Count()) (@Html.DisplayFor(s => item.DVDs.ToList().FindAll(a => a.State == "rented").Count())</td></tr>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @foreach (var genre in item.Categories)
+                    {
+                        @Html.DisplayFor(s => genre.Name);
+                }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(s => item.DVDs.Count()) (@rentedCount)
+                </td>
+            </tr>
         }
     </tbody>
 </table>
