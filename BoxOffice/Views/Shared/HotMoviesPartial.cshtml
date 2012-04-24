@@ -1,0 +1,21 @@
+﻿@using BoxOffice.Models
+
+<section id="hotMoviesSection">
+    <p>Hot Movies</p>
+
+    @foreach (var item in ViewData["hotMovies"] as List<Movie>)
+    {
+        var imgs = item.Images.ToList();
+        
+        <section class="tile">
+            <div class="tileContent">
+                <div class="tileText">
+                    <img class="tilePic" src="@imgs[0].Url" />
+                    <p class="tileDescription">@Html.Display(item.Name)</p>
+                </div>
+                <!-- tile text -->
+            </div>
+            <!-- tileContent -->
+        </section>
+    }
+</section>

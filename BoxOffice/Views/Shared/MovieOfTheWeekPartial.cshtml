@@ -1,0 +1,18 @@
+﻿@using BoxOffice.Models;
+
+@{ 
+    var movieOfTheWeek = ViewData["movieOfTheWeek"] as Movie;
+}
+<section id="movieOfTheWeekSection">
+    <p>Movie of the Week</p>
+    <section class="tile">
+        <div class="tileContent">
+            <div class="tileText">
+                <img class="tilePic" src="@movieOfTheWeek.Images.First().Url"/>
+                <p class="tileDescription">@movieOfTheWeek.Name</p>
+            </div>
+            <!-- tile text -->
+        </div>
+        <!-- tileContent -->
+    </section>
+</section>
