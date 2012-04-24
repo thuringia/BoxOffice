@@ -26,26 +26,14 @@ namespace BoxOffice.Controllers
                                          where m.MovieOfTheWeek == true
                                          select m).First();
 
-            // create a dictionary for our rental charts
-            var rentalCharts = new Dictionary<Movie, int>();
-
-            // loop over all movies to get their rental count
-            foreach (var item in db.Movies.ToList())
-            {
-                int rentalCount = 0;
-                item.DVDs.ToList().ForEach(s => rentalCount += s.Rentals.Count());
-                rentalCharts.Add(item, rentalCount);
-            }
-
-            // sort the charts and get the 10 most rented
-            ViewData["hotMovies"] = (from m in rentalCharts
-                                    orderby m.Value
-                                    select m).Take(10).ToList();
+            // get the ten most rented movies
+            ViewData["hotMovies"] = (from m in db.Movies
+                                     orderby m.RentalCount
+                                     select m).Take(10).ToList();
 
             // get all comments that need administrative action
-
             ViewData["flaggedComments"] = (from c in db.Comments
-                                          where (c.Flag == 5) || (c.Flag > 5)
+                                          where ( (c.Flag == 5) || (c.Flag > 5) )
                                           orderby c.Flag
                                           select c).ToList();
             return View();
