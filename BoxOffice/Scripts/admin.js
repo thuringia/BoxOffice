@@ -8,10 +8,12 @@ $(document).ready(function () {
         source: function (request, response) {
             // define a function to call your Action (assuming UserController)
             $.ajax({
-                url: 'Admin/ajaxSearch', type: "GET", dataType: "json",
+                url: 'http://api.themoviedb.org/2.1/Movie.search/en/json/b0f4c9d847ceda92061d4090b470dc10/',
+                type: "GET",
+                dataType: "json",
 
                 // query will be the param used by your action method
-                data: { q: request.term },
+                data: request.term,
                 success: function (data) {
                     response($.map(data, function (item) {
                         return { label: item.Name, value: item.Name };
@@ -20,6 +22,9 @@ $(document).ready(function () {
             })
         },
         minLength: 1, // require at least one character from the user
+        select: function (event, ui) {
+            alert(eve.item);
+        }
     });
 });
 

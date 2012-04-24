@@ -14,7 +14,7 @@ namespace BoxOffice.Controllers
             var db = new BoxOfficeContext();
 
             // add a field for the pages controller, to facilitate error checking in the view
-            ViewData["page"] = "admin";
+            ViewData["page"] = "home";
 
             /* add movie of the week to ViewData, so we can display it */
             // query for the MOTW

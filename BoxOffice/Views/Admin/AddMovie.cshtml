@@ -1,10 +1,8 @@
 ﻿@model BoxOffice.Models.AddMovieModel
-
 @{
     ViewBag.Title = "Add Movie - BoxOffice";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 @section js {
     <script type="text/javascript">
     var page = "#movies";
@@ -16,64 +14,58 @@
     });
     </script>
 }
-
 @section subMenu {
     @Html.Partial("_AdminMoviesSubMenuPartial")
 }
-
 <h2>AddMovie</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>AddMovieModel</legend>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        <input class="text-box single-line valid" data-val="true"
+            id="addSearchTerm" name="Name" type="text" value="">
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line valid" data-val="true" data-val-required="The Name field is required." id="addSearchTerm" name="Name" type="text" value="">
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.DVDs)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.DVDs)
+        @Html.ValidationMessageFor(model => model.DVDs)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DVDs)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DVDs)
-            @Html.ValidationMessageFor(model => model.DVDs)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Price)
+        @Html.ValidationMessageFor(model => model.Price)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MovieOfTheWeek)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.MovieOfTheWeek)
+        @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.TMDbID)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.TMDbID)
+        @Html.ValidationMessageFor(model => model.TMDbID)
+    </div>              
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MovieOfTheWeek)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MovieOfTheWeek)
-            @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
-        </div>
-
-        <div>
-            @Html.HiddenFor(model => model.TMDbID)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    <p>
+        <input type="submit" value="Create" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text" />
+    </p>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

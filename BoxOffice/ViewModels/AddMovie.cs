@@ -12,7 +12,6 @@ namespace BoxOffice.Models
         /// <summary>
         /// A name for the movie that is to be added
         /// </summary>
-        [Required]
         public string Name { get; set; }
 
         /// <summary>
@@ -37,7 +36,6 @@ namespace BoxOffice.Models
         /// The movie's ID on themoviedb.org, needed to fetch the metadata
         /// </summary>
         [Required]
-        [HiddenInput]
         public string TMDbID { get; set; }
     }
 }
