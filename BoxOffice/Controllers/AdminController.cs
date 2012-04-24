@@ -52,6 +52,14 @@ namespace BoxOffice.Controllers
         }
 
         //
+        // POST: /Admin/MessageUser
+        [HttpPost]
+        public JsonResult MessageUser()
+        {
+            return Json(new { implemented = false });
+        }
+
+        //
         // GET: /Admin/Movies
 
         public ActionResult Movies()
