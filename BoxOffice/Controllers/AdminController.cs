@@ -120,20 +120,17 @@ namespace BoxOffice.Controllers
 
             if (ModelState.IsValid)
             {
-                /*
-                var response = tmdb.MovieSearch(add.Name);
+                try
+                {
+                    mc.persistMovie(add);
 
-                if (response != null)
-                {
-                    var m = tmdb.GetMovieInfo(response.First().Id);
-                    var movie = mc.persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
-                    return Json(new { success = true, redirect = returnUrl });
+                    return Json(new { success = true });
                 }
-                else
+                catch (Exception e)
                 {
-                    ModelState.AddModelError("", "The movie could not be found.");
+
+                    return Json(new { exception = true, message = e.Message });
                 }
-                */
             }
             // If we got this far, something failed
             return Json(new { errors = mc.GetErrorsFromModelState() });
@@ -164,10 +161,10 @@ namespace BoxOffice.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                
+
                 // if we get here, something failed
                 return Json(new { fail = true });
-            }            
+            }
         }
 
         /// <summary>
