@@ -44,8 +44,9 @@ namespace BoxOffice.Controllers
 
             /* hot movies */
             // query for the ten most rented movies
+            var movies = db.Movies.ToList();
             result = (from m in db.Movies
-                     orderby m.RentalCount
+                     orderby m.Rentals.Count() ascending
                      select m).ToList();
 
             // check if there are rented movies, otherwise fail gracefully
