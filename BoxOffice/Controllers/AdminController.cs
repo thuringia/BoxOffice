@@ -15,7 +15,10 @@ namespace BoxOffice.Controllers
 
         //
         // GET: /Admin/
-
+        /// <summary>
+        /// Display the admin's dashboard with movie of the week, most rented movies and comment's needing action
+        /// </summary>
+        /// <returns>the view</returns>
         public ActionResult Index()
         {                    
             // add movie of the week to ViewData, so we can display it
