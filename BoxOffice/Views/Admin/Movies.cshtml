@@ -7,12 +7,10 @@
 
 @section js {
     <script type="text/javascript">
-    var page = new Array();
-    page[0] = "#movies";
+    var page = "#movies";
+    var subpage = "";
     $(document).ready(function () {
-        for (var i in page) {
-            $(i).addClass("selected");
-        }
+        $(page).addClass("selected");
     });
     </script>
 }
@@ -47,7 +45,7 @@
                 <td>
                     @foreach (var studio in item.Studios.ToList())
                     {
-                        @Html.DisplayFor(s => studio.Name);
+                        @Html.DisplayFor(s => studio.Name); <br />
                     }
                 </td>
             </tr>
@@ -55,8 +53,8 @@
                 <td>
                     @foreach (var genre in item.Categories)
                     {
-                        @Html.DisplayFor(s => genre.Name);
-                }
+                        @Html.DisplayFor(s => genre.Name); <br />
+                    }
                 </td>
             </tr>
             <tr>
