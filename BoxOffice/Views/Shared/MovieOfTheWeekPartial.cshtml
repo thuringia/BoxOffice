@@ -1,17 +1,18 @@
 ﻿@using BoxOffice.Models;
-@{ 
+@{
     var movieOfTheWeek = ViewData["movieOfTheWeek"] as Movie;
+    
     var page = ViewData["page"] as string;
 }
 @if (movieOfTheWeek != null)
 {
     <section id="movieOfTheWeekSection">
-        <p>Movie of the Week</p>
+        <h3>Movie of the Week</h3>
         <section class="tile">
             <div class="tileContent">
                 <img class="tilePic" src="@movieOfTheWeek.Images.First().Url"/>
                 <div class="tileText">
-                    <p class="tileDescription">@movieOfTheWeek.Name</p>
+                    <p class="tileDescription">@Html.ActionLink(movieOfTheWeek.Name, "Details", new {controller = "Movies", id=movieOfTheWeek.MovieID })</p>
                 </div>
                 <!-- tile text -->
             </div>
@@ -23,10 +24,14 @@ else
 {
     if (page.Equals("admin"))
     {
-    <p>
-        There is no "Movie of the Week" at present.<br />
-        I suggest you @Html.ActionLink("change", "Movies") that!
-    </p>
+    <section id="movieOfTheWeekSection">
+        <h3>Movie of the Week</h3>
+        <p>
+            There is no "Movie of the Week" at present.<br />
+            I suggest you @Html.ActionLink("change", "Movies") that!
+        </p>
+    </section>
+    
     }
     else if (page.Equals("home"))
     {

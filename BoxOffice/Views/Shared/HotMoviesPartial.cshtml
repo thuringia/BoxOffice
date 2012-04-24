@@ -4,20 +4,17 @@
     var page = ViewData["page"] as string;
 }
 <section id="hotMoviesSection">
-    
-    <p>Hot Movies</p>
-    
+    <h3>Hot Movies</h3>
     @if (hotMovies != null)
     {
         foreach (var item in hotMovies)
-        {
-            var imgs = item.Images.ToList();
-        
+        {        
         <section class="tile">
             <div class="tileContent">
-                <img class="tilePic" src="@imgs[0].Url" />
-                <div class="tileText">                    
-                    <p class="tileDescription">@Html.Display(item.Name)</p>
+                <img class="tilePic" src="@item.Images.First().Url" />
+                <div class="tileText">
+                    <p class="tileDescription">@Html.ActionLink(item.Name, "Details", new { controller = "Movies", id = item.MovieID })
+                    </p>
                 </div>
                 <!-- tile text -->
             </div>
@@ -27,14 +24,22 @@
     }
     else
     {
-        if (page.Equals("admin"))
-        {
-                    <p>There are no movies rented at present.<br /> I suggest you get some users!</p>
-        }
-        else if (page.Equals("home"))
-        {
-            <p>Nobody rented a movie :(<br />You could be the first!</p>
-        }
+        <section id="hotMoviesSection">
+            <h3>Hot Movies</h3>
+            @if (page.Equals("admin"))
+            {
+                <p>
+                    There are no movies rented at present.<br />
+                    I suggest you get some users!
+                </p>
+            }
+            else if (page.Equals("home"))
+            {
+                <p>
+                    Nobody rented a movie :(<br />
+                    You could be the first!
+                </p>
+            }
+        </section>
     }
-
 </section>
