@@ -11,7 +11,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// This cast member's unique ID
         /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CastMemberID { get; set; }
 
         /// <summary>
