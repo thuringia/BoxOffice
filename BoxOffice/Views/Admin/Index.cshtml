@@ -28,7 +28,7 @@
     var comments = (List<BoxOffice.Models.Comment>)ViewData["flaggedComments"];
 }
 
-@if (comments.Count == 0)
+@if (comments == null)
 {
     <section id="flaggedCommentsSection">
         <p>Everybody is playing nice.</p>

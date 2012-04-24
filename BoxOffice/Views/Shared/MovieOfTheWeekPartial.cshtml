@@ -1,18 +1,34 @@
 ﻿@using BoxOffice.Models;
-
 @{ 
     var movieOfTheWeek = ViewData["movieOfTheWeek"] as Movie;
+    var page = ViewData["page"] as string;
 }
-<section id="movieOfTheWeekSection">
-    <p>Movie of the Week</p>
-    <section class="tile">
-        <div class="tileContent">
-            <div class="tileText">
+@if (movieOfTheWeek != null)
+{
+    <section id="movieOfTheWeekSection">
+        <p>Movie of the Week</p>
+        <section class="tile">
+            <div class="tileContent">
                 <img class="tilePic" src="@movieOfTheWeek.Images.First().Url"/>
-                <p class="tileDescription">@movieOfTheWeek.Name</p>
+                <div class="tileText">
+                    <p class="tileDescription">@movieOfTheWeek.Name</p>
+                </div>
+                <!-- tile text -->
             </div>
-            <!-- tile text -->
-        </div>
-        <!-- tileContent -->
-    </section>
-</section>
+            <!-- tileContent -->
+        </section>
+    </section>                
+}
+else
+{
+    if (page.Equals("admin"))
+    {
+    <p>
+        There is no "Movie of the Week" at present.<br />
+        I suggest you @Html.ActionLink("change", "Movies") that!
+    </p>
+    }
+    else if (page.Equals("home"))
+    {
+    }
+}
