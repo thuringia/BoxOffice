@@ -12,3 +12,15 @@
     #movieTable tbody tr {
       width: 12.5em;
       margin: 0 auto; }
+
+#movieOfTheWeekSection, #hotMoviesSection, #flaggedCommentsSection {
+  margin-bottom: 1em; }
+  #movieOfTheWeekSection h3, #hotMoviesSection h3, #flaggedCommentsSection h3 {
+    font-weight: 500;
+    margin-bottom: 0.5em; }
+  #movieOfTheWeekSection .tile, #hotMoviesSection .tile, #flaggedCommentsSection .tile {
+    margin: 1em; }
+  #movieOfTheWeekSection p a, #hotMoviesSection p a, #flaggedCommentsSection p a {
+    color: rgba(250, 250, 250, 0.9);
+    font-weight: 500;
+    text-decoration: none; }
