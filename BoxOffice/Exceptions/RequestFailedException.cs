@@ -8,7 +8,7 @@ namespace BoxOffice.Exceptions
     [Serializable]
     class RequestFailedException : Exception
     {
-        override string Message
+        public override string Message
         {
             get
             {
