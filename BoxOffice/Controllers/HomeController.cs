@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BoxOffice.Models;
 
 namespace BoxOffice.Controllers
 {
@@ -10,6 +11,8 @@ namespace BoxOffice.Controllers
     {
         public ActionResult Index()
         {
+            var db = new BoxOfficeContext();
+
             // add a field for the pages controller, to facilitate error checking in the view
             ViewData["page"] = "admin";
 
