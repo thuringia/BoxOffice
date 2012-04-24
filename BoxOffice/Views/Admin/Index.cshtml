@@ -1,88 +1,74 @@
 ﻿@using BoxOffice.Models;
+
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "BoxOffice Administrative Interface";
 }
 
 @section js {
-<script type="text/javascript" src="@Url.Content("~/Content/admin.js")"></script>
+    <script type="text/javascript">
+    var page = new Array();
+    page[0] = "#home";
+
+    $(document).ready(function () {
+        for (var i in page) {
+            $(i).addClass("selected");
+        }
+    });
+    </script>
 }
 
 <h2>Dashboard</h2>
 
-@* ViewData["movieOfTheWeek"] *@
-@{ 
-    var movieOfTheWeek = ViewData["movieOfTheWeek"] as Movie;
-}
-<section id="movieOfTheWeekSection">
-    <p>Movie of the Week</p>
-    <section class="tile">
-        <div class="tileContent">
-            <div class="tileText">
-                <img class="tilePic" src="@movieOfTheWeek.Images.First().Url"/>
-                <p class="tileDescription">@movieOfTheWeek.Name</p>
-            </div>
-            <!-- tile text -->
-        </div>
-        <!-- tileContent -->
-    </section>
-</section>
+@Html.Partial("MovieOfTheWeekPartial")
 
-<section id="hotMoviesSection">
-    <p>Hot Movies</p>
-
-    @foreach (var item in (List<BoxOffice.Models.Movie>)ViewData["hotMovies"])
-    {
-        var imgs = item.Images.ToList();
-        
-        <section class="tile">
-            <div class="tileContent">
-                <div class="tileText">
-                    <img class="tilePic" src="@imgs[0].Url" />
-                    <p class="tileDescription">@Html.Display(item.Name)</p>
-                </div>
-                <!-- tile text -->
-            </div>
-            <!-- tileContent -->
-        </section>
-    }
-</section>
+@Html.Partial("HotMoviesPartial")
 
 @{
     var comments = (List<BoxOffice.Models.Comment>)ViewData["flaggedComments"];
 }
-<section id="flaggedCommentsSection">
-    <table>
-        <thead>
-            <tr>
-                <td>Username</td>
-            </tr>
-            <tr>
-                <td>Movie</td>
-            </tr>
-            <tr>
-                <td>Comment</td>
-            </tr>
-            <tr>
-                <td>Flags</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in comments)
-            {
+
+@if (comments.Count == 0)
+{
+    <section id="flaggedCommentsSection">
+        <p>Everybody is playing nice.</p>
+    </section>
+}
+else
+{
+    <section id="flaggedCommentsSection">
+        <table>
+            <thead>
                 <tr>
-                    <td>@Html.Display(item.User.Username)</td>
+                    <td>Username</td>
                 </tr>
                 <tr>
-                    <td>@Html.Display(item.Movie.Name)</td>
+                    <td>Movie</td>
                 </tr>
                 <tr>
-                    <td>@Html.Display(item.Message)</td>
+                    <td>Comment</td>
                 </tr>
                 <tr>
-                    <td>@Html.Display(item.Flag.ToString())</td>
+                    <td>Flags</td>
                 </tr>
-            }
-        </tbody>
-    </table>
-</section>
+            </thead>
+            <tbody>
+                @foreach (var item in comments)
+                {
+                    <tr>
+                        <td>@Html.Display(item.User.Username)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Display(item.Movie.Name)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Display(item.Message)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Display(item.Flag.ToString())</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>    
+}
