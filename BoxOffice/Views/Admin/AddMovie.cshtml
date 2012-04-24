@@ -7,14 +7,12 @@
 
 @section js {
     <script type="text/javascript">
-    var page = new Arr();
-    page[0] = "#movies";
-    page[1] = "#addMovieLink";
+    var page = "#movies";
+    var subpage = "#addMovieLink";
 
     $(document).ready(function () {
-        for (var i in page) {
-            $(i).addClass("selected");
-        }
+        $(page).addClass("selected");
+        $(subpage).addClass("selected");
     });
     </script>
 }
@@ -34,11 +32,11 @@
     <fieldset>
         <legend>AddMovieModel</legend>
 
-        <div class="editor-label" id="addSearchTerm">
+        <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            <input class="text-box single-line valid" data-val="true" data-val-required="The Name field is required." id="addSearchTerm" name="Name" type="text" value="">
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
