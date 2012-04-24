@@ -8,9 +8,13 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using BoxOffice.Models;
 using BoxOffice.ActionFilters;
+using BoxOffice.Exceptions;
+using System.Net;
+using System.Xml.Linq;
+using System.Globalization;
 
 namespace BoxOffice.Controllers
-{ 
+{
     [JsonRequestBehavior]
     public class MoviesController : Controller
     {
@@ -38,7 +42,7 @@ namespace BoxOffice.Controllers
         {
             Movie movie = db.Movies.Find(id);
             return View(movie);
-        }      
+        }
 
         //
         // GET: /Movies/Rent/{id}
@@ -113,7 +117,7 @@ namespace BoxOffice.Controllers
             }
             catch (Exception)
             {
-                
+
                 throw new AddToQueueFailedException();
             }
         }
@@ -169,7 +173,7 @@ namespace BoxOffice.Controllers
             }
             catch (Exception)
             {
-                
+
                 throw new FlagCommentFailedException();
             }
         }
@@ -211,9 +215,9 @@ namespace BoxOffice.Controllers
                 // if the search contains only one result return details
                 // otherwise a list
                 var movies = from a in db.Movies
-                              where a.Name.Contains(searchTerm)
-                              orderby a.Name
-                              select a;
+                             where a.Name.Contains(searchTerm)
+                             orderby a.Name
+                             select a;
 
                 if (movies.Count() == 0)
                 {
@@ -237,7 +241,7 @@ namespace BoxOffice.Controllers
         public ActionResult Create()
         {
             return View();
-        } 
+        }
 
         //
         // POST: /Movies/Create
@@ -297,271 +301,307 @@ namespace BoxOffice.Controllers
         /// <summary>
         /// Saves a movie from TheMovieDB to BoxOffices db
         /// </summary>
-        /// <param name="tmdbMovie"></param>
-        /// <returns></returns>
-        //public Movie persistMovie(TmdbMovie tmdbMovie, int dvdi, decimal price, bool MovieOfTheWeek)
-        //{
-        //    // Lists to fill
-        //    List<Category> categories = new List<Category>();
-        //    List<Image> images = new List<Image>();
-        //    List<CastMember> cast = new List<CastMember>();
-        //    List<Studio> studios = new List<Studio>();
-        //    List<Country> countries = new List<Country>();
-        //    List<DVD> dvds = new List<DVD>();
+        /// <param name="newMovie">An AddMovie model containing all info</param>
+        public void persistMovie(AddMovieModel model)
+        {
+            // create request url
+            string UrlRequest = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/b0f4c9d847ceda92061d4090b470dc10/" + model.TMDbID;
 
-        //    #region movie
-            
-        //    // create new movie object
-        //    var movie = new Movie();        
+            /* make request */
+            XDocument tmdbMovie = null;
+            try
+            {
+                HttpWebRequest request = WebRequest.Create(UrlRequest) as HttpWebRequest;
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
 
-        //    // set properties
-        //    movie.Adult = tmdbMovie.Adult;
-        //    movie.Alternative_name = tmdbMovie.AlternativeName;
-        //    movie.Cast = cast;
-        //    movie.Categories = categories;
-        //    movie.Certification = tmdbMovie.Certification;
-        //    movie.Comments = new List<Comment>();
-        //    movie.Countries = countries;
-        //    movie.DateAdded = DateTime.Now;
-        //    movie.DateReleased = DateTime.Parse(tmdbMovie.Released);
-        //    movie.DVDs = dvds;
-        //    movie.Homepage = tmdbMovie.Homepage;
-        //    movie.Images = images;
-        //    movie.Imdb_id = tmdbMovie.ImdbId;
-        //    movie.Language = tmdbMovie.Language;
-        //    movie.MovieID = tmdbMovie.Id;
-        //    movie.MovieOfTheWeek = MovieOfTheWeek;
-        //    movie.Name = tmdbMovie.Name;
-        //    movie.Original_name = tmdbMovie.OriginalName;
-        //    movie.Overview = tmdbMovie.Overview;
-        //    movie.Price = price;
-        //    movie.Rating_by_moviedb = float.Parse(tmdbMovie.Rating);
-        //    movie.Ratings = new List<Rating>();
-        //    movie.RentalCount = 0;
-        //    movie.Studios = studios;
-        //    movie.Tagline = tmdbMovie.Tagline;
-        //    movie.Trailer = tmdbMovie.Trailer;
-        //    movie.Translated = tmdbMovie.Translated;
-        //    movie.Type = tmdbMovie.Type;
-        //    movie.Url = tmdbMovie.Url;
-        //    movie.Votes_by_moviedb = int.Parse(tmdbMovie.Votes);
+                tmdbMovie = XDocument.Load(response.GetResponseStream());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new RequestFailedException();
+            }
 
-        //    // add movie to db
-        //    db.Movies.Add(movie);
+            /* parse xml */
+            // Lists to fill
+            var categories = new List<Category>();
+            var images = new List<Image>();
+            var cast = new List<CastMember>();
+            var studios = new List<Studio>();
+            var countries = new List<Country>();
+            var dvds = new List<DVD>();
 
-        //    // save changes
-        //    db.SaveChanges();
+            try
+            {
+                #region movie
+                // create a new Movie object and fill it with data parsed from the xml
+                var movie = (from m in tmdbMovie.Descendants("movie")
+                             select new Movie
+                             {
+                                 Adult = bool.Parse(m.Element("adult").Value),
+                                 Alternative_name = m.Element("alternative_name").Value,
+                                 Cast = cast,
+                                 Categories = categories,
+                                 Certification = m.Element("certification").Value,
+                                 Comments = new List<Comment>(),
+                                 Countries = countries,
+                                 DateAdded = DateTime.Now,
+                                 DateReleased = DateTime.ParseExact(m.Element("released").Value, @"yyyy-MM-dd", CultureInfo.InvariantCulture),
+                                 DVDs = dvds,
+                                 Homepage = m.Element("homepage").Value,
+                                 Images = images,
+                                 Imdb_id = m.Element("imdb_id").Value,
+                                 Language = m.Element("language").Value,
+                                 MovieID = int.Parse(m.Element("id").Value),
+                                 MovieOfTheWeek = model.MovieOfTheWeek,
+                                 Name = m.Element("name").Value,
+                                 Original_name = m.Element("original_name").Value,
+                                 Overview = m.Element("overview").Value,
+                                 Price = model.Price,
+                                 Rating = null,
+                                 Rating_by_moviedb = float.Parse(m.Element("rating").Value),
+                                 Ratings = new List<Rating>(),
+                                 Rentals = new List<Rental>(),
+                                 Studios = studios,
+                                 Tagline = m.Element("tagline").Value,
+                                 Trailer = m.Element("trailer").Value,
+                                 Translated = bool.Parse(m.Element("translated").Value),
+                                 Type = m.Element("type").Value,
+                                 Url = m.Element("url").Value,
+                                 Votes = null,
+                                 Votes_by_moviedb = int.Parse(m.Element("votes").Value)
+                             }).First();
 
-        //    #endregion
+                // save the new movie
+                db.Movies.Add(movie);
+                db.SaveChanges();
 
-        //    # region Cast
-        //    // Add Cast
-        //    foreach (var item in tmdbMovie.Cast)
-        //    {
-        //        cast.Add(new CastMember
-        //        {
-        //            Cast_id = item.CastId,
-        //            CastMemberID = item.Id,
-        //            Character = item.Character,
-        //            Department = item.Department,
-        //            Job = item.Job,
-        //            Movie = movie,
-        //            MovieID = movie.MovieID,
-        //            Name = item.Name,
-        //            Order = item.Order,
-        //            Url = item.Url
-        //        });
-        //    }
-        //    cast.ForEach(s => db.CastMembers.Add(s));
-        //    cast.ForEach(s => movie.Cast.Add(s));
-        //    db.SaveChanges();
+                #endregion
 
-        //    #endregion
+                #region cast
+                // now parse the cast
+                foreach (var person in (from castMembers
+                                            in tmdbMovie.Descendants("person")
+                                        select castMembers))
+                {
+                    // create new CastMember
+                    var member = new CastMember
+                    {
+                        Cast_id = int.Parse(person.Attribute("cast_id").Value),
+                        // CastMemberID will be generated
+                        Character = person.Attribute("character").Value,
+                        Department = person.Attribute("department").Value,
+                        Job = person.Attribute("job").Value,
+                        // Movie + Movie ID added after obj creation
+                        Movie = movie,
+                        Name = person.Attribute("name").Value,
+                        Order = int.Parse(person.Attribute("order").Value),
+                        Url = person.Attribute("url").Value
+                    };
 
-        //    #region category
+                    // save CastMember
+                    cast.Add(member);
+                }
 
-        //    // Check if category exists already
-        //    foreach (var item in tmdbMovie.Genres)
-        //    {
-        //        var id = db.Categories.Find(item.Id);
+                // add new CastMembers to DB
+                cast.ForEach(cm => db.CastMembers.Add(cm));
 
-        //        // Add new category
-        //        if (id == null)
-        //        {
-        //            var c = new Category
-        //            {
-        //                CategoryID = item.Id,
-        //                Movies = new List<Movie>(),
-        //                Name = item.Name,
-        //                Type = item.Type,
-        //                Url = item.Url
-        //            };
-        //            db.Categories.Add(c);
-        //            c.Movies.Add(movie);
-        //            movie.Categories.Add(c);
-        //            db.SaveChanges();
-        //        }
-        //        else
-        //        {
-        //            var c = db.Categories.Find(id);
-        //            c.Movies.Add(movie);
-        //            movie.Categories.Add(c);
-        //            db.SaveChanges();
-        //        }
-        //    }
+                // now add FKs
+                foreach (var member in cast)
+                {
+                    member.Movie = movie;
+                    member.MovieID = movie.MovieID;
+                }
+                movie.Cast = cast;
 
-        //    #endregion
+                // save
+                db.SaveChanges();
 
-        //    # region studio
+                #endregion
 
-        //    // check if studio exists
-        //    foreach (var item in tmdbMovie.Studios)
-        //    {
-        //        // try to find the studio
-        //        var id = db.Studios.Find(item.Id);
+                #region category
+                // loop over all category elements in the tmcb xml
+                foreach (var category in
+                    (from elements
+                         in tmdbMovie.Descendants("category")
+                     select elements))
+                {
+                    /* check if categories exist already */
+                    var dbCategory = (from c in db.Categories
+                                      where (c.CategoryID == (int.Parse(category.Attribute("id").Value)))
+                                      select c).First();
 
-        //        // if null, add new studio
-        //        if (id == null)
-        //        {
-        //            var s = new Studio
-        //            {
-        //                Movies = new List<Movie>(),
-        //                Name = item.Name,
-        //                StudioID = item.Id,
-        //                Url = item.Url
-        //            };
+                    /* if yes, add existing */
+                    if (dbCategory != null)
+                    {
+                        categories.Add(dbCategory);
+                    }
+                    /* if no, parse it */
+                    else
+                    {
+                        var c =
+                            new Category
+                            {
+                                CategoryID = int.Parse(category.Attribute("id").Value),
+                                // Movies will be set later on
+                                Movies = new List<Movie>(),
+                                Name = category.Attribute("name").Value,
+                                Type = category.Attribute("type").Value,
+                                Url = category.Attribute("url").Value
+                            };
 
-        //            db.Studios.Add(s);
-        //            s.Movies.Add(movie);
-        //            movie.Studios.Add(s);
+                        categories.Add(c);
+                        db.Categories.Add(c);
+                    }
+                }
+                // now save categories
+                db.SaveChanges();
 
-        //            db.SaveChanges();
+                // add FKs
+                categories.ForEach(c => c.Movies.Add(movie));
+                categories.ForEach(c => movie.Categories.Add(c));
 
-        //        }
-        //        // if the studio exists already, set the relationships
-        //        else
-        //        {
-        //            id.Movies.Add(movie);
-        //            movie.Studios.Add(id);
+                // now save categories
+                db.SaveChanges();
 
-        //            db.SaveChanges();
-        //        }
-        //    }
+                #endregion
 
-        //    #endregion
+                #region studio
 
-        //    #region country
+                /* check if studio exists already in DB, if not, parse */
+                foreach (var studio in (from elements
+                                            in tmdbMovie.Descendants("studio")
+                                        select elements))
+                {
+                    var dbStudio = (from s in db.Studios
+                                    where (s.StudioID == (int.Parse(studio.Attribute("id").Value)))
+                                    select s).First();
 
-        //    // check if country exists, if not add it
-        //    foreach (var item in tmdbMovie.Countries)
-        //    {
-        //        // try to find the country in the db
-        //        var c = db.Countries.Find(item.Code);
+                    if (dbStudio != null)
+                    {
+                        studios.Add(dbStudio);
+                    }
+                    else
+                    {
+                        var s =
+                            new Studio
+                            {
+                                Movies = new List<Movie>(),
+                                Name = studio.Attribute("name").Value,
+                                StudioID = int.Parse(studio.Attribute("id").Value),
+                                Url = studio.Attribute("url").Value
+                            };
 
-        //        // if not found add it
-        //        if (c == null)
-        //        {
-        //            // create new Country object
-        //            c = new Country
-        //            {
-        //                Code = item.Code,
-        //                Movies = new List<Movie>(),
-        //                Name = item.Name,
-        //                Url = item.Url
-        //            };
+                        studios.Add(s);
+                        db.Studios.Add(s);
+                    }
+                }
 
-        //            // add new object to db
-        //            db.Countries.Add(c);
+                /* add FKs */
+                studios.ForEach(s => s.Movies.Add(movie));
+                studios.ForEach(s => movie.Studios.Add(s));
 
-        //            // set relationships
-        //            c.Movies.Add(movie);
-        //            movie.Countries.Add(c);
+                /* save changes */
+                db.SaveChanges();
 
-        //            // save changes
-        //            db.SaveChanges();
-        //        }
-        //        // if found, set relationships
-        //        else
-        //        {
-        //            // set relationships
-        //            c.Movies.Add(movie);
-        //            movie.Countries.Add(c);
+                #endregion
 
-        //            // save changes
-        //            db.SaveChanges();
-        //        }
-        //    }
+                #region country
 
-        //    #endregion
+                /* check if studio exists already in DB, if not, parse */
+                foreach (var country in (from elements
+                                            in tmdbMovie.Descendants("country")
+                                         select elements))
+                {
+                    var dbCountry = (from c in db.Countries
+                                     where c.Code.Equals(country.Attribute("code").Value)
+                                     select c).First();
 
-        //    #region image
+                    if (dbCountry != null)
+                    {
+                        countries.Add(dbCountry);
+                    }
+                    else
+                    {
+                        var c =
+                            new Country
+                            {
+                                Movies = new List<Movie>(),
+                                Name = country.Attribute("name").Value,
+                                Code = country.Attribute("code").Value,
+                                Url = country.Attribute("url").Value
+                            };
 
-        //    // check if images exist, if not add them
-        //    foreach (var item in tmdbMovie.Posters)
-        //    {
-        //        // try to find the image
-        //        var i = db.Images.Find(item.ImageInfo.Id);
+                        countries.Add(c);
+                        db.Countries.Add(c);
+                    }
+                }
 
-        //        // if image not found, create it
-        //        if (i == null)
-        //        {
-        //            i = new Image
-        //            {
-        //                ImageID = i.ImageID,
-        //                Size = i.Size,
-        //                Type = item.ImageInfo.Size,
-        //                Url = item.ImageInfo.Url
-        //            };
+                /* add FKs */
+                countries.ForEach(s => s.Movies.Add(movie));
+                countries.ForEach(s => movie.Countries.Add(s));
 
-        //            // add image to db
-        //            db.Images.Add(i);
+                /* save changes */
+                db.SaveChanges();
 
-        //            // set relationships
-        //            movie.Images.Add(i);
+                #endregion
 
-        //            // save changes
-        //            db.SaveChanges();
-        //        }
-        //        // if image is found (shouldn't happen), set relationships
-        //        else
-        //        {
-        //            // add image to movie
-        //            movie.Images.Add(i);
+                #region image
 
-        //            // save changes
-        //            db.SaveChanges();
-        //        }
-        //    }
+                /* check if studio exists already in DB, if not, parse */
+                images = (from image
+                         in tmdbMovie.Descendants("image")
+                          where image.Attribute("type").Value.Equals("poster")
+                          select new Image
+                          {
+                              ImageID = image.Attribute("id").Value,
+                              Size = image.Attribute("size").Value,
+                              Type = image.Attribute("type").Value,
+                              Url = image.Attribute("url").Value
+                          }).ToList();
 
-        //    #endregion
+                /* save changes */
+                images.ForEach(i => db.Images.Add(i));
 
-        //    #region dvd
+                images.ForEach(i => movie.Images.Add(i));
+                db.SaveChanges();
 
-        //    for (int i = 0; i < dvdi; i++)
-        //    {
-        //        // create new DVD object
-        //        var dvd = new DVD
-        //        {
-        //            Rentals = new List<Rental>(),
-        //            State = "new"
-        //        };
+                #endregion
 
-        //        // add dvd to db
-        //        db.DVDs.Add(dvd);
+                #region dvd
 
-        //        // set relationships
-        //        dvd.MovieID = movie.MovieID;
-        //        dvd.Movie = movie;
-        //        movie.DVDs.Add(dvd);
+                /* create new DVDs according to number in AddMovie model */
+                for (int i = 0; i < model.DVDs; i++)
+                {
+                    var dvd = new DVD
+                    {
+                        Movie = new Movie(),
+                        Rentals = new List<Rental>(),
+                        State = "new"
+                    };
 
-        //        // save changes
-        //        db.SaveChanges();
-        //    }
+                    dvds.Add(dvd);
+                    db.DVDs.Add(dvd);
+                }
 
-        //    #endregion
-            
-        //    return movie;
-        //}
+                foreach (var d in dvds)
+                {
+                    d.Movie = movie;
+                    d.MovieID = movie.MovieID;
+                    movie.DVDs.Add(d);
+                }
+
+                db.SaveChanges();
+
+                #endregion
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return;
+        }
 
         public IEnumerable<string> GetErrorsFromModelState()
         {
