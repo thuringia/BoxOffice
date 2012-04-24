@@ -135,6 +135,7 @@
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Exceptions\RequestFailedException.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Exceptions\AddToQueueFailedException.cs" />
     <Compile Include="Exceptions\FlagCommentFailedException.cs" />
@@ -163,6 +164,9 @@
     <Content Include="App_Data\boxoffice.mdf" />
     <Content Include="App_Data\boxoffice_log.ldf">
       <DependentUpon>boxoffice.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\admin.css">
+      <DependentUpon>admin.scss</DependentUpon>
     </Content>
     <Content Include="Content\style.css">
       <DependentUpon>style.scss</DependentUpon>
@@ -257,6 +261,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\admin.scss" />
     <None Include="Content\style.scss" />
     <None Include="Content\style_ie.scss" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -282,6 +287,9 @@
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Shared\_AdminMoviesSubMenuPartial.cshtml" />
     <Content Include="Views\Admin\AddMovie.cshtml" />
+    <Content Include="Views\Shared\MovieOfTheWeekPartial.cshtml" />
+    <Content Include="Views\Shared\HotMoviesPartial.cshtml" />
+    <Content Include="Views\Admin\MessageUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
