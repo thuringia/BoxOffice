@@ -20,22 +20,62 @@ namespace BoxOffice.Controllers
         /// </summary>
         /// <returns>the view</returns>
         public ActionResult Index()
-        {                    
-            // add movie of the week to ViewData, so we can display it
-            ViewData["movieOfTheWeek"] = (from m in db.Movies
-                                         where m.MovieOfTheWeek == true
-                                         select m).First();
+        {
+            // add a field for the pages controller, to facilitate error checking in the view
+            ViewData["page"] = "admin";
 
-            // get the ten most rented movies
-            ViewData["hotMovies"] = (from m in db.Movies
-                                     orderby m.RentalCount
-                                     select m).Take(10).ToList();
+            /* add movie of the week to ViewData, so we can display it */
+            // query for the MOTW
+            var result = (from m in db.Movies
+                          where m.MovieOfTheWeek == true
+                          select m).ToList();
 
-            // get all comments that need administrative action
-            ViewData["flaggedComments"] = (from c in db.Comments
-                                          where ( (c.Flag == 5) || (c.Flag > 5) )
-                                          orderby c.Flag
-                                          select c).ToList();
+            // now check if MOTW is set, if not, fail gracefully
+            if (result.Count == 0)
+            {
+                ViewData["movieOfTheWeek"] = null;
+                result = null;
+            }
+            else
+            {
+                ViewData["movieOfTheWeek"] = result.First();
+                result = null;
+            }
+
+            /* hot movies */
+            // query for the ten most rented movies
+            result = (from m in db.Movies
+                     orderby m.RentalCount
+                     select m).ToList();
+
+            // check if there are rented movies, otherwise fail gracefully
+            if (result.Count == 0)
+            {
+                ViewData["hotMovies"] = null;
+            }
+            else
+            {
+                 ViewData["hotMovies"] = result.Take(10).ToList();
+            }         
+
+            /* flagged comments */
+            // query for comments that need administrative action
+            var flagged = (from c in db.Comments
+                           where ((c.Flag == 5) || (c.Flag > 5))
+                           orderby c.Flag
+                           select c).ToList();
+
+            // check if there are flagged comments or fail gracefully
+            if (flagged.Count == 0)
+            {
+                ViewData["flaggedComments"] = null;
+            }
+            else
+            {
+                ViewData["flaggedComments"] = flagged;
+            }
+
+            // return the Index view with all the data necessary for templating
             return View();
         }
 
