@@ -27,9 +27,10 @@ function showMovieSearch() {
     if (searchFieldVisible == false) {
         searchFieldVisible = true;
         // un-highlight current page
-        for (var i in page) {
-            $(i).removeClass("selected");
-        }
+        $(page).removeClass("selected");
+
+        // un-highlight sub-page
+        $(subpage).removeClass("selected");
 
         // highlight search
         $("#search").addClass("selected");
@@ -49,9 +50,10 @@ function showMovieSearch() {
         $("#search").removeClass("selected");
 
         // re-highlight current page
-        for (var i in page) {
-            $(i).addClass("selected");
-        }      
+        $(page).addClass("selected");
+
+        // re-highlight sub-page
+        $(subpage).addClass("selected");
 
         // hide search field
         searchFieldVisible = false;
