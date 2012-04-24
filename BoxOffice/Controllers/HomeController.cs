@@ -10,21 +10,43 @@ namespace BoxOffice.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            // add a field for the pages controller, to facilitate error checking in the view
+            ViewData["page"] = "admin";
 
-            return View();
-        }
+            /* add movie of the week to ViewData, so we can display it */
+            // query for the MOTW
+            var result = (from m in db.Movies
+                          where m.MovieOfTheWeek == true
+                          select m).ToList();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your quintessential app description page.";
+            // now check if MOTW is set, if not, fail gracefully
+            if (result.Count == 0)
+            {
+                ViewData["movieOfTheWeek"] = null;
+                result = null;
+            }
+            else
+            {
+                ViewData["movieOfTheWeek"] = result.First();
+                result = null;
+            }
 
-            return View();
-        }
+            /* hot movies */
+            // query for the ten most rented movies
+            var movies = db.Movies.ToList();
+            result = (from m in db.Movies
+                      orderby m.Rentals.Count() ascending
+                      select m).ToList();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your quintessential contact page.";
+            // check if there are rented movies, otherwise fail gracefully
+            if (result.Count == 0)
+            {
+                ViewData["hotMovies"] = null;
+            }
+            else
+            {
+                ViewData["hotMovies"] = result.Take(10).ToList();
+            }         
 
             return View();
         }
