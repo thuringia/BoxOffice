@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BoxOffice.Controllers
+namespace BoxOffice.Exceptions
 {
     [Serializable]
     class FlagCommentFailedException : Exception
