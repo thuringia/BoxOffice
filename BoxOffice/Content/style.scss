@@ -16,13 +16,13 @@
 	text-shadow: 0 0 1px rgba(0,0,0,0.3);
 }
 
-@mixin gradient($startColor, $endColor) {
+@mixin topGradient($startColor, $endColor) {
 	background: #87e0fd; /* Old browsers */
-	background: -moz-linear-gradient(top, $startColor 0%, $endColor 100%) no-repeat; /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(100%,$endColor)) no-repeat; /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, $startColor 0%,$endColor) no-repeat; /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* IE10+ */
+	//background: -moz-linear-gradient(top, $startColor 0%, $endColor 100%) no-repeat; /* FF3.6+ */
+	//background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(100%,$endColor)) no-repeat; /* Chrome,Safari4+ */
+	//background: -webkit-linear-gradient(top, $startColor 0%,$endColor) no-repeat; /* Chrome10+,Safari5.1+ */
+	//background: -o-linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* Opera 11.10+ */
+	//background: -ms-linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* IE10+ */
 	background: linear-gradient(top, $startColor 0%,$endColor 100%) no-repeat; /* W3C */
 }
 
@@ -49,9 +49,11 @@ $bgEnd: #0D5A7F;
         width: 90%;
     }
 
+
+/* page style */
 body {
 	$pageWidth: 900px;
-	@include gradient($bgStart, $bgEnd);
+	@include topGradient($bgStart, $bgEnd);
 	background-color: $bgEnd !important;
 	
 	//color: white;
