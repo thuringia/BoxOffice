@@ -9,6 +9,7 @@
 		tr {
 			width: ($tableWidth/4);
 			margin: 0 auto;
+			text-transform: lowercase;
 		}
 	}
 
@@ -19,6 +20,19 @@
 		tr {
 			width: ($tableWidth/4);
 			margin: 0 auto;
+
+			td {
+				height: 10em;
+			}
+
+			p:first {
+				margin-bottom: 0.25em;
+			}
+
+			p:not(.first) {
+				text-align: center;
+				margin-bottom: 0.25em;
+			}
 		}
 	}
 }
