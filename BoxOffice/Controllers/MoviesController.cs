@@ -221,7 +221,7 @@ namespace BoxOffice.Controllers
 
                 if (movies.Count() == 0)
                 {
-                    return View("notfound");
+                    return View("Index");
                 }
 
                 if (movies.Count() > 1)
