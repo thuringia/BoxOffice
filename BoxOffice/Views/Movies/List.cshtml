@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BoxOffice.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    $("#movies").addClass("selected");
+</script>
+
+<ul class="metroList">
+    @foreach (var item in Model.OrderBy(g => g.Name))
+    {
+        <li>@Html.ActionLink(item.Name, "Details", new { id = item.MovieID })</li>
+    }
+</ul>
+
