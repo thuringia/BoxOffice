@@ -261,7 +261,7 @@ namespace BoxOffice.Controllers
                 if (response != null)
                 {
                     var m = tmdb.GetMovieInfo(response.First().Id);
-                    var movie = persistMovie(m, add.DVDs, add.Price, add.MovieOfTheWeek);
+                    var movie = persistMovie(m, add.DVDs, add.Price, add.isMovieOfTheWeek);
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 else
@@ -289,9 +289,9 @@ namespace BoxOffice.Controllers
         public ActionResult MovieOfTheWeek(Movie movie)
         {
             var old = db.Movies.Find(movie.MovieID);
-            old.MovieOfTheWeek = false;
+            old.isMovieOfTheWeek = false;
 
-            movie.MovieOfTheWeek = true;
+            movie.isMovieOfTheWeek = true;
 
             db.SaveChanges();
 

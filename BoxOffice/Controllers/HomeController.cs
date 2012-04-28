@@ -19,7 +19,7 @@ namespace BoxOffice.Controllers
             /* add movie of the week to ViewData, so we can display it */
             // query for the MOTW
             var result = (from m in db.Movies
-                          where m.MovieOfTheWeek == true
+                          where m.isMovieOfTheWeek == true
                           select m).ToList();
 
             // now check if MOTW is set, if not, fail gracefully
