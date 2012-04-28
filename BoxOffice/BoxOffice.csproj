@@ -286,6 +286,7 @@
     <Content Include="Views\Shared\MovieOfTheWeekPartial.cshtml" />
     <Content Include="Views\Shared\HotMoviesPartial.cshtml" />
     <Content Include="Views\Admin\MessageUser.cshtml" />
+    <Content Include="Views\Movies\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
