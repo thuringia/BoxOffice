@@ -32,7 +32,7 @@ namespace BoxOffice.Models
             SeedComments(context, movie, users);
 
             var dvds = SeedDVDs(context, movie);
-            
+
             SeedRentals(context, users, dvds.ToList(), movie);
 
             SeedMessages(context, users);
@@ -381,7 +381,9 @@ namespace BoxOffice.Models
                 Images = new List<Image>(),
                 Ratings = new List<Rating>(),
                 Studios = new List<Studio>(),
-                Rentals = new List<Rental>()
+                Rentals = new List<Rental>(),
+                isMovieOfTheWeek = true,
+                isRentable = true
             };
             context.Movies.Add(movie);
             context.SaveChanges();
