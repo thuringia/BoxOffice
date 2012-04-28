@@ -3,43 +3,43 @@
     var hotMovies = ViewData["hotMovies"] as List<Movie>;
     var page = ViewData["page"] as string;
 }
-<section id="hotMoviesSection">
-    <h3>Hot Movies</h3>
-    @if (hotMovies != null)
-    {
-        foreach (var item in hotMovies)
+@if (hotMovies != null)
+{
+    <section id="hotMoviesSection">
+        <h3>Hot Movies</h3>
+        @foreach (var item in hotMovies)
         {        
-        <section class="tile">
-            <div class="tileContent">
-                <img class="tilePic" src="@item.Images.First().Url" />
-                <div class="tileText">
-                    <p class="tileDescription">@Html.ActionLink(item.Name, "Details", new { controller = "Movies", id = item.MovieID })
-                    </p>
+            <section class="tile">
+                <div class="tileContent">
+                    <img class="tilePic" src="@item.Images.First().Url" />
+                    <div class="tileText">
+                        <p class="tileDescription">@Html.ActionLink(item.Name, "Details", new { controller = "Movies", id = item.MovieID })
+                        </p>
+                    </div>
+                    <!-- tile text -->
                 </div>
-                <!-- tile text -->
-            </div>
-            <!-- tileContent -->
-        </section>
+                <!-- tileContent -->
+            </section>
         }
-    }
-    else
-    {
-        <section id="hotMoviesSection">
-            <h3>Hot Movies</h3>
-            @if (page.Equals("admin"))
-            {
-                <p>
-                    There are no movies rented at present.<br />
-                    I suggest you get some users!
-                </p>
-            }
-            else if (page.Equals("home"))
-            {
-                <p>
-                    Nobody rented a movie :(<br />
-                    You could be the first!
-                </p>
-            }
-        </section>
-    }
-</section>
+    </section>
+}
+else
+{
+    <section id="hotMoviesSection">
+        <h3>Hot Movies</h3>
+        @if (page.Equals("admin"))
+        {
+            <p>
+                There are no movies rented at present.<br />
+                I suggest you get some users!
+            </p>
+        }
+        else if (page.Equals("home"))
+        {
+            <p>
+                Nobody rented a movie :(<br />
+                You could be the first!
+            </p>
+        }
+    </section>
+}
