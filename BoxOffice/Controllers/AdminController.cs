@@ -32,7 +32,7 @@ namespace BoxOffice.Controllers
             /* add movie of the week to ViewData, so we can display it */
             // query for the MOTW
             var result = (from m in db.Movies
-                          where m.MovieOfTheWeek == true
+                          where m.isMovieOfTheWeek == true
                           select m).ToList();
 
             // now check if MOTW is set, if not, fail gracefully
@@ -51,8 +51,8 @@ namespace BoxOffice.Controllers
             // query for the ten most rented movies
             var movies = db.Movies.ToList();
             result = (from m in db.Movies
-                     orderby m.Rentals.Count() ascending
-                     select m).ToList();
+                      orderby m.Rentals.Count() ascending
+                      select m).ToList();
 
             // check if there are rented movies, otherwise fail gracefully
             if (result.Count == 0)
@@ -61,8 +61,8 @@ namespace BoxOffice.Controllers
             }
             else
             {
-                 ViewData["hotMovies"] = result.Take(10).ToList();
-            }         
+                ViewData["hotMovies"] = result.Take(10).ToList();
+            }
 
             /* flagged comments */
             // query for comments that need administrative action
@@ -251,13 +251,13 @@ namespace BoxOffice.Controllers
                     // get old movie of the week
                     var promo = (from m
                             in db.Movies
-                                 where m.MovieOfTheWeek == true
+                                 where m.isMovieOfTheWeek == true
                                  select m).First();
-                    
+
                     // unpromote it
-                    promo.MovieOfTheWeek = false;
+                    promo.isMovieOfTheWeek = false;
                     db.SaveChanges();
-                }              
+                }
 
                 // create a new Movie object and fill it with data parsed from the xml
                 var movie = (from m in tmdbMovie.Descendants("movie")
@@ -278,7 +278,7 @@ namespace BoxOffice.Controllers
                                  Imdb_id = m.Element("imdb_id").Value,
                                  Language = m.Element("language").Value,
                                  MovieID = int.Parse(m.Element("id").Value),
-                                 MovieOfTheWeek = model.MovieOfTheWeek,
+                                 isMovieOfTheWeek = model.MovieOfTheWeek,
                                  Name = m.Element("name").Value,
                                  Original_name = m.Element("original_name").Value,
                                  Overview = m.Element("overview").Value,
@@ -306,8 +306,8 @@ namespace BoxOffice.Controllers
                 #region cast
                 // now parse the cast
                 foreach (var person in (from castMembers
-                                            in tmdbMovie.Descendants("person")
-                                        select castMembers))
+                                            in tmdbMovie.Descendants("cast")
+                                        select castMembers).ToList())
                 {
                     // create new CastMember
                     var member = new CastMember
@@ -348,8 +348,8 @@ namespace BoxOffice.Controllers
                 // loop over all category elements in the tmcb xml
                 foreach (var category in
                     (from elements
-                         in tmdbMovie.Descendants("category")
-                     select elements))
+                         in tmdbMovie.Descendants("categories")
+                     select elements).ToList())
                 {
                     /* check if categories exist already */
                     var dbCategory = (from c in db.Categories
@@ -395,8 +395,8 @@ namespace BoxOffice.Controllers
 
                 /* check if studio exists already in DB, if not, parse */
                 foreach (var studio in (from elements
-                                            in tmdbMovie.Descendants("studio")
-                                        select elements))
+                                            in tmdbMovie.Descendants("studios")
+                                        select elements).ToList())
                 {
                     var dbStudio = (from s in db.Studios
                                     where (s.StudioID == (int.Parse(studio.Attribute("id").Value)))
@@ -435,8 +435,8 @@ namespace BoxOffice.Controllers
 
                 /* check if studio exists already in DB, if not, parse */
                 foreach (var country in (from elements
-                                            in tmdbMovie.Descendants("country")
-                                         select elements))
+                                            in tmdbMovie.Descendants("countrie")
+                                         select elements).ToList())
                 {
                     var dbCountry = (from c in db.Countries
                                      where c.Code.Equals(country.Attribute("code").Value)
@@ -475,7 +475,7 @@ namespace BoxOffice.Controllers
 
                 /* check if studio exists already in DB, if not, parse */
                 images = (from image
-                         in tmdbMovie.Descendants("image")
+                         in tmdbMovie.Descendants("images")
                           where image.Attribute("type").Value.Equals("poster")
                           select new Image
                           {
@@ -498,24 +498,23 @@ namespace BoxOffice.Controllers
                 /* create new DVDs according to number in AddMovie model */
                 for (int i = 0; i < model.DVDs; i++)
                 {
-                    var dvd = new DVD
+                    var newDVD = new DVD
                     {
-                        Movie = new Movie(),
+                        Movie = movie,
+                        MovieID = movie.MovieID,
                         Rentals = new List<Rental>(),
                         State = "new"
                     };
 
-                    dvds.Add(dvd);
-                    db.DVDs.Add(dvd);
+                    dvds.Add(newDVD);
                 }
 
-                foreach (var d in dvds)
-                {
-                    d.Movie = movie;
-                    d.MovieID = movie.MovieID;
-                    movie.DVDs.Add(d);
-                }
+                // add DVDs to DB context
+                dvds.ForEach(dvd => db.DVDs.Add(dvd));
 
+                // add DVDs to movie
+                dvds.ForEach(dvd => movie.DVDs.Add(dvd));
+                
                 db.SaveChanges();
 
                 #endregion
