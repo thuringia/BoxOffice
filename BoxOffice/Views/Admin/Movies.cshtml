@@ -23,45 +23,34 @@
     <thead>
         <tr>
             <th>Title</th>
-        </tr>
-        <tr>
             <th>Studios</th>
-        </tr>
-        <tr>
             <th>Genre</th>
-        </tr>
-        <tr>
             <th># of DVDs (rented)</th>
         </tr>
-        </thead>
+    </thead>
     <tbody>
         @foreach (var item in Model.OrderBy(s => s.Name))
         {
             var rentedCount = item.DVDs.ToList().FindAll(a => a.State == "rented").Count();
             <tr>
-                <td>@Html.DisplayFor(s => item.Name)</td>
-            </tr>
-            <tr>
                 <td>
-                    @foreach (var studio in item.Studios.ToList())
+                <td><p class="first">@Html.DisplayFor(s => item.Name)</p></td>
+                <td>
+                    @foreach (var studio in item.Studios.OrderBy(s => s.Name).ToList())
                     {
-                        @Html.DisplayFor(s => studio.Name); <br />
+                        <p>@Html.DisplayFor(s => studio.Name)</p>
                     }
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    @foreach (var genre in item.Categories)
+                    @foreach (var genre in item.Categories.OrderBy(c => c.Name))
                     {
-                        @Html.DisplayFor(s => genre.Name); <br />
+                        <p>@Html.DisplayFor(s => genre.Name)</p>
                     }
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    @Html.DisplayFor(s => item.DVDs.Count) (@rentedCount)
+                    <p>@Html.DisplayFor(s => item.DVDs.Count) (@rentedCount)</p>
                 </td>
             </tr>
         }
-        </tbody>
+    </tbody>
 </table>
