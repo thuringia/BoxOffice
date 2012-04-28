@@ -53,7 +53,7 @@ namespace BoxOffice.Models
         /// <summary>
         /// Marks this movie as the movie of the week
         /// </summary>
-        public bool? MovieOfTheWeek { get; set; }
+        public bool? isMovieOfTheWeek { get; set; }
 
         /// <summary>
         /// The number of times this movie has been rented
@@ -71,6 +71,11 @@ namespace BoxOffice.Models
         /// </summary>
         [DataType(DataType.DateTime)]
         public DateTime? DateAdded { get; set; }
+
+        /// <summary>
+        /// indicates whether this movie can be rented
+        /// </summary>
+        public bool isRentable { get; set; }
 
         #endregion
 
