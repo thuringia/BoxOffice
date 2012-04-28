@@ -67,5 +67,11 @@ namespace BoxOffice.Models
         /// the associated movie's MovieID FK
         /// </summary>
         public int MovieID { get; set; }
+
+        /// <summary>
+        /// The position of this Rental in the user's queue,
+        /// null = not in queue, i.e. rental returned
+        /// </summary>
+        public int? QueuePosition { get; set; }
     }
 }
