@@ -10,7 +10,7 @@
         <h3>Movie of the Week</h3>
         <section class="tile">
             <div class="tileContent">
-                <img class="tilePic" src="@movieOfTheWeek.Images.First().Url"/>
+                @Html.Partial(partialViewName:"_TilePicPartial", model: movieOfTheWeek)
                 <div class="tileText">
                     <p class="tileDescription">@Html.ActionLink(movieOfTheWeek.Name, "Details", new {controller = "Movies", id=movieOfTheWeek.MovieID })</p>
                 </div>
