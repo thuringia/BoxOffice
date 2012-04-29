@@ -1,16 +1,13 @@
 @{
     ViewBag.Title = "BoxOffice - Welcome";
 }
-
 @section js {
-<script type="text/javascript">
+    <script type="text/javascript">
     var page = "#home";
     $(document).ready(function () {
         $("#home").addClass("selected");
-    });    
-</script>
+    });
+    </script>
 }
-
-@Html.Partial("MovieOfTheWeekPartial")
-
-@Html.Partial("HotMoviesPartial")
+@Html.Partial(partialViewName: "MovieOfTheWeekPartial")
+@Html.Partial(partialViewName: "HotMoviesPartial")

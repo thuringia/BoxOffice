@@ -7,20 +7,22 @@
 {
     <section id="hotMoviesSection">
         <h3>Hot Movies</h3>
-        @foreach (var item in hotMovies)
-        {        
-            <section class="tile">
-                <div class="tileContent">
-                    @Html.Partial(partialViewName: "_TilePicPartial", model:item)
-                    <div class="tileText">
-                        <p class="tileDescription">@Html.ActionLink(item.Name, "Details", new { controller = "Movies", id = item.MovieID })
-                        </p>
+        <div id="container">
+            @foreach (var item in hotMovies)
+            {        
+                <section class="tile">
+                    <div class="tileContent">
+                        @Html.Partial(partialViewName: "_TilePicPartial", model: item)
+                        <div class="tileText">
+                            <p class="tileDescription">@Html.ActionLink(item.Name, "Details", new { controller = "Movies", id = item.MovieID })
+                            </p>
+                        </div>
+                        <!-- tile text -->
                     </div>
-                    <!-- tile text -->
-                </div>
-                <!-- tileContent -->
-            </section>
-        }
+                    <!-- tileContent -->
+                </section>
+            }
+        </div>
     </section>
 }
 else

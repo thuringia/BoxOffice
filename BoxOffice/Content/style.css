@@ -128,10 +128,16 @@ body {
     font-size: 1.25em;
     margin-bottom: 0.25em; }
 
+#hotMoviesSection {
+  height: 22em; }
+  #hotMoviesSection #container {
+    position: absolute; }
+
 .tile {
   background: linear-gradient(left, #063559 0%, #0d5a7f 100%) no-repeat;
-  width: 15em;
-  height: 6em; }
+  width: 13em;
+  height: 6em;
+  margin-bottom: 1em; }
   .tile .tileContent {
     padding: 0.5em; }
     .tile .tileContent .tilePic {
@@ -140,12 +146,12 @@ body {
       display: inline;
       position: absolute;
       margin-left: 0.5em;
-      width: 9em;
+      width: 8em;
       height: 5em; }
       .tile .tileContent .tileText p, .tile .tileContent .tileText a {
         color: rgba(250, 250, 250, 0.9);
         font-family: museo-sans;
-        font-size: 1.25em;
+        font-size: 1em;
         font-weight: 300;
         /* Inset text effect based on: */
         /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
@@ -277,35 +283,24 @@ nav ul li a.first {
 
 /* CSS Transitions
 -----------------------------------------------------------*/
-.masonry, .masonry .masonry-brick {
+.masonry,
+.masonry .masonry-brick {
   -webkit-transition-duration: 0.7s;
   -moz-transition-duration: 0.7s;
   -o-transition-duration: 0.7s;
   transition-duration: 0.7s; }
 
 .masonry {
-  -webkit-transition-property: height;
-  -moz-transition-property: height;
-  -o-transition-property: height;
-  transition-property: height;
-  -webkit-transition-property: width;
-  -moz-transition-property: width;
-  -o-transition-property: width;
-  transition-property: width; }
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  -o-transition-property: height, width;
+  transition-property: height, width; }
 
 .masonry .masonry-brick {
-  -webkit-transition-property: top;
-  -moz-transition-property: top;
-  -o-transition-property: top;
-  transition-property: top;
-  -webkit-transition-property: right;
-  -moz-transition-property: right;
-  -o-transition-property: right;
-  transition-property: right;
-  -webkit-transition-property: left;
-  -moz-transition-property: left;
-  -o-transition-property: left;
-  transition-property: left; }
+  -webkit-transition-property: left, right, top;
+  -moz-transition-property: left, right, top;
+  -o-transition-property: left, right, top;
+  transition-property: left, right, top; }
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/

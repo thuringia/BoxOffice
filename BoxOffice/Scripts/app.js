@@ -4,22 +4,38 @@ var searchFieldVisible = false;
 // $(document).ready()
 $(document).ready(function () {
     $("#searchTerm").autocomplete({
-    source: function (request, response) {
-        // define a function to call your Action (assuming UserController)
-        $.ajax({
-            url: 'Movies/ajaxSearch', type: "GET", dataType: "json",
+        source: function (request, response) {
+            // define a function to call your Action (assuming UserController)
+            $.ajax({
+                url: 'Movies/ajaxSearch', type: "GET", dataType: "json",
 
-            // query will be the param used by your action method
-            data: { q: request.term },
-            success: function (data) {
-                response($.map(data, function (item) {
-                    return { label: item, value: item };
-                }))
-            }
-        })
-    },
-    minLength: 1, // require at least one character from the user
-});
+                // query will be the param used by your action method
+                data: { q: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item, value: item };
+                    }))
+                }
+            })
+        },
+        minLength: 1, // require at least one character from the user
+    });
+    var $container = $("#hotMoviesSection");
+    if ($container) {
+        $container.imagesLoaded(function () {
+            $container.masonry({
+                itemSelector: '.tile',
+                columnWidth: 225,
+                gutterWidth: 0,
+                isAnimated: !Modernizr.csstransitions,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+        });
+    }
 });
 
 function showMovieSearch() {
@@ -38,7 +54,7 @@ function showMovieSearch() {
             {
                 opacity: 1
             }, 500, function () {
-                }
+            }
             );
     }
     else {
@@ -57,9 +73,9 @@ function showMovieSearch() {
                 $("#searchField").removeClass("visible");
                 $("#searchField").addClass("hidden");
             });
-    }    
+    }
 }
 
 
 
-    
+

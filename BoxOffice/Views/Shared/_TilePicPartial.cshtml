@@ -1,5 +1,5 @@
 ﻿@model BoxOffice.Models.Movie
-@if (Model.Images.Count == 0)
+@if (Model.Images.Count() != 0)
 {
     <img class="tilePic" src="@Model.Images.First().Url" alt=@string.Format("{0} movie poster", Model.Name) /> 
 }
