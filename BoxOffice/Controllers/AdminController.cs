@@ -172,41 +172,93 @@ namespace BoxOffice.Controllers
         }
 
         /// <summary>
-        /// Processes a user's search request
+        /// Ignores a user's search request
         /// </summary>
         /// <param name="searchTerm">The search term</param>
-        /// <returns>a response</returns>
+        /// <returns>View("Movies")</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Search(string searchTerm)
         {
-            if (searchTerm == string.Empty)
-            {
-                return View();
-            }
-            else
-            {
-                // if the search contains only one result return details
-                // otherwise a list
-                var movies = from a in db.Movies
-                             where a.Name.Contains(searchTerm)
-                             orderby a.Name
-                             select a;
+            return View(viewName: "Movies", model: db.Movies.ToList());
+        }
 
-                if (movies.Count() == 0)
+        /// <summary>
+        /// Processes the Admin's request to "delete" a movie.
+        /// => Movie will be marked as unrentable/unqueable
+        /// </summary>
+        /// <param name="id">The MovieID to be deleted</param>
+        /// <returns>
+        /// {"success" = true} if successful,
+        /// {"fail" = true} if unsuccessful
+        /// </returns>
+        [HttpGet]
+        public JsonResult Delete(int id)
+        {
+            try
+            {
+                var movieToDelete = (from m
+                                         in db.Movies
+                                     where m.MovieID == id
+                                     select m).First();
+                movieToDelete.isRentable = false;
+                db.SaveChanges();
+
+                return Json(new {success = true});
+            }
+            catch (Exception e)
+            {
+                return Json(new { fail = true, message = e.Message });
+            }
+
+            // if we got here, something failed
+            return Json(new { fail = true });
+        }
+
+        /// <summary>
+        /// Makes a movie the movie of the week.
+        /// If there is currently a MOTW, upromote it first
+        /// </summary>
+        /// <param name="id">The MovieID to become MOTW</param>
+        /// <returns>
+        /// {"success" = true} if successful,
+        /// {"fail" = true} if unsuccessful
+        /// </returns>
+        [HttpGet]
+        public JsonResult Promote(int id)
+        {
+            try
+            {
+                // check if there is a MOTW at present
+                var currentPromo = from m
+                                       in db.Movies
+                                   where m.isMovieOfTheWeek == true
+                                   select m;
+                
+                if (currentPromo.Count() != 0)
                 {
-                    return View("notfound");
+                    // unpromote movie
+                    currentPromo.First().isMovieOfTheWeek = false;
+                    db.SaveChanges();
                 }
 
-                if (movies.Count() > 1)
-                {
-                    return View("List", movies);
-                }
-                else
-                {
-                    return RedirectToAction("Details",
-                        new { id = movies.First().MovieID });
-                }
+                // promote new movie
+                var newPromo = (from m in db.Movies
+                                where m.MovieID == id
+                                select m).First();
+
+                newPromo.isMovieOfTheWeek = true;
+                db.SaveChanges();
+
+                return Json(new {success = true});
             }
+            catch (Exception e)
+            {
+
+                return Json(new {fail = true, message = e.Message});
+            }
+
+            // if we got here, something failed
+            return Json(new {fail = true});
         }
 
         /// <summary>
