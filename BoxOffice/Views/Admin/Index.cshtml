@@ -20,9 +20,9 @@
 
 <h2>Dashboard</h2>
 
-@Html.Partial("MovieOfTheWeekPartial")
+@Html.Partial(partialViewName: "MovieOfTheWeekPartial")
 
-@Html.Partial("HotMoviesPartial")
+@Html.Partial(partialViewName: "HotMoviesPartial")
 
 @{
     var comments = (List<BoxOffice.Models.Comment>)ViewData["flaggedComments"];
