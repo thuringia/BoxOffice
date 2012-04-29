@@ -188,7 +188,7 @@ body {
 #hotMoviesSection {
 	height: 22em;
 	
-	#container {
+	.container {
 		position: absolute;
 	}
 }
@@ -214,7 +214,7 @@ body {
 			height: 5em;
 
 			p, a {
-				@include font(1em, rgba(250,250,250,0.9), 300);
+				@include font(0.9em, rgba(250,250,250,0.9), 300);
 			}
 
 			a {

@@ -20,12 +20,14 @@ $(document).ready(function () {
         },
         minLength: 1, // require at least one character from the user
     });
-    var $container = $("#hotMoviesSection");
+    var $container = $(".container");
     if ($container) {
         $container.imagesLoaded(function () {
             $container.masonry({
                 itemSelector: '.tile',
-                columnWidth: 225,
+                columnWidth: function (containerWidth) {
+                    return containerWidth / 4;
+                },
                 gutterWidth: 0,
                 isAnimated: !Modernizr.csstransitions,
                 animationOptions: {

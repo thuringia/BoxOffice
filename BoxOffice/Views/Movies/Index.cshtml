@@ -33,27 +33,28 @@
                                   select g).ToList());
     }
 }
-
 @foreach (var letter in sortedMovies.Keys)
 {
     if (sortedMovies[letter].Count != 0)
     {
     <section class="section" id="@letter">
         <h3>@letter</h3>
-        @foreach (var movie in sortedMovies[letter])
-        {
-            <section class="tile">
-                <div class="tileContent">
-                    <img class="tilePic" src="@movie.Images.First().Url"/>
-                    <div class="tileText">
-                        <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">@movie.Name
-                        </a>
+        <div class="container">
+            @foreach (var movie in sortedMovies[letter])
+            {
+                <section class="tile">
+                    <div class="tileContent">
+                        @Html.Partial(partialViewName: "_TilePicPartial", model: movie)
+                        <div class="tileText">
+                            <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">@movie.Name
+                            </a>
+                        </div>
+                        <!-- tile text -->
                     </div>
-                    <!-- tile text -->
-                </div>
-                <!-- tileContent -->
-            </section>
-        }
+                    <!-- tileContent -->
+                </section>
+            }
+        </div>
     </section>
     }
 }

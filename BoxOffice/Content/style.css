@@ -130,7 +130,7 @@ body {
 
 #hotMoviesSection {
   height: 22em; }
-  #hotMoviesSection #container {
+  #hotMoviesSection .container {
     position: absolute; }
 
 .tile {
@@ -151,7 +151,7 @@ body {
       .tile .tileContent .tileText p, .tile .tileContent .tileText a {
         color: rgba(250, 250, 250, 0.9);
         font-family: museo-sans;
-        font-size: 1em;
+        font-size: 0.9em;
         font-weight: 300;
         /* Inset text effect based on: */
         /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
