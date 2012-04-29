@@ -7,18 +7,23 @@
 
 @section js {
     <script type="text/javascript">
-    var page = new Array();
-    page[0] = "#home";
-
     $(document).ready(function () {
-        for (var i in page) {
-            $(i).addClass("selected");
-        }
+        $("#home").addClass("selected");
+        $("#search").css({
+            opacity: 0.1
+        });
     });
     </script>
 }
 
-<h2>Dashboard</h2>
+@section subMenu
+{
+    <ul id="subMenu">
+        <li><a href="#movieOfTheWeekSection">motw</a></li>
+        <li><a href="#hotMoviesSection">Hot Movies</a></li>
+        <li><a href='#flaggedCommentsSection'>Flagged Comments</a></li>
+    </ul>
+}
 
 @Html.Partial(partialViewName: "MovieOfTheWeekPartial")
 

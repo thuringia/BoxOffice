@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BoxOffice.Models.Movie>
+@using BoxOffice.Models;
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "BoxOffice Administrative Interface - Movies";
@@ -6,55 +7,74 @@
 @section js {
     <script type="text/javascript">
     var page = "#movies";
-    var subpage = "";
+    var subpage = "#allMoviesLink";
     $(document).ready(function () {
         $(page).addClass("selected");
+        $(subpage).addClass("selected");
     });
     </script>
 }
 @section subMenu {
-    @Html.Partial("_AdminMoviesSubMenuPartial")
+    @Html.Partial(partialViewName: "_AdminMoviesSubMenuPartial")
 }
-<table id="movieTable">
-    <thead>
-        <tr>
-            <th>Actions</th>
-            <th>Title</th>
-            <th>Studios</th>
-            <th>Genre</th>
-            <th># of DVDs (rented)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderBy(s => s.Name))
-        {
-            var rentedCount = item.DVDs.ToList().FindAll(a => a.State == "rented").Count();
-            <tr>
-                <td>
-                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
-                        <a href="javascript:makeMovieOfTheWeek(@item.MovieID);">Promote</a>
-                    </button>
-                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
-                        <a href="javascript:delete(@item.MovieID);">Delete</a>
-                    </button>
-                </td>
-                <td><p class="first">@Html.DisplayFor(s => item.Name)</p></td>
-                <td>
-                    @foreach (var studio in item.Studios.OrderBy(s => s.Name).ToList())
-                    {
-                        <p>@Html.DisplayFor(s => studio.Name)</p>
-                    }
-                </td>
-                <td>
-                    @foreach (var genre in item.Categories.OrderBy(c => c.Name))
-                    {
-                        <p>@Html.DisplayFor(s => genre.Name)</p>
-                    }
-                </td>
-                <td>
-                    <p>@Html.DisplayFor(s => item.DVDs.Count) (@rentedCount)</p>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@{
+    var sortedMovies = new Dictionary<string, List<Movie>>();
+    var alphabet = new List<string>
+    {
+        "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"
+    };
+
+    // select movies whose title begins with a number
+    var movies = (from m in
+                      ((from g in Model
+                        where ((g.Name != null) && ((g.Name.StartsWith("1")) || (g.Name.StartsWith("2")) || (g.Name.StartsWith("3")) || (g.Name.StartsWith("4")) || (g.Name.StartsWith("5")) || (g.Name.StartsWith("6")) || (g.Name.StartsWith("7")) || (g.Name.StartsWith("8")) || (g.Name.StartsWith("9")) || (g.Name.StartsWith("0"))))
+                        select g).ToList())
+                  orderby m.Name
+                  select m).ToList();
+    sortedMovies.Add("#", movies);
+
+    // now add all other movies, split by their beginning letter
+    foreach (var letter in alphabet)
+    {
+        sortedMovies.Add(letter, (from g in
+                                      (from m in Model
+                                       orderby m.Name
+                                       select m)
+                                  where g.Name.ToLower().StartsWith(letter)
+                                  select g).ToList());
+    }
+}
+@foreach (var letter in sortedMovies.Keys)
+{
+    if (sortedMovies[letter].Count != 0)
+    {
+    <section class="section" id="@letter">
+        <h3>@letter</h3>
+        <div class="container">
+            @foreach (var movie in sortedMovies[letter])
+            {
+                <section class="tile">
+                    <div class="tileContent containerTile">
+                        <div class="item">
+                            @Html.Partial(partialViewName: "_TilePicPartial", model: movie)
+                        </div>
+                        <div class="tileText item">
+                            <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">@movie.Name
+                            </a>
+                        </div>
+                        <div class="item buttons">
+                            <button type="button" class="item ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
+                                <a class="link" href="javascript:promoteMovie(@movie.MovieID);">Promote</a>
+                            </button>
+                            <button type="button" class="item ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
+                                <a class="link" href="javascript:deleteMovie(@movie.MovieID);">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- tileContent -->
+                </section>
+            }
+        </div>
+    </section>
+    }
+}

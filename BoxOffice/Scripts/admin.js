@@ -26,7 +26,55 @@ $(document).ready(function () {
             alert(eve.item);
         }
     });
+
+    var $container = $(".section");
+    if ($container) {
+        $container.imagesLoaded(function () {
+            $container.masonry({
+                itemSelector: '.tile',
+                gutterWidth: 20,
+                isAnimated: !Modernizr.csstransitions,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+        });
+    }
+
+    var $containerTile = $(".containerTile");
+    $containerTile.imagesLoaded(function () {
+        $containerTile.masonry({
+            itemSelector: '.item',
+            gutterWidth: 0,
+            isAnimated: !Modernizr.csstransitions,
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+        $(".buttons").css({ 'position': '' });
+    });
+
 });
+
+function promoteMovie(id) {
+    $.ajax({
+        url: '/Admin/Promote/',
+        type: "GET",
+        dataType: "json",
+        data: {
+          id: id  
+        },
+        success: function(data) {
+            response($.map(data, function(item) {
+                return { label: item.Name, value: item.Name };
+            }))
+        }
+    });
+}
 
 function showMovieSearch() {
     if (searchFieldVisible == false) {
