@@ -1,71 +1,102 @@
 ﻿@model BoxOffice.Models.User
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "Your Data";
 }
-
+@section js
+{
+    <script type="text/javascript">
+        var page = "#me";
+        var subpage = "#profileLink";
+        $(document).ready(function () {
+            $(page).addClass("selected");
+            $(subpage).addClass("selected");
+        });
+    </script>
+}
 <h2>Profile</h2>
 
-<fieldset>
-    <legend>User</legend>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Username)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Username)
-    </div>
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+    <fieldset>
+        <legend>User</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DateOfBirth)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DateOfBirth)
-    </div>
+        @Html.HiddenFor(model => model.UserID)
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Street)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Street)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Number)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Number)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Zip)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Zip)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateOfBirth)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateOfBirth)
+            @Html.ValidationMessageFor(model => model.DateOfBirth)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.City)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.City)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Street)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Street)
+            @Html.ValidationMessageFor(model => model.Street)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Phone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Phone)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.UserID }) |
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Number)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Number)
+            @Html.ValidationMessageFor(model => model.Number)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Zip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
