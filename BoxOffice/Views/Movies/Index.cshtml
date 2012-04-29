@@ -62,7 +62,8 @@
                     <div class="tileContent">
                         @Html.Partial(partialViewName: "_TilePicPartial", model: movie)
                         <div class="tileText">
-                            <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">@movie.Name
+                            <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = movie.MovieID })">
+                                @movie.Name
                             </a>
                         </div>
                         <!-- tile text -->
