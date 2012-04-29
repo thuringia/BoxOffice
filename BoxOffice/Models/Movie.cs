@@ -23,7 +23,9 @@ namespace BoxOffice.Models
         /// <summary>
         /// The number of votes by users of BoxOffice
         /// </summary>
-        public int? Votes { get; set; }
+        public int? Votes { 
+            get { return Ratings.Count; } 
+        }
 
         /// <summary>
         /// Navigation property for the ratings placed by the users 
@@ -33,7 +35,9 @@ namespace BoxOffice.Models
         /// <summary>
         /// The rating of the movie by users of BoxOffice
         /// </summary>
-        public float? Rating { get; set; }
+        public float? Rating { 
+            get { return (Ratings.Sum(r => r.Value))/(Ratings.Count); }
+        }
 
         /// <summary>
         /// The Comments for that movie
