@@ -1,11 +1,12 @@
-﻿@model BoxOffice.Models.Movie
+﻿@using BoxOffice.Models
+@model BoxOffice.Models.Movie
 @{
     ViewBag.Title = Model.Name;
 }
 <section id="movieArea" class="containerMovie">
     @if (Model.Images.Count() != 0)
     {
-        <img class="item" src="@Model.Images.First().Url" alt=@string.Format("{0} movie poster", Model.Name) /> 
+        <img class="item" src="@Model.Images.First().Url" alt=@string.Format("{0} movie poster", Model.Name) />
     }
     else
     {
@@ -18,7 +19,7 @@
             @if (Model.Rating != null)
             {
                 <label>Rating:</label>
-                <span>@Model.Rating</span> 
+                <span>@Model.Rating</span>
             }
             else
             {
@@ -28,7 +29,7 @@
             @if (Model.Votes != null)
             {
                 <label class="rightish">Votes:</label>
-                <span>@Model.Votes</span> 
+                <span>@Model.Votes</span>
             }
             else
             {
@@ -37,31 +38,87 @@
             }
         </fieldset>
         <section id="story">
-            <div id="tagline">
-                <label>Tagline</label>
-                <p>@Model.Tagline</p>
-            </div>
+            @if (!string.Empty.Equals(value: Model.Tagline))
+            {
+                <div id="tagline">
+                    <label>Tagline</label>
+                    <p>@Model.Tagline</p>
+                </div>
+            }
             <div id="overview">
                 <label>Overview</label>
                 <p>@Model.Overview</p>
             </div>
         </section>
-        <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <div class="ui-dialog-buttonset">
-                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false">
-                    <span class="ui-button-text" id="addToQueue">Add to Queue</span>
-                </button>
-                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false">
-                    <span class="ui-button-text" id="rate">Rate</span>
-                </button>
-                <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false">
-                    <span class="ui-button-text" id="comment">Comment</span>
-                </button>
-            </div>
-        </section>
+        @* Show buttons only for logged in users *@
+        @if (Request.IsAuthenticated)
+        {
+            <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-dialog-buttonset">
+                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        role="button" aria-disabled="false">
+                        @if (Model.isRentable)
+                        {
+                            <a href="javascript:addToQueue(@Model.MovieID);"><span class="ui-button-text" id="addToQueue">
+                                Add to Queue </span></a>
+                        }
+                        else
+                        {
+                            <a href="#"><span class="ui-button-text ui-state-disabled" id="addToQueue">Add to Queue
+                            </span></a>
+                        }
+                    </button>
+                    @{
+                        // compute, whether the user already watched the movie
+                        var db = new BoxOfficeContext();
+                        var theUser = (from u in db.Users
+                                       where u.Username == User.Identity.Name
+                                       select u).First();
+
+                        // check if movie is in rental list
+                        bool isWatched = false;
+                        var rentalFromQueue = new Rental();
+                        foreach (var rental in theUser.Queue)
+                        {
+                            // if in queue, check if watched
+                            if ((rental.MovieID == Model.MovieID) && (rental.DateSent != null))
+                            {
+                                // if a DVD was sent to the user, we assume it was watched
+                                isWatched = true;
+                                break;
+                            }
+                        }
+                    }
+                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        role="button" aria-disabled="false">
+                        @if (isWatched)
+                        {
+                            <a href="javascript:rate(@Model.MovieID);"><span class="ui-button-text" id="rate">Rate
+                            </span></a>
+                        }
+                        else
+                        {
+                            <a href="#"><span class="ui-button-text ui-state-disabled" id="rate">Rate </span>
+                            </a>
+                        }
+                    </button>
+                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                            role="button" aria-disabled="false">
+                        @if (isWatched)
+                        {
+                            <a href="javascript:Comment(@Model.MovieID);"><span class="ui-button-text" id="comment">
+                                                                          Comment </span></a>
+                        }
+                        else
+                        {
+                            <a href="#"><span class="ui-button-text ui-state-disabled" id="comment">
+                                                                          Comment </span></a>
+                        }
+                        
+                    </button>
+                </div>
+            </section>
+        }
         <section id="comments">
             <label>Comments</label>
             @foreach (var comment in Model.Comments.ToList())
