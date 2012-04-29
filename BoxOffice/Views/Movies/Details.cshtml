@@ -10,12 +10,25 @@
 
 @section js
 {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.raty.min.js")"></script>
     <script type="text/javascript">
         var page = "#movies";
         var subpage = "#movieDetailsLink";
         $(document).ready(function() {
             $(page).addClass("selected");
             $(subpage).addClass("selected");
+        });
+        
+        // rating
+        $(".rating").raty({
+            half: true,
+            halfShow: true,
+            number: 10,
+            path: "/Content/img",
+            readOnly: true,
+            start: function () {
+                $(this).attr("data-rating");
+            }
         });
     </script>
 }
@@ -33,17 +46,17 @@
         <h2>@Model.Name</h2>
         <fieldset>
             <legend>Community Ratings</legend>
-            @if (Model.Rating != null)
+            @if (Model.Ratings.Any())
             {
                 <label>Rating:</label>
-                <span>@Model.Rating</span>
+                <div class="rating" data-rating="@Model.Rating"></div>
             }
             else
             {
                 <label>Rating (TMDb):</label>
-                <span>@Model.Rating_by_moviedb</span>
+                <div class="rating" data-rating="@Model.Rating_by_moviedb"></div>
             }
-            @if (Model.Votes != null)
+            @if (Model.Ratings.Any())
             {
                 <label class="rightish">Votes:</label>
                 <span>@Model.Votes</span>
