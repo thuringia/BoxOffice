@@ -63,10 +63,14 @@
                             </a>
                         </div>
                         <div class="item buttons">
-                            <button type="button" class="item ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
+                            @{
+                                var promoteID = string.Format("promoteButton{0}", movie.MovieID);
+                                var deleteID = string.Format("deleteButton{0}", movie.MovieID);
+                            }
+                            <button type="button" id="@promoteID" class="item ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
                                 <a class="link" href="javascript:promoteMovie(@movie.MovieID);">Promote</a>
                             </button>
-                            <button type="button" class="item ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
+                            <button type="button" id="@deleteID" class="item ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text">
                                 <a class="link" href="javascript:deleteMovie(@movie.MovieID);">Delete</a>
                             </button>
                         </div>
