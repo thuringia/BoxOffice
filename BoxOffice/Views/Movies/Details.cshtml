@@ -4,9 +4,9 @@
     ViewBag.Title = Model.Name;
 }
 
-@*<section id="movieArea">*@
-    <img src="@Model.Images.First().Url" alt="Poster of @Model.Name" />
-    <section id="infoArea">
+<section id="movieArea" class="containerMovie">
+    <img class="item" src="@Model.Images.First().Url" alt="Poster of @Model.Name" />
+    <section id="infoArea" class="item">
         <h2>@Model.Name</h2>
 
         <fieldset>
@@ -75,4 +75,4 @@
             }
         </section>      
     </section>
-@*</section>*@
+</section>

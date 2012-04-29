@@ -161,54 +161,51 @@ body {
       .tile .tileContent .tileText a {
         text-decoration: none; }
 
-.movieImage {
-  height: 20em;
-  margin: 1em; }
-
-#infoArea {
-  width: 40em;
-  display: inline-block; }
-  #infoArea fieldset {
+#movieArea img {
+  width: 15em; }
+#movieArea #infoArea {
+  width: 35em; }
+  #movieArea #infoArea fieldset {
     border: none; }
-    #infoArea fieldset legend {
+    #movieArea #infoArea fieldset legend {
       text-transform: lowercase;
       margin: 0.5em;
       padding-bottom: 0.5em;
       font-weight: 500; }
-    #infoArea fieldset label {
+    #movieArea #infoArea fieldset label {
       margin: 1em; }
-      #infoArea fieldset label .rightish {
+      #movieArea #infoArea fieldset label .rightish {
         margin-left: 5em; }
-  #infoArea #story {
+  #movieArea #infoArea #story {
     margin: 0.5em; }
-    #infoArea #story div {
+    #movieArea #infoArea #story div {
       margin-bottom: 0.5em;
       margin-top: 1em; }
-      #infoArea #story div label {
+      #movieArea #infoArea #story div label {
         text-transform: lowercase; }
-      #infoArea #story div p {
+      #movieArea #infoArea #story div p {
         margin-left: 1em;
         margin-top: 0.5em;
         font-weight: 100; }
-  #infoArea #actions {
+  #movieArea #infoArea #actions {
     width: 25em;
     margin: 0 auto;
     height: 4em; }
-    #infoArea #actions div {
+    #movieArea #infoArea #actions div {
       margin: 0 auto;
       width: 23em;
       top: 0.6em;
       position: relative; }
-  #infoArea #comments {
+  #movieArea #infoArea #comments {
     margin: 0.5em; }
-    #infoArea #comments label {
+    #movieArea #infoArea #comments label {
       text-transform: lowercase; }
-    #infoArea #comments .comment {
+    #movieArea #infoArea #comments .comment {
       margin-left: 1em;
       margin-bottom: 1em; }
-      #infoArea #comments .comment label {
+      #movieArea #infoArea #comments .comment label {
         font-weight: 100; }
-      #infoArea #comments .comment p {
+      #movieArea #infoArea #comments .comment p {
         font-weight: 500; }
 
 .metroList li {

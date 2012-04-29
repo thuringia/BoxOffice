@@ -20,6 +20,7 @@ $(document).ready(function () {
         },
         minLength: 1, // require at least one character from the user
     });
+    
     var $container = $(".container");
     if ($container) {
         $container.imagesLoaded(function () {
@@ -29,6 +30,22 @@ $(document).ready(function () {
                     return containerWidth / 4;
                 },
                 gutterWidth: 0,
+                isAnimated: !Modernizr.csstransitions,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+        });
+    }
+    
+    $containerMovie = $(".containerMovie");
+    if ($containerMovie) {
+        $containerMovie.imagesLoaded(function () {
+            $containerMovie.masonry({
+                itemSelector: '.item',
+                gutterWidth: 50,
                 isAnimated: !Modernizr.csstransitions,
                 animationOptions: {
                     duration: 750,

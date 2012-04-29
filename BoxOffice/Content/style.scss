@@ -224,83 +224,83 @@ body {
 	}
 }
 
-.movieImage {
-	height: 20em;
-	margin: 1em;
-}
-
-#infoArea {
-	width: 40em;
-	display: inline-block;
-
-	fieldset {
-		border: none;
-
-		legend {
-			text-transform: lowercase;
-			margin: 0.5em;
-			padding-bottom: 0.5em;
-			font-weight: 500;
-		}
-
-		label {
-			margin: 1em;
-
-			.rightish {
-				margin-left: 5em;
-			}
-		}
+#movieArea{
+	img {
+		width: 15em;
 	}
 
-	#story {
-		margin: 0.5em;
+	#infoArea {
+		width: 35em;
 
-		div {
-			margin-bottom: 0.5em;
-			margin-top: 1em;
+		fieldset {
+			border: none;
+
+			legend {
+				text-transform: lowercase;
+				margin: 0.5em;
+				padding-bottom: 0.5em;
+				font-weight: 500;
+			}
+
+			label {
+				margin: 1em;
+
+				.rightish {
+					margin-left: 5em;
+				}
+			}
+		}
+
+		#story {
+			margin: 0.5em;
+
+			div {
+				margin-bottom: 0.5em;
+				margin-top: 1em;
+
+				label {
+					text-transform: lowercase;
+				}
+
+				p {
+					margin-left: 1em;
+					margin-top: 0.5em;
+					font-weight: 100;
+				}
+			}
+		}
+
+		#actions {
+			width: 25em;
+			margin: 0 auto;
+			height: 4em;
+
+			div {
+				margin: 0 auto;
+				width: 23em;
+				top: 0.6em;
+				position: relative;
+			}
+		}
+
+		#comments {
+			margin: 0.5em;
 
 			label {
 				text-transform: lowercase;
 			}
 
-			p {
+			.comment {
 				margin-left: 1em;
-				margin-top: 0.5em;
-				font-weight: 100;
-			}
-		}
-	}
+				margin-bottom: 1em;
 
-	#actions {
-		width: 25em;
-		margin: 0 auto;
-		height: 4em;
+				label {
+					font-weight: 100;
+				}
 
-		div {
-			margin: 0 auto;
-			width: 23em;
-			top: 0.6em;
-			position: relative;
-		}
-	}
-
-	#comments {
-		margin: 0.5em;
-
-		label {
-			text-transform: lowercase;
-		}
-
-		.comment {
-			margin-left: 1em;
-			margin-bottom: 1em;
-
-			label {
-				font-weight: 100;
-			}
-
-			p {
-				font-weight: 500;
+				p {
+					font-weight: 500;
+				}
 			}
 		}
 	}
