@@ -23,9 +23,9 @@ namespace BoxOffice.Controllers
         /// Get a list of all users
         /// </summary>
         /// <returns></returns>
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            return View(viewName: "Profile", model: db.Users.First(u => u.Username == User.Identity.Name).UserID);
+            return RedirectToAction("Queue");
         }
 
         //
@@ -36,9 +36,17 @@ namespace BoxOffice.Controllers
         /// </summary>
         /// <param name="id">The UserID whose profile is requested</param>
         /// <returns>View(user)</returns>
-        public ViewResult Profile(int id)
+        public ViewResult Queue()
         {
-            return View(model: db.Users.First(u => u.UserID == id));
+            return View(model: db.Users.First(u => u.UserID == db.Users.First(a => a.Username == User.Identity.Name).UserID));
+        }
+
+        //
+        // GET /Users/UserData/id
+
+        public ActionResult Profile()
+        {
+            return View(model: db.Users.First(u => u.UserID == db.Users.First(a => a.Username == User.Identity.Name).UserID));
         }
 
         #region login
@@ -158,7 +166,7 @@ namespace BoxOffice.Controllers
                     };
                     db.Users.Add(newUser);
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-                    return Json(new { success = true });
+                    return Json(new { success = true, redirect = "/Users/Profile" });
                 }
                 else
                 {
@@ -203,7 +211,7 @@ namespace BoxOffice.Controllers
                     };
                     db.Users.Add(newUser);
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Profile", "Users");
                 }
                 else
                 {
