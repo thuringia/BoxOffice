@@ -10,6 +10,7 @@ using System.Web.Security;
 
 namespace BoxOffice.Controllers
 { 
+    [Authorize(Roles = "User")]
     public class UsersController : Controller
     {
         private BoxOfficeContext db = new BoxOfficeContext();
