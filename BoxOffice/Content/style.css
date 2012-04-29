@@ -257,6 +257,9 @@ body {
 nav ul li a.first {
   padding-left: 0px; }
 
+.group {
+  zoom: 1; }
+
 /* Dialog Styling
 -----------------------------------------------------------*/
 .ui-dialog-titlebar {
