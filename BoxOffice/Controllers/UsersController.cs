@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,13 +18,27 @@ namespace BoxOffice.Controllers
 
         //
         // GET: /Users/
+        
         /// <summary>
         /// Get a list of all users
         /// </summary>
         /// <returns></returns>
         public ViewResult Index()
         {
-            return View(db.Users.ToList());
+            return View(viewName: "Profile", model: db.Users.First(u => u.Username == User.Identity.Name).UserID);
+        }
+
+        //
+        // GET: /Users/Profile/id
+
+        /// <summary>
+        /// Returns the Profile for a user
+        /// </summary>
+        /// <param name="id">The UserID whose profile is requested</param>
+        /// <returns>View(user)</returns>
+        public ViewResult Profile(int id)
+        {
+            return View(model: db.Users.First(u => u.UserID == id));
         }
 
         #region login
