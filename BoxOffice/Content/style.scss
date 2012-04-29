@@ -34,8 +34,8 @@ $bgEnd: #0D5A7F;
 	margin: 0;
 	padding: 0;
 	outline: 0;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+	//-moz-box-sizing: border-box;
+	//-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -307,6 +307,16 @@ body {
 			text-decoration: none;
 		}
 	}
+}
+
+/* HELPERS */
+.link {
+	@include font(1.75em, rgba(250,250,250,0.9), 500);
+				text-decoration: none;
+}
+
+.boxoffice {
+	text-transform: none;
 }
 
 nav ul li a.first {
