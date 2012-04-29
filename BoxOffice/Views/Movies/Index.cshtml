@@ -1,11 +1,27 @@
 ﻿@model IEnumerable<BoxOffice.Models.Movie>
+
 @using BoxOffice.Models;
+
 @{
     ViewBag.Title = "Movies - BoxOffice";
 }
-<script type="text/javascript">
-    $("#movies").addClass("selected");
-</script>
+
+@section subMenu
+{
+    @Html.Partial(partialViewName: "SubMenuPartial")
+}
+
+@section js
+{
+    <script type="text/javascript">
+        var page = "#movies";
+        var subpage = "#allMoviesLink";
+        $(document).ready(function() {
+            $(page).addClass("selected");
+            $(subpage).addClass("selected ui-state-disabled");
+        });
+    </script>
+}
 @{
     var sortedMovies = new Dictionary<string, List<Movie>>();
     var alphabet = new List<string>

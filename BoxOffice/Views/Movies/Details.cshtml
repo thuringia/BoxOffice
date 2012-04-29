@@ -3,6 +3,23 @@
 @{
     ViewBag.Title = Model.Name;
 }
+@section subMenu
+{
+    @Html.Partial(partialViewName: "SubMenuPartial")
+}
+
+@section js
+{
+    <script type="text/javascript">
+        var page = "#movies";
+        var subpage = "#movieDetailsLink";
+        $(document).ready(function() {
+            $(page).addClass("selected");
+            $(subpage).addClass("selected");
+        });
+    </script>
+}
+
 <section id="movieArea" class="containerMovie">
     @if (Model.Images.Count() != 0)
     {
