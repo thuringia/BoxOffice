@@ -37,8 +37,13 @@ namespace BoxOffice.Models
         public virtual User User { get; set; }
 
         /// <summary>
-        /// The date the rental was issued
+        /// The date the rating was issued
         /// </summary>
-        public DateTime? DateRented { get; set; }
+        public DateTime? Date { get; set; }
+
+        /// <summary>
+        /// How high the movie was rated.
+        /// </summary>
+        public float Value { get; set; }
     }
 }
