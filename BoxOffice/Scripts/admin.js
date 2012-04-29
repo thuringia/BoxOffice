@@ -68,10 +68,30 @@ function promoteMovie(id) {
         data: {
           id: id  
         },
-        success: function(data) {
-            response($.map(data, function(item) {
-                return { label: item.Name, value: item.Name };
-            }))
+        success: function (data) {
+            var selector = "promoteButton" + id;
+            if (data.success == true) {
+                $(selector).animate({
+                    backgroundColor: "#00FF00"
+                }, 500);
+            } else if (data.fail = true) {
+                $(selector).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function(selector) {
+                    $(selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500)
+                });
+            }
+        },
+        error: function (data) {
+            var selector = "promoteButton" + id;
+            $(selector).animate({
+                backgroundColor: '#FF0000'
+            }, 500);
+            $(selector).animate({
+                backgroundColor: '#063559'
+            }, 500);
         }
     });
 }
