@@ -1,1 +1,12 @@
-﻿
+﻿@model BoxOffice.Models.Movie
+<section class="tile">
+    <div class="tileContent">
+        @Html.Partial(partialViewName: "_TilePicPartial", model: Model)
+        <div class="tileText">
+            <a class="tileDescription" href="@Url.Action("Details", "Movies", new { id = Model.MovieID })">@Model.Name
+            </a>
+        </div>
+        <!-- tile text -->
+    </div>
+    <!-- tileContent -->
+</section>
