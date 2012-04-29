@@ -120,10 +120,19 @@ namespace BoxOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
-                Roles.AddUserToRole(model.UserName, "User");
+
+                // check if username is unique
+                if (UserNameIsUnique(model.UserName))
+                {
+                    // Attempt to register the user
+                    Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                    Roles.AddUserToRole(model.UserName, "User");
+                }
+                else
+                {
+                    createStatus = MembershipCreateStatus.DuplicateUserName;
+                }
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -155,10 +164,20 @@ namespace BoxOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
-                Roles.AddUserToRole(model.UserName, "User");
+
+                // check for username uniqueness
+                if (UserNameIsUnique(model.UserName))
+                {
+                    // Attempt to register the user
+                    Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                    Roles.AddUserToRole(model.UserName, "User");
+                }
+                else
+                {
+                    // username exists so throw error
+                    createStatus = MembershipCreateStatus.DuplicateUserName;
+                }
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -230,7 +249,8 @@ namespace BoxOffice.Controllers
         //
         // GET: /Account/ChangePasswordSuccess
 
-        [Authorize]       public ActionResult ChangePasswordSuccess()
+        [Authorize]       
+        public ActionResult ChangePasswordSuccess()
         {
             return View();
         }
@@ -294,6 +314,26 @@ namespace BoxOffice.Controllers
             }
         }
         #endregion
+
+        #endregion
+
+        #region Helper Methods
+
+        private bool UserNameIsUnique(string UserNameToCheck)
+        {
+            var aUser = from user in db.Users
+                        where user.Username == UserNameToCheck
+                        select user;
+
+            if (!aUser.Any())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
 
