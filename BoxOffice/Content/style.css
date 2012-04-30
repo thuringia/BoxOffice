@@ -259,6 +259,18 @@ body {
 #queuePage #messages {
   margin-left: 5em;
   width: 35em; }
+#queuePage .containerQueue img {
+  height: 3em; }
+#queuePage .containerQueue h4, #queuePage .containerQueue p {
+  font-size: 0.75em !important;
+  font-family: museo-sans !important; }
+#queuePage .containerQueue .taglineDiv {
+  width: 5em; }
+#queuePage .containerQueue .ratingDiv {
+  width: 5em; }
+  #queuePage .containerQueue .ratingDiv img {
+    height: 0.5em;
+    width: 0.5em !important; }
 
 /* HELPERS */
 .link {
@@ -295,6 +307,9 @@ nav ul li a.first {
 -----------------------------------------------------------*/
 .ui-dialog-titlebar {
   text-transform: lowercase; }
+
+.ui-widget-content a {
+  color: rgba(250, 250, 250, 0.9) !important; }
 
 .modal-popup .title h1 {
   display: none; }

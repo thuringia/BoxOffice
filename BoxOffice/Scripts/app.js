@@ -8,27 +8,30 @@ $(document).ready(function () {
         source: function (request, response) {
             // define a function to call your Action (assuming UserController)
             $.ajax({
-                url: 'Movies/ajaxSearch', type: "GET", dataType: "json",
+                url: 'Movies/ajaxSearch',
+                type: "GET",
+                dataType: "json",
 
                 // query will be the param used by your action method
                 data: { q: request.term },
                 success: function (data) {
                     response($.map(data, function (item) {
                         return { label: item, value: item };
-                    }))
+                    }));
                 }
-            })
+            });
         },
         minLength: 1, // require at least one character from the user
     });
-    
+
     // accordion for queue
     var $accordion = $("#accordion");
     if ($accordion) {
         $("#accordion")
 			.accordion({
 			    header: "> div > h3",
-			    collapsible: true
+			    collapsible: true,
+			    active: false
 			})
 			.sortable({
 			    axis: "y",
@@ -42,10 +45,42 @@ $(document).ready(function () {
         $('.ui-accordion').bind('accordionchange', function (event, ui) {
             var newHeader = ui.newHeader; // jQuery object, activated header
             var oldHeader = ui.oldHeader;// jQuery object, previous header
-            alert(newHeader.value);
         });
     }
     
+    // view masonry
+    var $container = $(".containerView");
+    if ($container) {
+        $container.masonry({
+            itemSelector: '.item',
+            gutterWidth: 0,
+            isAnimated: !Modernizr.csstransitions,
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+    }
+
+    // queue masonry
+    var $container = $(".containerQueue");
+    if ($container) {
+        $container.masonry({
+            itemSelector: '.item',
+            containerWidth: function(containerWidth) {
+                return containerWidth / 2;
+            },
+            gutterWidth: 10,
+            isAnimated: !Modernizr.csstransitions,
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+    }
+
     var $container = $(".container");
     if ($container) {
         $container.imagesLoaded(function () {
@@ -64,7 +99,7 @@ $(document).ready(function () {
             });
         });
     }
-    
+
     $containerMovie = $(".containerMovie");
     if ($containerMovie) {
         $containerMovie.imagesLoaded(function () {
@@ -120,16 +155,39 @@ function showMovieSearch() {
     }
 }
 
-function toggleEdit() {
-    if (contentEditable) {
-        $("input[type=text]:not(.noneditable)").prop("contenteditable", !contentEditable);
-        $("input[type=submit]").removeClass("ui-state-disabled");
-        contentEditable = !contentEditable;
-    } else {
-        $("input[type=text]:not(.noneditable)").prop("contenteditable", !contentEditable);
-        $("input[type=submit]").addClass("ui-state-disabled");
-        contentEditable = !contentEditable;
-    }
+function addToQueue(id) {
+    $.ajax({
+        url: '/Movies/Rent',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id },
+        success: function (data) {
+            if (data.success) {
+                $("#addToQueue").animate({
+                    backgroundColor: green
+                }, 500, function () {
+                    $("#addToQueue").animate({
+                        backgroundColor: "#063559"
+                    }, 500, function () {
+
+                    });
+                });
+            } else if (data.fail) {
+                $("#addToQueue").animate({
+                    backgroundColor: red
+                }, 500, function () {
+                    $("#addToQueue").animate({
+                        backgroundColor: "#063559"
+                    }, 500, function () {
+
+                    });
+                });
+            }
+
+        }
+    });
 }
 
 
