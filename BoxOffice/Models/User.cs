@@ -23,6 +23,16 @@ namespace BoxOffice.Models
         public string Username { get; set; }
 
         /// <summary>
+        /// The name of this user
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The surname of this user
+        /// </summary>
+        public string Surname { get; set; }
+
+        /// <summary>
         /// The user's e-mail address
         /// </summary>
         [DataType(DataType.EmailAddress)]

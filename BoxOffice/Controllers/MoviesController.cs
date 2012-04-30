@@ -208,7 +208,7 @@ namespace BoxOffice.Controllers
         {
             if (searchTerm == string.Empty)
             {
-                return View();
+                return View("Index");
             }
             else
             {

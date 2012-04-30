@@ -1,5 +1,6 @@
 ﻿// GLOBALS
 var searchFieldVisible = false;
+var contentEditable = false;
 
 // $(document).ready()
 $(document).ready(function () {
@@ -95,6 +96,10 @@ function showMovieSearch() {
     }
 }
 
+function toggleEdit() {
+    $("input[type=text]:not(.noneditable)").prop("contenteditable", !contentEditable);
+    contentEditable = !contentEditable;
+}
 
 
 

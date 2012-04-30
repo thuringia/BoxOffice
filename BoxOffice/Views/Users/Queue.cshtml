@@ -1,6 +1,19 @@
-﻿@model BoxOffice.Models.User
+﻿@using BoxOffice.Models
+@model BoxOffice.Models.User
 @{
     ViewBag.Title = "Queue";
+    var db = new BoxOfficeContext();
+
+    var messagesToDisplay = new List<Message>();
+    if (Model.Messages.Any())
+    {
+        messagesToDisplay = Model.Messages.ToList();
+    }
+    if ((from m in db.Messages where m.toAll select m).Any())
+    {
+        (from m in db.Messages where m.toAll select m).ToList().ForEach(m => messagesToDisplay.Add(m));
+    }
+    messagesToDisplay = messagesToDisplay.OrderBy(m => m.DateSent).Take(30).ToList();
 }
 @section subMenu
 {
@@ -17,7 +30,7 @@
         $(page).addClass("selected");
         $(subpage).addClass("selected");
     });
-    
+
     // accordion
     $("#accordion")
 			.accordion({
@@ -50,12 +63,9 @@
             $(this).attr("data-rating");
         }
     });
-    
+
     </script>
 }
-
-
-
 <div class="container">
     <section id="queue" class="item">
         <p>This is your queue of movies, change priority by dragging and dropping.</p>
@@ -105,4 +115,44 @@
             }
         </div>
     </section>
+    @if (!messagesToDisplay.Any())
+    {
+        <section id="messages" class="item">
+            <h2>Your Messages</h2>
+            <p>You have no messages.</p>
+        </section>
+    }
+    else
+    {
+        <section id="messages" class="item">
+            <h2>Your Messages</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>From</td>
+                        <td>Date</td>
+                        <td>Text</td>
+                    </tr>
+                    <tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in messagesToDisplay)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.FromUserID == 0)
+                                {
+                                    @Html.Display("System");
+                                }
+                            </td>
+                            <td>@Html.Display(item.DateSent.ToString())</td>
+                            <td>
+                                <p>@Html.Display(item.Text)</p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>    
+    }
 </div>

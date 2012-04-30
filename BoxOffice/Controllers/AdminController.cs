@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace BoxOffice.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [JsonRequestBehavior]
     public class AdminController : Controller
     {
@@ -337,11 +337,11 @@ namespace BoxOffice.Controllers
                              Language = m.Element("language").Value,
                              MovieID = int.Parse(m.Element("id").Value),
                              isMovieOfTheWeek = model.MovieOfTheWeek,
+                             isRentable = true,
                              Name = m.Element("name").Value,
                              Original_name = m.Element("original_name").Value,
                              Overview = m.Element("overview").Value,
                              Price = model.Price,
-                             Rating = null,
                              Rating_by_moviedb = float.Parse(m.Element("rating").Value),
                              Ratings = new List<Rating>(),
                              Rentals = new List<Rental>(),
@@ -351,7 +351,6 @@ namespace BoxOffice.Controllers
                              Translated = bool.Parse(m.Element("translated").Value),
                              Type = m.Element("type").Value,
                              Url = m.Element("url").Value,
-                             Votes = null,
                              Votes_by_moviedb = int.Parse(m.Element("votes").Value)
                          }).First();
 

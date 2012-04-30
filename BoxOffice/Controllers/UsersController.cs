@@ -38,15 +38,19 @@ namespace BoxOffice.Controllers
         /// <returns>View(user)</returns>
         public ViewResult Queue()
         {
-            return View(model: db.Users.First(u => u.UserID == db.Users.First(a => a.Username == User.Identity.Name).UserID));
+            return View(model: db.Users.First(a => a.Username == User.Identity.Name));
         }
 
         //
         // GET /Users/UserData/id
 
+        /// <summary>
+        /// shows the user's profile
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Profile()
         {
-            return View(model: db.Users.First(u => u.UserID == db.Users.First(a => a.Username == User.Identity.Name).UserID));
+            return View(model: db.Users.First(a => a.Username == User.Identity.Name));
         }
 
         #region login
@@ -121,6 +125,14 @@ namespace BoxOffice.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            foreach (var cookie in Request.Cookies.AllKeys)
+            {
+                Request.Cookies.Remove(cookie);
+            }
+            foreach (var cookie in Response.Cookies.AllKeys)
+            {
+                Response.Cookies.Remove(cookie);
+            }
 
             return RedirectToAction("Index", "Home");
         }

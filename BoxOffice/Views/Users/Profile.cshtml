@@ -1,102 +1,114 @@
 ﻿@model BoxOffice.Models.User
-
 @{
     ViewBag.Title = "Your Data";
 }
 @section js
 {
     <script type="text/javascript">
-        var page = "#me";
-        var subpage = "#profileLink";
-        $(document).ready(function () {
-            $(page).addClass("selected");
-            $(subpage).addClass("selected");
-        });
+    var page = "#me";
+    var subpage = "#profileLink";
+    $(document).ready(function () {
+        $(page).addClass("selected");
+        $(subpage).addClass("selected");
+    });
     </script>
 }
 <h2>Profile</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>User</legend>
+    <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <div class="ui-dialog-buttonset">
+            <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false">
+                <a href="javascript:toggleEdit();"><span class="ui-button-text">Edit</span></a>
+            </button>
+            <input type="submit" value="Save" class="ui-button ui-widget ui-state-disabled ui-corner-all ui-button-text-only" />
+        </div>
+    </section>
 
-        @Html.HiddenFor(model => model.UserID)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Username)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Username)
-            @Html.ValidationMessageFor(model => model.Username)
-        </div>
+    @Html.HiddenFor(model => model.UserID)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Username)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line noneditable" id="Username" name="Username" type="text" value="@Model.Username">
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateOfBirth)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateOfBirth)
-            @Html.ValidationMessageFor(model => model.DateOfBirth)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your name is required." id="Name" name="Name" type="text" value="@Model.Name">
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Street)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Street)
-            @Html.ValidationMessageFor(model => model.Street)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Surname)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your surname is required." id="Surname" name="Surname" type="text" value="@Model.Surname">
+        @Html.ValidationMessageFor(model => model.Surname)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Number)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Number)
-            @Html.ValidationMessageFor(model => model.Number)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Email)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" id="Email" name="Email" type="text" value="@Model.Email">
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Zip)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Zip)
-            @Html.ValidationMessageFor(model => model.Zip)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.DateOfBirth)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your date of birth is required." id="DateOfBirth" name="DateOfBirth" type="text" value="@Model.DateOfBirth">
+        @Html.ValidationMessageFor(model => model.DateOfBirth)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Street)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your Street is required." id="Street" name="Street" type="text" value="@Model.Street">
+        @Html.ValidationMessageFor(model => model.Street)
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Phone)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Phone)
-            @Html.ValidationMessageFor(model => model.Phone)
-        </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Number)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your number is required." id="Number" name="Number" type="text" value="@Model.Number">
+        @Html.ValidationMessageFor(model => model.Number)
+    </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Zip)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your zipcode is required." id="Zip" name="Zip" type="text" value="@Model.Zip">
+        @Html.ValidationMessageFor(model => model.Zip)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.City)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your city is required." id="City" name="City" type="text" value="@Model.City">
+        @Html.ValidationMessageFor(model => model.City)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Phone)
+    </div>
+    <div class="editor-field">
+        <input contenteditable="false" class="text-box single-line" id="Phone" name="Phone" type="text" value="@Model.Phone">
+        @Html.ValidationMessageFor(model => model.Phone)
+    </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

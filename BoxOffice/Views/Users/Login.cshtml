@@ -1,16 +1,16 @@
 @model BoxOffice.Models.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Login";
 }
 <div id="loginForm">
     <hgroup class="title">
-        <h1>@ViewBag.Title.</h1>
+        <h1>@ViewBag.Title</h1>
         <h2>Enter your user name and password below.</h2>
     </hgroup>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    @using (Html.BeginForm((string)ViewBag.FormAction, "User"))
+    @using (Html.BeginForm((string)ViewBag.FormAction, "Users"))
     {
         @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
 

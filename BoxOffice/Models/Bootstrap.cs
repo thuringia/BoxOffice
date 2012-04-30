@@ -54,9 +54,10 @@ namespace BoxOffice.Models
             {
                 MovieID = 187,
                 UserID = 1,
-                DateRented = DateTime.Now,
+                Date = DateTime.Now,
                 Movie = movie,
-                User = users[0]
+                User = users[0],
+                Value = 9.0f
             };
             context.Ratings.Add(rating);
 
@@ -183,6 +184,8 @@ namespace BoxOffice.Models
                 new User 
                 {
                     Username = "foo",
+                    Name =  "foo",
+                    Surname = "bar",
                     Email = "foo@bar.com",
                     DateOfBirth = DateTime.ParseExact("1988-02-13", @"yyyy-MM-dd", CultureInfo.InvariantCulture),
                     Street = "Foo",
@@ -196,6 +199,8 @@ namespace BoxOffice.Models
                 new User
                 {
                     Username = "bar",
+                    Name = "bar",
+                    Surname = "foo",
                     Email = "bar@foo.com",
                     DateOfBirth = DateTime.ParseExact("1988-02-13", @"yyyy-MM-dd", CultureInfo.InvariantCulture),
                     Street = "Foo",
