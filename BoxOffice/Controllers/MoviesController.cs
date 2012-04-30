@@ -224,15 +224,7 @@ namespace BoxOffice.Controllers
             try
             {
                 var toFlag = db.Comments.First(c => c.CommentID == id);
-                if (toFlag.Flag == null)
-                {
-                    toFlag.Flag = new int();
-                    toFlag.Flag = 1;
-                }
-                else
-                {
-                    toFlag.Flag += 1;
-                }
+                toFlag.Flag += 1;
 
                 db.SaveChanges();
             }
@@ -300,70 +292,13 @@ namespace BoxOffice.Controllers
                 }
             }
         }
-        //
-        // GET: /Movies/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Movies/Create
-        /// <summary>
-        /// Adds a new movie to BoxOffice's database
-        /// </summary>
-        /// <param name="add">An AddMovieModel containing all necessery information</param>
-        /// <returns>A JSON response, {"success":true} on success, an</returns>
-        [HttpPost]
-        public JsonResult Create(AddMovieModel add, String returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                /*
-                var response = tmdb.MovieSearch(add.Name);
-
-                if (response != null)
-                {
-                    var m = tmdb.GetMovieInfo(response.First().Id);
-                    var movie = persistMovie(m, add.DVDs, add.Price, add.isMovieOfTheWeek);
-                    return Json(new { success = true, redirect = returnUrl });
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The movie could not be found.");
-                }
-                */
-            }
-            // If we got this far, something failed
-            return Json(new { errors = GetErrorsFromModelState() });
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
 
-        /// <summary>
-        /// Sets the new movie of the week
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult MovieOfTheWeek(Movie movie)
-        {
-            var old = db.Movies.Find(movie.MovieID);
-            old.isMovieOfTheWeek = false;
-
-            movie.isMovieOfTheWeek = true;
-
-            db.SaveChanges();
-
-            return View();
-        }
-
-        
         public IEnumerable<string> GetErrorsFromModelState()
         {
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
