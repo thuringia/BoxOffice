@@ -101,7 +101,10 @@ namespace BoxOffice.Controllers
 
         //
         // GET: /Users/History
-
+        /// <summary>
+        /// displays a user's rental history
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult History()
         {
@@ -111,6 +114,41 @@ namespace BoxOffice.Controllers
                 View(
                     theUser.Queue.Where(rental => rental.QueuePosition == null).OrderBy(rental => rental.DateReturned).
                         ToList());
+        }
+
+        //
+        // GET: /Users/Comments
+
+        [HttpGet]
+        public ActionResult Comments()
+        {
+            return View(db.Users.First(a => a.Username == User.Identity.Name));
+        }
+
+        //
+        // GET: /Users/EditComment/
+
+        /// <summary>
+        /// updates a comments text
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="edit"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult EditComment(int id, string edit)
+        {
+            try
+            {
+                var comment = db.Comments.First(c => c.CommentID == id);
+
+                comment.Message = edit;
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return Json(new {success = false, error = e.Message});
+            }
+            return Json(new {success = true});
         }
 
         #region login
@@ -459,14 +497,7 @@ namespace BoxOffice.Controllers
                         where user.Username == UserNameToCheck
                         select user;
 
-            if (!aUser.Any())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return !aUser.Any();
         }
 
 
