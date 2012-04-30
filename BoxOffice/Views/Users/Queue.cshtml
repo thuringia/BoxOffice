@@ -29,51 +29,49 @@
     $(document).ready(function () {
         $(page).addClass("selected");
         $(subpage).addClass("selected");
+
+        // view masonry
+        var $container = $(".containerView");
+        if ($container) {
+                $container.masonry({
+                    itemSelector: '.item',
+                    gutterWidth: 0,
+                    isAnimated: !Modernizr.csstransitions,
+                    animationOptions: {
+                        duration: 750,
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
+            }
+        
+        // rating
+        $(".rating").raty({
+            half: true,
+            halfShow: true,
+            number: 10,
+            path: "/Content/img",
+            readOnly: true,
+            start: function () {
+                $(this).attr("data-rating");
+            }
+        });
     });
 
-    // accordion
-    $("#accordion")
-			.accordion({
-			    header: "> div > h3",
-			    collapsable: true,
-			    active: 0
-			})
-			.sortable({
-			    axis: "y",
-			    handle: "h3",
-			    stop: function (event, ui) {
-			        // IE doesn't register the blur when sorting
-			        // so trigger focusout handlers to remove .ui-state-focus
-			        ui.item.children("h3").triggerHandler("focusout");
-			    }
-			});
-    $('.ui-accordion').bind('accordionchange', function (event, ui) {
-        var newHeader = ui.newHeader; // jQuery object, activated header
-        var oldHeader = ui.oldHeader;// jQuery object, previous header
-        alert(newHeader);
-    });
-    // rating
-    $(".rating").raty({
-        half: true,
-        halfShow: true,
-        number: 10,
-        path: "/Content/img",
-        readOnly: true,
-        start: function () {
-            $(this).attr("data-rating");
-        }
-    });
+    
 
     </script>
 }
-<div class="container">
+<div id="queuePage" class="containerView">
     <section id="queue" class="item">
         <p>This is your queue of movies, change priority by dragging and dropping.</p>
         <div id="accordion">
-            @foreach (var rental in Model.Queue.Where(r => r.DateSent == null).OrderBy(r => r.QueuePosition))
+            @if (Model.Queue.Any())
             {
+                foreach (var rental in Model.Queue.Where(r => r.DateSent == null).OrderBy(r => r.QueuePosition))
+                {
                 <div class="group">
-                    <h3>@rental.Movie.Name</h3>
+                    <h3>@Html.ActionLink(@rental.Movie.Name, "Details", "Movies")</h3>
                     <div class="container">
                         @if (rental.Movie.Images.Any())
                         {
@@ -111,6 +109,14 @@
                             </div>
                         }
                     </div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="group">
+                    <h3><a href="#">No movies in queue</a></h3>
+                    <p>You didn't add any movies to your queue, but you can @Html.ActionLink(linkText: "change", controllerName: "Movies", actionName: "Index") that.</p>
                 </div>
             }
         </div>

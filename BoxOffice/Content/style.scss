@@ -27,6 +27,7 @@
 }
 
 /* Variablen */
+$pageWidth: 60em;
 $bgStart: #063559;
 $bgEnd: #0D5A7F;
 
@@ -51,8 +52,7 @@ $bgEnd: #0D5A7F;
 
 
 /* page style */
-body {
-	$pageWidth: 900px;
+body {	
 	@include topGradient($bgStart, $bgEnd);
 	background-color: $bgEnd !important;
 	
@@ -115,7 +115,7 @@ body {
 			a {
 				@include font(1.75em, rgba(250,250,250,0.9), 500);
 				text-decoration: none;
-				padding-left: 25px;
+				padding-left: 0.75em;
 			}
 
 			a:not(#search) {
@@ -127,11 +127,10 @@ body {
 			a {
 				@include font(1.5em, rgba(250,250,250,0.9), 300);
 				text-decoration: none;
-				padding-left: 25px;
+				padding-left: 0.75em;
 			}
-
-			
-		}
+		}		
+		
 	}
 
 	.hidden {
@@ -179,6 +178,28 @@ body {
 		@include font(0.75em, rgba(250,250,250,0.9), 300);
 		text-align: center;
 	}
+}
+
+#profileForm {
+	width: 26em;
+
+	label {
+					width: 10em;
+				margin-top: 1em;
+				margin-left: 1em;
+					float: left;
+					text-transform: lowercase;
+				}
+
+				input[type=text] {
+					width: 16em !important;
+					float:left;
+					margin: 1em;
+				}
+
+				input[type=submit] {
+					margin: 1em;
+				}
 }
 
 .rating {
@@ -330,6 +351,18 @@ body {
 	}
 }
 
+#queuePage {
+	$queueWidth: 15em;
+	#queue {
+		width: $queueWidth;
+	}
+
+	#messages {
+		margin-left: 5em;
+		width: ($pageWidth - $queueWidth) - 10em;
+	}
+}
+
 /* HELPERS */
 .link {
 	@include font(1.75em, rgba(250,250,250,0.9), 500);
@@ -338,6 +371,10 @@ body {
 
 .boxoffice {
 	text-transform: none;
+}
+
+.firstLink {
+	padding-left: 2em !important;
 }
 
 .selected {

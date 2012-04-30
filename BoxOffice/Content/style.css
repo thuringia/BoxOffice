@@ -61,7 +61,7 @@ body {
         text-decoration: none;
         padding-left: 2em; }
   body header, body #body, body footer {
-    width: 900px;
+    width: 60em;
     margin: 0 auto; }
   body header {
     margin-top: 5em;
@@ -81,7 +81,7 @@ body {
         /* pseudo anti-aliasing for fonts */
         text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
         text-decoration: none;
-        padding-left: 25px; }
+        padding-left: 0.75em; }
       body nav ul li a:not(#search) {
         text-transform: lowercase; }
     body nav #subMenu a {
@@ -95,7 +95,7 @@ body {
       /* pseudo anti-aliasing for fonts */
       text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
       text-decoration: none;
-      padding-left: 25px; }
+      padding-left: 0.75em; }
   body .hidden {
     visibility: hidden; }
   body .visible {
@@ -130,6 +130,21 @@ body {
     /* pseudo anti-aliasing for fonts */
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     text-align: center; }
+
+#profileForm {
+  width: 26em; }
+  #profileForm label {
+    width: 10em;
+    margin-top: 1em;
+    margin-left: 1em;
+    float: left;
+    text-transform: lowercase; }
+  #profileForm input[type=text] {
+    width: 16em !important;
+    float: left;
+    margin: 1em; }
+  #profileForm input[type=submit] {
+    margin: 1em; }
 
 .rating {
   display: inline;
@@ -239,6 +254,12 @@ body {
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     text-decoration: none; }
 
+#queuePage #queue {
+  width: 15em; }
+#queuePage #messages {
+  margin-left: 5em;
+  width: 35em; }
+
 /* HELPERS */
 .link {
   color: rgba(250, 250, 250, 0.9);
@@ -254,6 +275,9 @@ body {
 
 .boxoffice {
   text-transform: none; }
+
+.firstLink {
+  padding-left: 2em !important; }
 
 .selected {
   color: rgba(255, 255, 255, 0.4) !important; }

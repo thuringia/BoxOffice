@@ -22,6 +22,30 @@ $(document).ready(function () {
         minLength: 1, // require at least one character from the user
     });
     
+    // accordion for queue
+    var $accordion = $("#accordion");
+    if ($accordion) {
+        $("#accordion")
+			.accordion({
+			    header: "> div > h3",
+			    collapsible: true
+			})
+			.sortable({
+			    axis: "y",
+			    handle: "h3",
+			    stop: function (event, ui) {
+			        // IE doesn't register the blur when sorting
+			        // so trigger focusout handlers to remove .ui-state-focus
+			        ui.item.children("h3").triggerHandler("focusout");
+			    }
+			});
+        $('.ui-accordion').bind('accordionchange', function (event, ui) {
+            var newHeader = ui.newHeader; // jQuery object, activated header
+            var oldHeader = ui.oldHeader;// jQuery object, previous header
+            alert(newHeader.value);
+        });
+    }
+    
     var $container = $(".container");
     if ($container) {
         $container.imagesLoaded(function () {
@@ -97,8 +121,15 @@ function showMovieSearch() {
 }
 
 function toggleEdit() {
-    $("input[type=text]:not(.noneditable)").prop("contenteditable", !contentEditable);
-    contentEditable = !contentEditable;
+    if (contentEditable) {
+        $("input[type=text]:not(.noneditable)").prop("contenteditable", !contentEditable);
+        $("input[type=submit]").removeClass("ui-state-disabled");
+        contentEditable = !contentEditable;
+    } else {
+        $("input[type=text]:not(.noneditable)").prop("contenteditable", !contentEditable);
+        $("input[type=submit]").addClass("ui-state-disabled");
+        contentEditable = !contentEditable;
+    }
 }
 
 
