@@ -320,7 +320,7 @@
     <Content Include="Views\Admin\AddMovie.cshtml" />
     <Content Include="Views\Shared\MovieOfTheWeekPartial.cshtml" />
     <Content Include="Views\Shared\HotMoviesPartial.cshtml" />
-    <Content Include="Views\Admin\MessageUser.cshtml" />
+    <Content Include="Views\Admin\Messaging.cshtml" />
     <Content Include="Views\Movies\List.cshtml" />
     <Content Include="Views\Shared\_TilePicPartial.cshtml" />
     <None Include="Readme.md" />
