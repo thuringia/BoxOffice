@@ -36,7 +36,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -168,6 +168,11 @@
     <Content Include="Content\admin.css">
       <DependentUpon>admin.scss</DependentUpon>
     </Content>
+    <Content Include="Content\img\cancel-off.png" />
+    <Content Include="Content\img\cancel-on.png" />
+    <Content Include="Content\img\star-half.png" />
+    <Content Include="Content\img\star-off.png" />
+    <Content Include="Content\img\star-on.png" />
     <Content Include="Content\style.css">
       <DependentUpon>style.scss</DependentUpon>
     </Content>
@@ -245,6 +250,8 @@
     <Content Include="Scripts\jquery-ui-1.8.19.min.js" />
     <Content Include="Scripts\jquery.color.js" />
     <Content Include="Scripts\jquery.masonry.min.js" />
+    <Content Include="Scripts\jquery.raty.js" />
+    <Content Include="Scripts\jquery.raty.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />

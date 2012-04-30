@@ -17,18 +17,18 @@
         $(document).ready(function() {
             $(page).addClass("selected");
             $(subpage).addClass("selected");
-        });
-        
-        // rating
-        $(".rating").raty({
-            half: true,
-            halfShow: true,
-            number: 10,
-            path: "/Content/img",
-            readOnly: true,
-            start: function () {
-                $(this).attr("data-rating");
-            }
+            
+            // rating
+            $(".rating").raty({
+                half: true,
+                halfShow: true,
+                number: 10,
+                path: "/Content/img",
+                readOnly: true,
+                start: function () {
+                    return $(this).attr("data-rating");
+                }
+            });
         });
     </script>
 }

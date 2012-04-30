@@ -181,6 +181,15 @@ body {
 	}
 }
 
+.rating {
+	display: inline;
+	width: 200px;
+	img {
+		height: 1em;
+		width: 1em !important;
+	}
+}
+
 .section {
 	margin-left: 1em;
 	margin-bottom: 2em;
@@ -356,6 +365,7 @@ nav ul li a.first {
 	.title h1 {
 		display: none;
 	}
+}
 
 	#loginForm, #registerForm {
 		padding-left: 7px;
@@ -402,7 +412,7 @@ nav ul li a.first {
 			float: right;
 		}
 	}
-}
+
 
 /* CSS Transitions
 -----------------------------------------------------------*/

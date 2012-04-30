@@ -131,6 +131,13 @@ body {
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     text-align: center; }
 
+.rating {
+  display: inline;
+  width: 200px; }
+  .rating img {
+    height: 1em;
+    width: 1em !important; }
+
 .section {
   margin-left: 1em;
   margin-bottom: 2em; }
@@ -267,33 +274,35 @@ nav ul li a.first {
 
 .modal-popup .title h1 {
   display: none; }
-.modal-popup #loginForm, .modal-popup #registerForm {
+
+#loginForm, #registerForm {
   padding-left: 7px; }
-.modal-popup form {
+
+form {
   padding-top: 20px;
   font-family: museo-sans !important; }
-  .modal-popup form ol {
+  form ol {
     list-style: none; }
-    .modal-popup form ol li {
+    form ol li {
       clear: both;
       padding-bottom: 30px; }
-      .modal-popup form ol li label {
+      form ol li label {
         width: 100px;
         float: left;
         text-transform: lowercase; }
-      .modal-popup form ol li input {
+      form ol li input {
         width: 400px !important;
         float: left;
         margin-left: 25px; }
-        .modal-popup form ol li input[type="checkbox"] {
+        form ol li input[type="checkbox"] {
           width: 13px !important; }
-      .modal-popup form ol li .field-validation-error span {
+      form ol li .field-validation-error span {
         position: relative;
         left: 0px;
         float: left;
         padding: 5px 0 10px 0;
         text-transform: lowercase; }
-  .modal-popup form input {
+  form input {
     float: right; }
 
 /* CSS Transitions
