@@ -49,6 +49,6 @@ namespace BoxOffice.Models
         /// <summary>
         /// the number of times this comment was flagged by other users
         /// </summary>
-        public int? Flag { get; set; }
+        public int Flag { get; set; }
     }
 }
