@@ -87,9 +87,7 @@ namespace BoxOffice.Controllers
         {
             try
             {
-                var movie = (from m in db.Movies
-                             where m.MovieID == id
-                             select m).First();
+                var movie = db.Movies.First(m => m.MovieID == id);
 
                 var newQueueItem = new Rental
                 {
@@ -103,9 +101,7 @@ namespace BoxOffice.Controllers
                 db.Rentals.Add(newQueueItem);
                 db.SaveChanges();
 
-                var user = (from u in db.Users
-                            where u.Username == User.Identity.Name
-                            select u).First();
+                var user = db.Users.First(u => u.Username == User.Identity.Name);
 
                 user.Queue.Add(newQueueItem);
                 newQueueItem.User = user;
