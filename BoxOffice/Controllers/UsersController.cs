@@ -42,15 +42,55 @@ namespace BoxOffice.Controllers
         }
 
         //
-        // GET /Users/UserData/id
+        // GET /Users/Profile/
 
         /// <summary>
         /// shows the user's profile
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Profile()
         {
+            // set FormAction
+            string actionName = ControllerContext.RouteData.GetRequiredString("action");
+            ViewBag.FormAction = actionName;
+
             return View(model: db.Users.First(a => a.Username == User.Identity.Name));
+        }
+
+        //
+        // POST: /Users/Profile/
+        [HttpPost]
+        public ActionResult Profile(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                // get the user object
+                var user = db.Users.First(u => u.UserID == model.UserID);
+
+                // update information
+                user.City = model.City;
+                user.DateOfBirth = model.DateOfBirth;
+                user.Email = model.Email;
+                user.Name = model.Name;
+                user.Number = model.Number;
+                user.Phone = model.Phone;
+                user.Street = model.Street;
+                user.Surname = model.Surname;
+                user.Zip = model.Zip;
+
+                // save changes
+                db.SaveChanges();
+
+                return View();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Error");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         #region login
@@ -101,10 +141,18 @@ namespace BoxOffice.Controllers
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
+                        if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
                         return Redirect(returnUrl);
                     }
                     else
                     {
+                        if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -173,10 +221,23 @@ namespace BoxOffice.Controllers
                 {
                     var newUser = new User
                     {
+                        City = string.Empty,
+                        Comments = new List<Comment>(),
+                        DateOfBirth = null,
+                        Email = model.Email,
+                        Messages = new List<Message>(),
+                        Name = string.Empty,
+                        Number = string.Empty,
+                        Phone = 0,
+                        Queue = new List<Rental>(),
+                        Ratings = new List<Rating>(),
+                        Street = string.Empty,
+                        Surname = string.Empty,
                         Username = model.UserName,
-                        Email = model.Email
+                        Zip = string.Empty
                     };
                     db.Users.Add(newUser);
+                    db.SaveChanges();
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     return Json(new { success = true, redirect = "/Users/Profile" });
                 }
@@ -218,10 +279,23 @@ namespace BoxOffice.Controllers
                 {
                     var newUser = new User
                     {
+                        City = string.Empty,
+                        Comments = new List<Comment>(),
+                        DateOfBirth = null,
+                        Email = model.Email,
+                        Messages = new List<Message>(),
+                        Name = string.Empty,
+                        Number = string.Empty,
+                        Phone = 0,
+                        Queue = new List<Rental>(),
+                        Ratings = new List<Rating>(),
+                        Street = string.Empty,
+                        Surname = string.Empty,
                         Username = model.UserName,
-                        Email = model.Email
+                        Zip = string.Empty
                     };
                     db.Users.Add(newUser);
+                    db.SaveChanges();
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     return RedirectToAction("Profile", "Users");
                 }
@@ -367,6 +441,31 @@ namespace BoxOffice.Controllers
             else
             {
                 return false;
+            }
+        }
+
+
+        //
+        // GET: /Users/Usernames
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public JsonResult Usernames(string q)
+        {
+            var names = from user in db.Users
+                        where user.Username.Contains(q)
+                        select new User
+                                   {
+                                       UserID = user.UserID,
+                                       Username = user.Username
+                                   };
+
+            if (names.Any())
+            {
+                return Json(names.ToArray());
+            }
+            else
+            {
+                return Json(new {success = false});
             }
         }
 
