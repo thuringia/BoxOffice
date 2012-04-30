@@ -18,25 +18,18 @@ namespace BoxOffice.Models
         public int MessageID { get; set; }
 
         /// <summary>
-        /// The Users participating in this message
+        /// The receipient as nav. prop.
         /// </summary>
-        public virtual ICollection<User> Users { get; set; }
-
-        /// <summary>
-        /// The sending user's UserID
-        /// </summary>
-        [Required]
-        public int FromUserID { get; set; }
+        public virtual User User { get; set; }
 
         /// <summary>
         /// The receiving user's UserID, null if sent to all
         /// </summary>
-        public int? ToUserID { get; set; }
+        public int? UserID { get; set; }
 
         /// <summary>
         /// The date the message was sent
         /// </summary>
-        [Required]
         public DateTime? DateSent { get; set; }
 
         /// <summary>
