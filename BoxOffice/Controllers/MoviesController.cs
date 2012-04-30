@@ -45,6 +45,70 @@ namespace BoxOffice.Controllers
         }
 
         //
+        // GET: /Movies/Comment/{id}
+
+        /// <summary>
+        /// Handles a user's request to comment on a movie
+        /// </summary>
+        /// <param name="id">a MovieID</param>
+        /// <param name="comment">a comment</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult Comment(int id, string comment)
+        {
+            var movie = db.Movies.First(m => m.MovieID == id);
+            var usr = db.Users.First(user => user.Username == User.Identity.Name);
+            var com = new Comment
+                          {
+                              Date = DateTime.Now,
+                              Flag = 0,
+                              Message = comment,
+                              Movie = movie,
+                              MovieID = movie.MovieID,
+                              User = usr,
+                              UserID = usr.UserID
+                          };
+            db.Comments.Add(com);
+            db.SaveChanges();
+
+            usr.Comments.Add(com);
+            movie.Comments.Add(com);
+            db.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+        /// <summary>
+        /// Handles a user's request to rate  a movie
+        /// </summary>
+        /// <param name="id">a MovieID</param>
+        /// <param name="rating">the rating</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult Rate(int id, string rating)
+        {
+            var movie = db.Movies.First(m => m.MovieID == id);
+            var usr = db.Users.First(user => user.Username == User.Identity.Name);
+            var r = new Rating
+                        {
+                            Date = DateTime.Now,
+                            Movie = movie,
+                            MovieID = movie.MovieID,
+                            User = usr,
+                            UserID = usr.UserID,
+                            Value = float.Parse(rating)
+                        };
+            db.Ratings.Add(r);
+            db.SaveChanges();
+
+            usr.Ratings.Add(r);
+            movie.Ratings.Add(r);
+            db.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+        //
         // GET: /Movies/Rent/{id}
 
         /// <summary>
@@ -88,6 +152,16 @@ namespace BoxOffice.Controllers
             try
             {
                 var movie = db.Movies.First(m => m.MovieID == id);
+                var user = db.Users.First(u => u.Username == User.Identity.Name);
+                var position = 0;
+
+                if (user.Queue.Any())
+                {
+                    if (user.Queue.Any(r => r.QueuePosition != null))
+                    {
+                        position = user.Queue.Count(r => r.QueuePosition != null) + 1;
+                    }
+                }
 
                 var newQueueItem = new Rental
                 {
@@ -95,20 +169,17 @@ namespace BoxOffice.Controllers
                     DateOfRental = DateTime.Now,
                     DateReturned = null,
                     DateSent = null,
-                    Dvd = new DVD(),
-                    DvdID = null
+                    Movie = movie,
+                    MovieID = movie.MovieID,
+                    User = user,
+                    UserID = user.UserID,
+                    QueuePosition = position
                 };
                 db.Rentals.Add(newQueueItem);
                 db.SaveChanges();
 
-                var user = db.Users.First(u => u.Username == User.Identity.Name);
-
                 user.Queue.Add(newQueueItem);
-                newQueueItem.User = user;
-                newQueueItem.UserID = user.UserID;
                 movie.Rentals.Add(newQueueItem);
-                newQueueItem.Movie = movie;
-                newQueueItem.MovieID = movie.MovieID;
                 db.SaveChanges();
             }
             catch (Exception)
@@ -152,9 +223,7 @@ namespace BoxOffice.Controllers
         {
             try
             {
-                var toFlag = (from c in db.Comments
-                              where c.CommentID == id
-                              select c).First();
+                var toFlag = db.Comments.First(c => c.CommentID == id);
                 if (toFlag.Flag == null)
                 {
                     toFlag.Flag = new int();
