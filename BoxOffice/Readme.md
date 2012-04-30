@@ -26,12 +26,12 @@ The kind of functionality required for members/visitors is as follows (see marki
 * <del>Add a DVD to a personal rental list (requires log in)</del>
 * <ins>Change the order of DVD s in personal rental list (requires log in)</ins>
 * Remove a DVD from a personal rental list (requires log in)
-* View a personal history of DVD rentals including the dates when the DVD s were rented (requires log in)
+* <del>View a personal history of DVD rentals including the dates when the DVD s were rented (requires log in)</del>
 * <del>Rate a DVD that has been rented or is currently rented (requires log in)</del>
 * <del>Post comments on a DVD that has been rented or is currently rented  (requires log in)</del>
 * The ability for a member to edit (only) their own comments (requires log in)
 * <del>View comments that other customers have made</del>
-* Flag abusive or inappropriate comments for the administrator's attention
+* <del>Flag abusive or inappropriate comments for the administrator's attention</del>
 * <del>Log out</del>
 
 #### Registering for the Site
