@@ -60,6 +60,12 @@ namespace BoxOffice.Controllers
 
         //
         // POST: /Users/Profile/
+
+        /// <summary>
+        /// Processes a user's profile for persistence
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Profile(User model)
         {
@@ -93,6 +99,20 @@ namespace BoxOffice.Controllers
             return View(model);
         }
 
+        //
+        // GET: /Users/History
+
+        [HttpGet]
+        public ActionResult History()
+        {
+            var theUser = db.Users.First(a => a.Username == User.Identity.Name);
+
+            return
+                View(
+                    theUser.Queue.Where(rental => rental.QueuePosition == null).OrderBy(rental => rental.DateReturned).
+                        ToList());
+        }
+
         #region login
         //
         // GET: /Account/Login
@@ -108,13 +128,17 @@ namespace BoxOffice.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public JsonResult JsonLogin(LoginModel model, string returnUrl)
+        public ActionResult JsonLogin(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction(controllerName: "Admin", actionName: "Index");
+                    }
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 else
@@ -173,6 +197,7 @@ namespace BoxOffice.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            Session.Abandon();
             foreach (var cookie in Request.Cookies.AllKeys)
             {
                 Request.Cookies.Remove(cookie);

@@ -328,6 +328,7 @@
     <Content Include="Views\Users\Profile.cshtml" />
     <Content Include="Views\Users\userSubMenuPartial.cshtml" />
     <Content Include="Views\Users\Queue.cshtml" />
+    <Content Include="Views\Users\History.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

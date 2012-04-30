@@ -1,0 +1,41 @@
+﻿@model BoxOffice.Models.User
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+@section js{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var page = "#me";
+        var subpage = "#commentsLink";
+        $(page).addClass("selected");
+        $(subpage).addClass("selected");
+    });
+    </script>
+}
+@section subMenu
+{
+    @Html.Partial("userSubMenuPartial")
+}
+
+@if (Model.Comments.Any())
+{
+    <ul class="metroList">
+    @foreach (var item in Model.Comments)
+    {
+        <li>
+            <section class="comment">
+                    <label>@item.User.Username (@item.Date)</label>
+                    <p>@item.Message</p>
+                </section>
+        </li>
+    }
+</ul>
+}
+else
+{
+    <h2>No Comments</h2>
+    <p>You did not post any comments.<br/> Feel free to engage in the community and change that.</p>
+}
+

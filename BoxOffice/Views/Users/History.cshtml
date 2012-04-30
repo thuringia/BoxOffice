@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BoxOffice.Models.Rental>
+@{
+    ViewBag.Title = "History";
+}
+@section js{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var page = "#me";
+        var subpage = "#historyLink";
+        $(page).addClass("selected");
+        $(subpage).addClass("selected");
+    });
+    </script>
+}
+@section subMenu
+{
+    @Html.Partial("userSubMenuPartial")
+}
+@if (Model.Any())
+{
+    <ul class="metroList">
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="@Html.Action("Details", "Movies", new { id = item.MovieID })">
+                @string.Format("{0} ({1})", item.Movie.Name, item.DateSent)
+            </a>
+        </li>
+    }
+</ul>
+}
+else
+{
+    <h2>No rentals</h2>
+    <p>You may have never added a movie to your queue or no movies were dispatched to you yet. <br/>
+        Either way, keep queueing. ;)
+    </p>
+}
