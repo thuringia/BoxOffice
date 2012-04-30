@@ -86,15 +86,15 @@
             <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <div class="ui-dialog-buttonset">
                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                        role="button" aria-disabled="false">
+                        role="button" aria-disabled="false" id="addToQueue">
                         @if (Model.isRentable)
                         {
-                            <a href="javascript:addToQueue(@Model.MovieID);"><span class="ui-button-text" id="addToQueue">
+                            <a href="javascript:addToQueue(@Model.MovieID);"><span class="ui-button-text" >
                                 Add to Queue </span></a>
                         }
                         else
                         {
-                            <a href="#"><span class="ui-button-text ui-state-disabled" id="addToQueue">Add to Queue
+                            <a href="#"><span class="ui-button-text ui-state-disabled">Add to Queue
                             </span></a>
                         }
                     </button>
@@ -120,28 +120,28 @@
                         }
                     }
                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                        role="button" aria-disabled="false">
+                        role="button" aria-disabled="false" id="rate">
                         @if (isWatched)
                         {
-                            <a href="javascript:rate(@Model.MovieID);"><span class="ui-button-text" id="rate">Rate
+                            <a href="javascript:rate(@Model.MovieID);"><span class="ui-button-text" >Rate
                             </span></a>
                         }
                         else
                         {
-                            <a href="#"><span class="ui-button-text ui-state-disabled" id="rate">Rate </span>
+                            <a href="#"><span class="ui-button-text ui-state-disabled">Rate </span>
                             </a>
                         }
                     </button>
                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                            role="button" aria-disabled="false">
+                            role="button" aria-disabled="false" id="comment">
                         @if (isWatched)
                         {
-                            <a href="javascript:Comment(@Model.MovieID);"><span class="ui-button-text" id="comment">
+                            <a href="javascript:Comment(@Model.MovieID);"><span class="ui-button-text" >
                                                                           Comment </span></a>
                         }
                         else
                         {
-                            <a href="#"><span class="ui-button-text ui-state-disabled" id="comment">
+                            <a href="#"><span class="ui-button-text ui-state-disabled">
                                                                           Comment </span></a>
                         }
                         
