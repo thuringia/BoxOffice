@@ -7,32 +7,30 @@
 {
     @Html.Partial(partialViewName: "SubMenuPartial")
 }
-
 @section js
 {
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.raty.min.js")"></script>
     <script type="text/javascript">
-        var page = "#movies";
-        var subpage = "#movieDetailsLink";
-        $(document).ready(function() {
-            $(page).addClass("selected");
-            $(subpage).addClass("selected");
-            
-            // rating
-            $(".rating").raty({
-                half: true,
-                halfShow: true,
-                number: 10,
-                path: "/Content/img",
-                readOnly: true,
-                start: function () {
-                    return $(this).attr("data-rating");
-                }
-            });
+    var page = "#movies";
+    var subpage = "#movieDetailsLink";
+    $(document).ready(function () {
+        $(page).addClass("selected");
+        $(subpage).addClass("selected");
+
+        // rating
+        $(".rating").raty({
+            half: true,
+            halfShow: true,
+            number: 10,
+            path: "/Content/img",
+            readOnly: true,
+            start: function () {
+                return $(this).attr("data-rating");
+            }
         });
+    });
     </script>
 }
-
 <section id="movieArea" class="containerMovie">
     @if (Model.Images.Count() != 0)
     {
@@ -89,13 +87,12 @@
                         role="button" aria-disabled="false" id="addToQueue">
                         @if (Model.isRentable)
                         {
-                            <a href="javascript:addToQueue(@Model.MovieID);"><span class="ui-button-text" >
-                                Add to Queue </span></a>
+                            <a href="javascript:addToQueue(@Model.MovieID);"><span class="ui-button-text">Add to
+                                Queue</span></a>
                         }
                         else
                         {
-                            <a href="#"><span class="ui-button-text ui-state-disabled">Add to Queue
-                            </span></a>
+                            <a href="#"><span class="ui-button-text ui-state-disabled">Add to Queue</span></a>
                         }
                     </button>
                     @{
@@ -121,32 +118,44 @@
                     }
                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
                         role="button" aria-disabled="false" id="rate">
-                        @if (isWatched)
+                        @if (true)
                         {
-                            <a href="javascript:rate(@Model.MovieID);"><span class="ui-button-text" >Rate
-                            </span></a>
+                            <a href="javascript:rate(@Model.MovieID);"><span class="ui-button-text">Rate</span>
+                            </a>
                         }
                         else
                         {
-                            <a href="#"><span class="ui-button-text ui-state-disabled">Rate </span>
-                            </a>
+                            <a href="#"><span class="ui-button-text ui-state-disabled">Rate</span></a>
                         }
                     </button>
                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                            role="button" aria-disabled="false" id="comment">
-                        @if (isWatched)
+                        role="button" aria-disabled="false" id="comment">
+                        @if (true)
                         {
-                            <a href="javascript:Comment(@Model.MovieID);"><span class="ui-button-text" >
-                                                                          Comment </span></a>
+                            <a href="javascript:showComment();"><span class="ui-button-text">Comment</span>
+                            </a>
                         }
                         else
                         {
-                            <a href="#"><span class="ui-button-text ui-state-disabled">
-                                                                          Comment </span></a>
+                            <a href="#"><span class="ui-button-text ui-state-disabled">Comment</span></a>
                         }
-                        
                     </button>
                 </div>
+            </section>
+            <section id="ratingField" class="hidden">
+                <p>Click on the stars to rate this movie.<br />
+                    Click the button again to hide.</p>
+                <div id="ratingStars"></div>
+            </section>
+            <section id="commentField" class="hidden">
+                <p>Click on "send" to comment on this movie.<br />
+                    Click "comment" again to hide.</p>
+                <input id="commentText" type="text" placeholder="Your Comment goes here." />
+                 <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        role="button" aria-disabled="false" id="commentButton">
+                    <a href="javascript:sendComment(@Model.MovieID);"><span class="ui-button-text">Send</span>
+                    </a>
+                </button>
             </section>
         }
         <section id="comments">
@@ -155,7 +164,7 @@
             {
                 <section class="comment">
                     <label>@comment.User.Username (@comment.Date)</label>
-                    <a href="javascript:flagComment(@comment.CommentID)">Flag comment</a>
+                    <a href="javascript:flagComment(@comment.CommentID)" class="link">Flag comment</a>
                     <p>@comment.Message</p>
                 </section>
             }

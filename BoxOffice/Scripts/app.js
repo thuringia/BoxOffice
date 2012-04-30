@@ -1,6 +1,7 @@
 ﻿// GLOBALS
 var searchFieldVisible = false;
-var contentEditable = false;
+var rateFieldVisible = false;
+var commentFieldVisible = false;
 
 // $(document).ready()
 $(document).ready(function () {
@@ -47,7 +48,7 @@ $(document).ready(function () {
             var oldHeader = ui.oldHeader;// jQuery object, previous header
         });
     }
-    
+
     // view masonry
     var $container = $(".containerView");
     if ($container) {
@@ -68,7 +69,7 @@ $(document).ready(function () {
     if ($container) {
         $container.masonry({
             itemSelector: '.item',
-            containerWidth: function(containerWidth) {
+            containerWidth: function (containerWidth) {
                 return containerWidth / 2;
             },
             gutterWidth: 10,
@@ -116,6 +117,122 @@ $(document).ready(function () {
         });
     }
 });
+
+function showComment() {
+    var $selector = $("#commentField");
+    if (commentFieldVisible == false) {
+        commentFieldVisible = true;
+        // make search fiel visible
+        $selector.removeClass("hidden");
+        $selector.addClass("visible");
+        $selector.animate(
+            {
+                opacity: 1
+            }, 500, function () {
+            }
+            );
+    }
+    else {
+        // hide search field
+        commentFieldVisible = false;
+        $("#searchField").animate(
+            {
+                opacity: 0
+            }, 500, function () {
+                $selector.removeClass("visible");
+                $selector.addClass("hidden");
+            });
+    }
+}
+
+function sendComment(id) {
+    $.ajax({
+        url: '/Movies/Comment',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id, comment: $("#commentText").val() },
+        success: function (data) {
+            if (data.success) {
+                $("#comment").animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $("#comment").animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            } else {
+                $("#comment").animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $("#comment").animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            }
+        }
+    });
+}
+
+function rate(id) {
+    if (rateFieldVisible == false) {
+        rateFieldVisible = true;
+        $("#ratingField").removeClass("hidden");
+        $("#ratingField").addClass("visible");
+        $("#ratingField").animate(
+            {
+                opacity: 1
+            }, 500, function () {
+                $('#ratingStars').raty({
+                    half: true,
+                    halfShow: true,
+                    number: 10,
+                    path: "/Content/img",
+                    click: function (score, evt) {
+                        $.ajax({
+                            url: '/Movies/Rate',
+                            type: "GET",
+                            dataType: "json",
+
+                            // query will be the param used by your action method
+                            data: { id: id, rating: score },
+                            success: function (data) {
+                                if (data.success) {
+                                    $("#rate").animate({
+                                        backgroundColor: "#008000"
+                                    }, 500, function() {
+                                        $("#rate").animate({
+                                            backgroundColor: "#063559"
+                                        }, 500);
+                                    });
+                                } else {
+                                    $("#rate").animate({
+                                        backgroundColor: "#FF0000"
+                                    }, 500, function () {
+                                        $("#rate").animate({
+                                            backgroundColor: "#063559"
+                                        }, 500);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            );
+    } else {
+        $("#ratingField").animate({
+            opacity: 0
+        }, 500, function() {
+            $("ratingField").removeClass("visible");
+            $("ratingField").addClass("hidden");
+            rateFieldVisible = false;
+        });
+    }
+
+
+}
 
 function showMovieSearch() {
     if (searchFieldVisible == false) {

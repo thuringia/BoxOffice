@@ -60,6 +60,17 @@ body {
         text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
         text-decoration: none;
         padding-left: 2em; }
+    body #login p a {
+      color: rgba(250, 250, 250, 0.9);
+      font-family: museo-sans;
+      font-size: 1em;
+      font-weight: 500;
+      /* Inset text effect based on: */
+      /* http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects */
+      /* text-shadow: 0px 2px 3px #666; */
+      /* pseudo anti-aliasing for fonts */
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+      text-decoration: none; }
   body header, body #body, body footer {
     width: 60em;
     margin: 0 auto; }
@@ -236,8 +247,34 @@ body {
       margin-bottom: 1em; }
       #movieArea #infoArea #comments .comment label {
         font-weight: 100; }
+      #movieArea #infoArea #comments .comment .link {
+        font-size: 1em;
+        font-weight: 900; }
       #movieArea #infoArea #comments .comment p {
         font-weight: 500; }
+
+#ratingField {
+  opacity: 0;
+  background-color: #063559;
+  width: 18em;
+  height: 4em;
+  padding: 0.5em;
+  position: absolute;
+  left: 12em; }
+  #ratingField img {
+    height: 1em;
+    width: 1em !important; }
+
+#commentField {
+  opacity: 0;
+  background-color: #063559;
+  width: 21em;
+  height: 6em;
+  padding: 0.5em;
+  position: absolute;
+  left: 9em; }
+  #commentField span {
+    color: rgba(250, 250, 250, 0.9) !important; }
 
 .metroList li {
   margin: 1em;
