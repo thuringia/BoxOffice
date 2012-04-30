@@ -86,11 +86,65 @@ namespace BoxOffice.Controllers
         }
 
         //
+        // GET: /Admin/Messaging
+
+        [HttpGet]
+        public ActionResult Messaging()
+        {
+            return View();
+        }
+
+        //
         // POST: /Admin/MessageUser
         [HttpPost]
-        public JsonResult MessageUser()
+        public ActionResult Messaging(Message model)
         {
-            return Json(new { implemented = false });
+            if (ModelState.IsValid)
+            {
+                var msg = new Message
+                              {
+                                  UserID = model.UserID,
+                                  Text = model.Text,
+                                  DateSent = DateTime.Now,
+                                  User = new User()
+                              };
+                if (!model.toAll)
+                {  
+                    // get receipient
+                    var rec = db.Users.First(u => u.UserID == model.UserID);
+                    
+                    // add message to db
+                    db.Messages.Add(msg);
+                    db.SaveChanges();
+
+                    // add FKs
+                    msg.User = rec;
+                    rec.Messages.Add(msg);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    // sent msg to all
+                    msg.toAll = true;
+                    msg.UserID = null;
+                    msg.User = null;
+
+                    // add and save
+                    db.Messages.Add(msg);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("","ERROR");
+            }
+
+            return View(model);
         }
 
         //
