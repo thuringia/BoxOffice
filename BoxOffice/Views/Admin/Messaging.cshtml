@@ -48,9 +48,6 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Message</legend>
-        
         <div class="editor-label">
             @Html.Label("To:")
         </div>
@@ -59,19 +56,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ToUserID)
+            @Html.LabelFor(model => model.UserID)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ToUserID)
-            @Html.ValidationMessageFor(model => model.ToUserID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateSent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateSent)
-            @Html.ValidationMessageFor(model => model.DateSent)
+            @Html.EditorFor(model => model.UserID)
+            @Html.ValidationMessageFor(model => model.UserID)
         </div>
 
         <div class="editor-label">
@@ -90,12 +79,9 @@
             @Html.ValidationMessageFor(model => model.toAll)
         </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+        <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
+        <div class="ui-dialog-buttonset">
+            <input type="submit" value="Send" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
+        </div>
+    </section>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
