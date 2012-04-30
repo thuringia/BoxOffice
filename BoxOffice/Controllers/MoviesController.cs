@@ -137,10 +137,7 @@ namespace BoxOffice.Controllers
 
                 return Json(new { success = true });
             }
-            else
-            {
-                return Json(new { authenticated = false });
-            }
+            return Json(new { authenticated = false });
         }
 
         /// <summary>
