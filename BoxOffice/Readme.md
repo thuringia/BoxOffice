@@ -23,8 +23,8 @@ The kind of functionality required for members/visitors is as follows (see marki
 * <del>Browse details on various categories of rentable DVD s (Action & Adventure, Animation, Comedy, Documentary, Drama, etc.)</del>
 * <del>Keyword search for DVD titles</del>
 * <del>View DVD of the week</del>
-* Add a DVD to a personal rental list (requires log in)
-* Change the order of DVD s in personal rental list (requires log in)
+* <del>Add a DVD to a personal rental list (requires log in)</del>
+* <ins>Change the order of DVD s in personal rental list (requires log in)</ins>
 * Remove a DVD from a personal rental list (requires log in)
 * View a personal history of DVD rentals including the dates when the DVD s were rented (requires log in)
 * Rate a DVD that has been rented or is currently rented (requires log in)
