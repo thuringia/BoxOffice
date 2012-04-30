@@ -1,6 +1,10 @@
 ﻿@model BoxOffice.Models.User
 @{
-    ViewBag.Title = "Your Data";
+    ViewBag.Title = "Your Data - BoxOffice";
+}
+@section subMenu
+{
+    @Html.Partial(partialViewName:"userSubMenuPartial")
 }
 @section js
 {
@@ -16,99 +20,97 @@
 <h2>Profile</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-@using (Html.BeginForm())
+
+<p>Please check that all your personal information is complete and up-to-date.</p>
+<div id="profileForm" class="">
+@using (Html.BeginForm((string)ViewBag.FormAction, "Users"))
 {
     @Html.ValidationSummary(true)
-
-    <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <div class="ui-dialog-buttonset">
-            <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false">
-                <a href="javascript:toggleEdit();"><span class="ui-button-text">Edit</span></a>
-            </button>
-            <input type="submit" value="Save" class="ui-button ui-widget ui-state-disabled ui-corner-all ui-button-text-only" />
-        </div>
-    </section>
-
-
     @Html.HiddenFor(model => model.UserID)
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Username)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line noneditable" id="Username" name="Username" type="text" value="@Model.Username">
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Name)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your name is required." id="Name" name="Name" type="text" value="@Model.Name">
         @Html.ValidationMessageFor(model => model.Name)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Surname)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your surname is required." id="Surname" name="Surname" type="text" value="@Model.Surname">
         @Html.ValidationMessageFor(model => model.Surname)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Email)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" id="Email" name="Email" type="text" value="@Model.Email">
         @Html.ValidationMessageFor(model => model.Email)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.DateOfBirth)
     </div>
-    <div class="editor-field">
-        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your date of birth is required." id="DateOfBirth" name="DateOfBirth" type="text" value="@Model.DateOfBirth">
+    <div class="editor-field item">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your date of birth is required." id="Date Of Birth" name="DateOfBirth" type="text" value="@Model.DateOfBirth">
         @Html.ValidationMessageFor(model => model.DateOfBirth)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Street)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your Street is required." id="Street" name="Street" type="text" value="@Model.Street">
         @Html.ValidationMessageFor(model => model.Street)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Number)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your number is required." id="Number" name="Number" type="text" value="@Model.Number">
         @Html.ValidationMessageFor(model => model.Number)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Zip)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your zipcode is required." id="Zip" name="Zip" type="text" value="@Model.Zip">
         @Html.ValidationMessageFor(model => model.Zip)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.City)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your city is required." id="City" name="City" type="text" value="@Model.City">
         @Html.ValidationMessageFor(model => model.City)
     </div>
 
-    <div class="editor-label">
+    <div class="editor-label item">
         @Html.LabelFor(model => model.Phone)
     </div>
-    <div class="editor-field">
+    <div class="editor-field item">
         <input contenteditable="false" class="text-box single-line" id="Phone" name="Phone" type="text" value="@Model.Phone">
         @Html.ValidationMessageFor(model => model.Phone)
     </div>
+    
+    <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
+        <div class="ui-dialog-buttonset">
+            <input type="submit" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
+        </div>
+    </section>
 }
+    </div>
