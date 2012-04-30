@@ -75,18 +75,16 @@ namespace BoxOffice.Models
         {
             var msg = new Message
             {
-                MessageID = 1,
-                FromUserID = 1,
-                ToUserID = 2,
+                UserID = 1,
                 DateSent = DateTime.Now,
                 Text = "You suck!",
                 toAll = false,
-                Users = new List<User>()
+                User = new User()
             };
             context.Messages.Add(msg);
 
-            users.ForEach(s => s.Messages.Add(msg));
-            users.ForEach(s => msg.Users.Add(s));
+            users[0].Messages.Add(msg);
+            msg.User = users[0];
             context.SaveChanges();
         }
 
@@ -163,7 +161,8 @@ namespace BoxOffice.Models
                 Message = "Awesome movie!!!",
                 Date = DateTime.Now,
                 Movie = context.Movies.Find(187),
-                User = context.Users.Find(1)
+                User = context.Users.Find(1),
+                Flag = 0
             };
             context.Comments.Add(comment);
 
