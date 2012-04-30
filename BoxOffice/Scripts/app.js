@@ -118,6 +118,38 @@ $(document).ready(function () {
     }
 });
 
+function flagComment(id) {
+    $.ajax({
+        url: '/Movies/Flag',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id },
+        success: function (data) {
+            var sel = ".comment" + id;
+            var $selector = $(sel);
+            if (data.success) {
+                $($selector).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "rgba(0, 0, 0, 0.0)"
+                    }, 500);
+                });
+            } else {
+                $($selector).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "rgba(0, 0, 0, 0.0)"
+                    }, 500);
+                });
+            }
+        }
+    });
+}
+
 function showComment() {
     var $selector = $("#commentField");
     if (commentFieldVisible == false) {

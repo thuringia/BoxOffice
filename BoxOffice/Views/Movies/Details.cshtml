@@ -164,7 +164,7 @@
             {
                 <section class="comment">
                     <label>@comment.User.Username (@comment.Date)</label>
-                    <a href="javascript:flagComment(@comment.CommentID)" class="link">Flag comment</a>
+                    <a href="javascript:flagComment(@comment.CommentID)" class="link @string.Format("comment{0}",comment.CommentID)">Flag comment</a>
                     <p>@comment.Message</p>
                 </section>
             }
