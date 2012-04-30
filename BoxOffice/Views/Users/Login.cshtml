@@ -1,5 +1,4 @@
 @model BoxOffice.Models.LoginModel
-
 @{
     ViewBag.Title = "Login";
 }
@@ -31,6 +30,11 @@
             </li>
         </ol>
         
-        <input type="submit"  value="Login" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text" />
+        <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
+            <div class="ui-dialog-buttonset">
+                <input type="submit" value="Login" class="ui-button ui-widget ui-state-default ui-corner-all"
+                    role="button" aria-disabled="false" />
+            </div>
+        </section>
     }
 </div>
