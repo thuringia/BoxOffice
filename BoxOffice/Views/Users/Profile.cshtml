@@ -60,10 +60,10 @@
     </div>
 
     <div class="editor-label item">
-        @Html.LabelFor(model => model.DateOfBirth)
+        <label for="DateOfBirth">Date Of Birth</label>
     </div>
     <div class="editor-field item">
-        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your date of birth is required." id="Date Of Birth" name="DateOfBirth" type="text" value="@Model.DateOfBirth">
+        <input contenteditable="false" class="text-box single-line" data-val="true" data-val-required="Your date of birth is required." id="DateOfBirth" name="DateOfBirth" type="text" value="@Model.DateOfBirth">
         @Html.ValidationMessageFor(model => model.DateOfBirth)
     </div>
 
