@@ -20,46 +20,48 @@
 <h2 class="boxoffice">add a movie to BoxOffice</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-    <p></p>
+<div id="addMovieForm">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.TMDbID)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.TMDbID)
-        @Html.ValidationMessageFor(model => model.TMDbID)
-    </div>
+        <div class="editor-label">
+            <label for="TMDbID">TMDb ID</label>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TMDbID)
+            @Html.ValidationMessageFor(model => model.TMDbID)
+        </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.DVDs)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.DVDs)
-        @Html.ValidationMessageFor(model => model.DVDs)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DVDs)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DVDs)
+            @Html.ValidationMessageFor(model => model.DVDs)
+        </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.Price)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.Price)
-        @Html.ValidationMessageFor(model => model.Price)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.MovieOfTheWeek)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.MovieOfTheWeek)
-        @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
-    </div>
+        <div class="editor-label">
+            <label for="MovieOfTheWeek">Movie Of The Week</label>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MovieOfTheWeek)
+            @Html.ValidationMessageFor(model => model.MovieOfTheWeek)
+        </div>
     
-                  
-
-    <p>
-        <input type="submit" value="Create" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text" />
-    </p>
-}
+        <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
+            <div class="ui-dialog-buttonset">
+                <input type="submit" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all"
+                    role="button" aria-disabled="false" />
+            </div>
+        </section>
+    }
+</div>
