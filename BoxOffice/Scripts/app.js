@@ -32,7 +32,8 @@ $(document).ready(function () {
 			.accordion({
 			    header: "> div > h3",
 			    collapsible: true,
-			    active: false
+			    active: false,
+			    autoHeight: false
 			})
 			.sortable({
 			    axis: "y",
@@ -143,6 +144,38 @@ function flagComment(id) {
                 }, 500, function () {
                     $($selector).animate({
                         backgroundColor: "rgba(0, 0, 0, 0.0)"
+                    }, 500);
+                });
+            }
+        }
+    });
+}
+
+function unqueue(id) {
+    $.ajax({
+        url: '/Users/Unqueue',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id },
+        success: function (data) {
+            var sel = "#unqueueButton";
+            var $selector = $(sel);
+            if (data.success) {
+                $($selector).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            } else {
+                $($selector).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
                     }, 500);
                 });
             }
