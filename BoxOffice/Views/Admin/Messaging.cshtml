@@ -12,7 +12,7 @@
         $(page).addClass("selected");
 
         // username completion
-        $("#Username").autocomplete({
+        $("#UserID").autocomplete({
             source: function (request, response) {
                 // define a function to call your Action (assuming UserController)
                 $.ajax({
@@ -23,9 +23,12 @@
                     // query will be the param used by your action method
                     data: { q: request.term },
                     success: function (data) {
+                        //response($.map(data, function (item) {
+                        //    return { label: item.key(), value: item.key() };
+                        //}));
                         response($.map(data, function (item) {
-                            return { label: item, value: item };
-                        }));
+                                return { label: item.Name, value: item.Id };
+                            }));
                     }
                 });
             },
@@ -47,17 +50,10 @@
         @Html.ValidationSummary(true)
 
         <div class="editor-label">
-            @Html.Label("To")
+            <label for="UserID">To</label>
         </div>
         <div class="editor-field">
-            <input class="text-box single-line" id="Username" name="Username" type="text" value="">
-        </div>
-
-        <div class="editor-label">
-            <label for="UserID">User ID</label>
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserID)
+            <input class="text-box single-line" data-val="true" data-val-number="The field UserID must be a number." id="UserID" name="UserID" type="text" value="">
             @Html.ValidationMessageFor(model => model.UserID)
         </div>
 

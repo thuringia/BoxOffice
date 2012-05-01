@@ -173,6 +173,11 @@ body {
     font-size: 1.25em;
     margin-bottom: 0.25em; }
 
+#messages .from {
+  width: 5em; }
+#messages .date {
+  width: 11em; }
+
 #hotMoviesSection {
   height: 22em; }
 

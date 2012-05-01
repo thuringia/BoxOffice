@@ -14,6 +14,9 @@
         db.Messages.Where(m => m.toAll).ToList().ForEach(m => messagesToDisplay.Add(m));
     }
     messagesToDisplay = messagesToDisplay.OrderBy(m => m.DateSent).Take(30).ToList();
+
+    var fromAdmin = "Admin";
+    var fromSystem = "System";
 }
 @section subMenu
 {
@@ -29,7 +32,7 @@
     $(document).ready(function () {
         $(page).addClass("selected");
         $(subpage).addClass("selected");
-        
+
         // rating
         $(".rating").raty({
             half: true,
@@ -43,7 +46,7 @@
         });
     });
 
-    
+
 
     </script>
 }
@@ -59,10 +62,10 @@
                     <h3>@Html.ActionLink(@rental.Movie.Name, "Details", "Movies")</h3>
                     <div class="containerQueue">
                         <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button" aria-disabled="false" id="unqueueButton">
-                    <a href="javascript:unqueue(@rental.RentalID);"><span class="ui-button-text">Unqueue</span>
-                    </a>
-                </button>
+                            role="button" aria-disabled="false" id="unqueueButton">
+                            <a href="javascript:unqueue(@rental.RentalID);"><span class="ui-button-text">Unqueue
+                            </span></a>
+                        </button>
                     </div>
                 </div>
                 }
@@ -71,7 +74,10 @@
             {
                 <div class="group">
                     <h3><a href="#">No movies in queue</a></h3>
-                    <p>You didn't add any movies to your queue, but you can @Html.ActionLink(linkText: "change", controllerName: "Movies", actionName: "Index") that.</p>
+                    <p>
+                        You didn't add any movies to your queue, but you can @Html.ActionLink(linkText: "change", controllerName: "Movies", actionName: "Index")
+                        that.
+                    </p>
                 </div>
             }
         </div>
@@ -100,15 +106,19 @@
                     @foreach (var item in messagesToDisplay)
                     {
                         <tr>
-                            <td>
+                            <td class="from">
                                 @if (item.toAll)
                                 {
-                                    @Html.Display("System");
+                                    @fromAdmin
+                                }
+                                else
+                                {
+                                    @fromSystem
                                 }
                             </td>
-                            <td>@Html.Display(item.DateSent.ToString())</td>
-                            <td>
-                                <p>@Html.Display(item.Text)</p>
+                            <td class="date">@item.DateSent</td>
+                            <td class="text">
+                                <p>@item.Text</p>
                             </td>
                         </tr>
                     }

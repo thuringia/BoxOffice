@@ -9,6 +9,7 @@ using BoxOffice.ActionFilters;
 using System.Xml.Linq;
 using BoxOffice.Exceptions;
 using System.Globalization;
+using BoxOffice.ViewModels;
 
 namespace BoxOffice.Controllers
 {
@@ -326,28 +327,22 @@ namespace BoxOffice.Controllers
         [HttpGet]
         public JsonResult Usernames(string q)
         {
-            var names = from user in db.Users
-                        where user.Username.Contains(q)
-                        select new User
-                        {
-                            UserID = user.UserID,
-                            Username = user.Username
-                        };
+            var names = db.Users.Where(user => user.Username.Contains(q));
 
             if (names.Any())
             {
-                return Json(names.ToArray());
+                return Json(names.Select(user => new UserSearch()
+                                                        {
+                                                            Name = user.Username, Id = user.UserID
+                                                        }).ToList());
             }
-            else
-            {
-                return Json(new { success = false });
-            }
+            return Json(new {});
         }
 
         /// <summary>
         /// Saves a movie from TheMovieDB to BoxOffices db
         /// </summary>
-        /// <param name="newMovie">An AddMovie model containing all info</param>
+        /// <param name="model">An AddMovie model containing all info</param>
         public void persistMovie(AddMovieModel model)
         {
             // create request url
