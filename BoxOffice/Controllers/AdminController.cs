@@ -383,7 +383,7 @@ namespace BoxOffice.Controllers
             try
             {
                 var commentToDelete = db.Comments.First(m => m.CommentID == id);
-                commentToDelete.Hide = false;
+                commentToDelete.Hide = true;
                 db.SaveChanges();
 
                 return Json(new { success = true });
@@ -712,7 +712,7 @@ namespace BoxOffice.Controllers
                     Movie = movie,
                     MovieID = movie.MovieID,
                     Rentals = new List<Rental>(),
-                    State = "new"
+                    State = "available"
                 };
 
                 dvds.Add(newDVD);

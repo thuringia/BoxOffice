@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BoxOffice.Events;
 using BoxOffice.Models;
 using System.Web.Security;
 using BoxOffice.ActionFilters;
@@ -147,8 +148,32 @@ namespace BoxOffice.Controllers
         }
 
         //
+        // GET: /Movies/Return/{id}
+
+        /// <summary>
+        /// handles a users return of a dvd
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult Return(int id)
+        {
+            var theReturn = db.Rentals.First(d => d.RentalID == id);
+
+            if (Dispatch.ReturnDVD(theReturn))
+            {
+                return Json(new {success = true});
+            }
+            return Json(new {success = false});
+        }
+
+        //
         // GET: /Users/Comments
 
+        /// <summary>
+        /// shows the comments view
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Comments()
         {

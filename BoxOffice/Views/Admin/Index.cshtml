@@ -60,12 +60,12 @@ else
                             <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
                                 <div class="ui-dialog-buttonset">
                                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                                        role="button" aria-disabled="false" id="@string.Format("deleteComment{0})", item.UserID)">
+                                        role="button" aria-disabled="false" id="@string.Format("deleteComment{0}", item.UserID)">
                                         <a href="javascript:deleteComment(@item.CommentID);"><span class="ui-button-text">delete
                                             comment</span></a>
                                     </button>
                                     <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                                        role="button" aria-disabled="false" id="@string.Format("deleteUser{0})", item.UserID)">
+                                        role="button" aria-disabled="false" id="@string.Format("deleteUser{0}", item.UserID)">
                                         <a href="javascript:deleteUser(@item.UserID);"><span class="ui-button-text">ban user
                                             </span></a>
                                     </button>

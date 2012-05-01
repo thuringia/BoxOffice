@@ -77,9 +77,11 @@ function deleteComment(id) {
                 }, 500, function () {
                     $($selector).animate({
                         backgroundColor: "#063559"
-                    }, 500);
+                    }, 500, function() {
+                        
+                    });
                 });
-                window.location.href = "/Admin/Index";
+                
             } else {
                 $($selector).animate({
                     backgroundColor: "#FF0000"
@@ -112,7 +114,6 @@ function deleteUser(id) {
                         backgroundColor: "#063559"
                     }, 500);
                 });
-                window.location.href = "/Admin/Index";
             } else {
                 $($selector).animate({
                     backgroundColor: "#FF0000"

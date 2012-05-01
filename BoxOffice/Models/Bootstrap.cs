@@ -135,7 +135,7 @@ namespace BoxOffice.Models
                 var dvd = new DVD
                 {
                     MovieID = 187,
-                    State = "new",
+                    State = "available",
                     Movie = context.Movies.Find(187),
                     Rentals = new List<Rental>()
                 };

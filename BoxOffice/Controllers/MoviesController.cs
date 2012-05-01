@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using BoxOffice.Events;
 using BoxOffice.Models;
 using BoxOffice.ActionFilters;
 using BoxOffice.Exceptions;
@@ -178,6 +179,9 @@ namespace BoxOffice.Controllers
                 user.Queue.Add(newQueueItem);
                 movie.Rentals.Add(newQueueItem);
                 db.SaveChanges();
+
+                // try getting a dvd
+                Dispatch.RequestDVD(newQueueItem);
             }
             catch (Exception)
             {

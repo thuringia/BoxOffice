@@ -19,20 +19,40 @@
 @if (Model.Any())
 {
     <ul class="metroList">
-    @foreach (var item in Model)
-    {
-        <li>
-            <a href="@Html.Action("Details", "Movies", new { id = item.MovieID })">
-                @string.Format("{0} ({1})", item.Movie.Name, item.DateSent)
-            </a>
-        </li>
-    }
-</ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @if (Model.ToList().Any(r => r.DateSent != null && r.DateReturned == null))
+                {
+                    <ul>
+                        <li><a href="@Html.Action("Details", "Movies", new { id = item.MovieID })">
+                            @string.Format("{0} (sent: {1})", item.Movie.Name, item.DateSent)
+                        </a></li>
+                        <li>
+                            <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                                    role="button" aria-disabled="false" id="@string.Format("return{0})", item.RentalID)">
+                                <a href="javascript:returnDVD(@item.RentalID);"><span class="ui-button-text">return</span>
+                                </a>
+                            </button>
+                        </li>
+                    </ul>
+                }
+                else
+                {<a href="@Html.Action("Details", "Movies", new { id = item.MovieID })">
+                    @string.Format("{0} (returned: {1})", item.Movie.Name, item.DateReturned)
+                </a>
+                }
+            </li>
+        }
+    </ul>
 }
 else
 {
     <h2>No rentals</h2>
-    <p>You may have never added a movie to your queue or no movies were dispatched to you yet. <br/>
+    <p>
+        You may have never added a movie to your queue or no movies were dispatched to you
+        yet.
+        <br />
         Either way, keep queueing. ;)
     </p>
 }

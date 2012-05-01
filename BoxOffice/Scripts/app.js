@@ -119,6 +119,38 @@ $(document).ready(function () {
     }
 });
 
+function returnDVD(id) {
+    $.ajax({
+        url: '/Users/Return',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id },
+        success: function (data) {
+            var sel = "#return" + id;
+            var $selector = $(sel);
+            if (data.success) {
+                $($selector).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            } else {
+                $($selector).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            }
+        }
+    });
+}
+
 function flagComment(id) {
     $.ajax({
         url: '/Movies/Flag',
