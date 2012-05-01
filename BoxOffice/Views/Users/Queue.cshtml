@@ -58,6 +58,11 @@
                 <div class="group">
                     <h3>@Html.ActionLink(@rental.Movie.Name, "Details", "Movies")</h3>
                     <div class="containerQueue">
+                        <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button" aria-disabled="false" id="unqueueButton">
+                    <a href="javascript:unqueue(@rental.RentalID);"><span class="ui-button-text">Unqueue</span>
+                    </a>
+                </button>
                     </div>
                 </div>
                 }
