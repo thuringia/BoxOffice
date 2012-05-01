@@ -8,10 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using BoxOffice.Models;
 using System.Web.Security;
+using BoxOffice.ActionFilters;
 
 namespace BoxOffice.Controllers
 { 
     [Authorize(Roles = "User")]
+    [JsonRequestBehavior]
     public class UsersController : Controller
     {
         private BoxOfficeContext db = new BoxOfficeContext();
@@ -114,6 +116,39 @@ namespace BoxOffice.Controllers
                 View(
                     theUser.Queue.Where(rental => rental.QueuePosition == null).OrderBy(rental => rental.DateReturned).
                         ToList());
+        }
+
+        //
+        // GET: /Users/Unqueue/{id}
+
+        /// <summary>
+        /// Unqueues a movie
+        /// </summary>
+        /// <param name="id">RentalID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Unqueue(int id)
+        {
+            try
+            {
+                var rental = db.Rentals.First(r => r.RentalID == id);
+                var movie = rental.Movie;
+                var usr = rental.User;
+
+                // unqueue
+                movie.Rentals.Remove(rental);
+                usr.Queue.Remove(rental);
+                db.SaveChanges();
+
+                db.Rentals.Remove(rental);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return Json(new {success = false, error = e.Message});
+            }
+
+            return RedirectToAction("Queue");
         }
 
         //
