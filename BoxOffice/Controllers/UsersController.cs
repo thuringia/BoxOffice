@@ -535,31 +535,6 @@ namespace BoxOffice.Controllers
             return !aUser.Any();
         }
 
-
-        //
-        // GET: /Users/Usernames
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public JsonResult Usernames(string q)
-        {
-            var names = from user in db.Users
-                        where user.Username.Contains(q)
-                        select new User
-                                   {
-                                       UserID = user.UserID,
-                                       Username = user.Username
-                                   };
-
-            if (names.Any())
-            {
-                return Json(names.ToArray());
-            }
-            else
-            {
-                return Json(new {success = false});
-            }
-        }
-
         #endregion
 
         protected override void Dispose(bool disposing)

@@ -315,6 +315,35 @@ namespace BoxOffice.Controllers
             return Json(new {fail = true});
         }
 
+        //
+        // GET: /Users/Usernames
+        
+        /// <summary>
+        /// searches for users
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult Usernames(string q)
+        {
+            var names = from user in db.Users
+                        where user.Username.Contains(q)
+                        select new User
+                        {
+                            UserID = user.UserID,
+                            Username = user.Username
+                        };
+
+            if (names.Any())
+            {
+                return Json(names.ToArray());
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
+        }
+
         /// <summary>
         /// Saves a movie from TheMovieDB to BoxOffices db
         /// </summary>
