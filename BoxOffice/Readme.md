@@ -29,7 +29,7 @@ The kind of functionality required for members/visitors is as follows (see marki
 * <del>View a personal history of DVD rentals including the dates when the DVD s were rented (requires log in)</del>
 * <del>Rate a DVD that has been rented or is currently rented (requires log in)</del>
 * <del>Post comments on a DVD that has been rented or is currently rented  (requires log in)</del>
-* The ability for a member to edit (only) their own comments (requires log in)
+* <del>The ability for a member to edit (only) their own comments (requires log in)</del>
 * <del>View comments that other customers have made</del>
 * <del>Flag abusive or inappropriate comments for the administrator's attention</del>
 * <del>Log out</del>
@@ -48,8 +48,8 @@ The kind of functionality required for the administrator to perform is as follow
 
 * <del>Add the details of new DVD s for rental (including date for when the DVD becomes available to rent   you could have a default of the date when the record was added)</del>
 * <del>Edit details of DVD s that are currently in stock</del>
-* Remove DVD s from being available to rent (the details of the DVD should still remain on the system)
-* Post DVD of the week (available to all users including visitors)
+* <del>Remove DVD s from being available to rent (the details of the DVD should still remain on the system)</del>
+* <del>Post DVD of the week (available to all users including visitors)</del>
 * Register the return of a DVD (this should automatically be removed as the  currently rented  DVD from the account of the member who rented it)
 * Register dispatch of the next available DVD on the rental list (as a simulation this could be any DVD on the list)
 * <del>Investigate comments flagged by members</del>
