@@ -16,7 +16,7 @@
             source: function (request, response) {
                 // define a function to call your Action (assuming UserController)
                 $.ajax({
-                    url: '/Users/Usernames',
+                    url: '/Admin/Usernames',
                     type: "GET",
                     dataType: "json",
 
@@ -42,17 +42,19 @@
 <div id="messagingForm">
     @using (Html.BeginForm())
     {
+        <p>Send a message to one user or all of the them.</p>
+        
         @Html.ValidationSummary(true)
 
         <div class="editor-label">
-            @Html.Label("To:")
+            @Html.Label("To")
         </div>
         <div class="editor-field">
             <input class="text-box single-line" id="Username" name="Username" type="text" value="">
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.UserID)
+            <label for="UserID">User ID</label>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.UserID)
@@ -68,7 +70,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.toAll)
+            <label for="toAll">send to All</label>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.toAll)
