@@ -178,17 +178,17 @@ namespace BoxOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                //try
-                //{
+                try
+                {
                 persistMovie(add);
 
-                return View("Movies");
-                //}
-                //catch (Exception e)
-                //{
+                return RedirectToAction("Movies");
+                }
+                catch (Exception e)
+                {
 
-                //    return View();
-                //}
+                    return View();
+                }
             }
             // If we got this far, something failed
             return View();
