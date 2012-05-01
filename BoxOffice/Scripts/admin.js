@@ -4,27 +4,24 @@ var searchFieldVisible = false;
 // $(document).ready()
 $(document).ready(function () {
     // search for adding a movie
-    $("#addSearchTerm").autocomplete({
+    $("#TMDbID").autocomplete({
         source: function (request, response) {
             // define a function to call your Action (assuming UserController)
             $.ajax({
-                url: 'http://api.themoviedb.org/2.1/Movie.search/en/json/b0f4c9d847ceda92061d4090b470dc10/',
+                url: '/Admin/MovieTitle',
                 type: "GET",
                 dataType: "json",
 
                 // query will be the param used by your action method
-                data: request.term,
+                data: { q: request.term },
                 success: function(data) {
                     response($.map(data, function(item) {
-                        return { label: item.Name, value: item.Name };
+                        return { label: item.Name, value: item.Id };
                     }));
                 }
             });
         },
-        minLength: 1, // require at least one character from the user
-        select: function (event, ui) {
-            alert(event.item);
-        }
+        minLength: 1 // require at least one character from the user
     });
 
     var $container = $(".container");

@@ -333,11 +333,51 @@ namespace BoxOffice.Controllers
             if (names.Any())
             {
                 return Json(names.Select(user => new UserSearch()
-                                                        {
-                                                            Name = user.Username, Id = user.UserID
-                                                        }).ToList());
+                                                     {
+                                                         Name = user.Username,
+                                                         Id = user.UserID
+                                                     }).ToList());
             }
             return Json(new {});
+
+        }
+
+        //
+        // GET: /Users/Usernames
+
+        /// <summary>
+        /// searches for users
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult MovieTitle(string q)
+        {
+            // create request url
+            string UrlRequest = "http://api.themoviedb.org/2.1/Movie.search/en/xml/b0f4c9d847ceda92061d4090b470dc10/" + q;
+
+            /* make request */
+            XDocument tmdbMovie = null;
+            try
+            {
+                HttpWebRequest request = WebRequest.Create(UrlRequest) as HttpWebRequest;
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+                tmdbMovie = XDocument.Load(response.GetResponseStream());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new RequestFailedException();
+            }
+
+            var movie = (from m in tmdbMovie.Descendants("movie")
+                         select new MovieSearch
+                                    {
+                                        Name = m.Element("name").Value,
+                                        Id = int.Parse(m.Element("id").Value)
+                                    }).ToList();
+            return Json(movie);
         }
 
         /// <summary>
