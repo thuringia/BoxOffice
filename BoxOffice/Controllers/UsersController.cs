@@ -91,7 +91,7 @@ namespace BoxOffice.Controllers
                 // save changes
                 db.SaveChanges();
 
-                return View();
+                return RedirectToAction("Profile");
             }
             else
             {

@@ -192,7 +192,7 @@ function unqueue(id) {
         // query will be the param used by your action method
         data: { id: id },
         success: function (data) {
-            var sel = "#unqueueButton";
+            var sel = "#return" + id;
             var $selector = $(sel);
             if (data.success) {
                 $($selector).animate({

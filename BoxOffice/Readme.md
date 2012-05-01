@@ -50,8 +50,8 @@ The kind of functionality required for the administrator to perform is as follow
 * <del>Edit details of DVD s that are currently in stock</del>
 * <del>Remove DVD s from being available to rent (the details of the DVD should still remain on the system)</del>
 * <del>Post DVD of the week (available to all users including visitors)</del>
-* Register the return of a DVD (this should automatically be removed as the  currently rented  DVD from the account of the member who rented it)
-* Register dispatch of the next available DVD on the rental list (as a simulation this could be any DVD on the list)
+* <del>Register the return of a DVD (this should automatically be removed as the  currently rented  DVD from the account of the member who rented it)</del>
+* <del>Register dispatch of the next available DVD on the rental list (as a simulation this could be any DVD on the list)</del>
 * <del>Investigate comments flagged by members</del>
 * <del>Moderate (potentially remove) comments made by members</del>
 * <del>Remove or suspend members from the site</del>
