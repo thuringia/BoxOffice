@@ -29,7 +29,7 @@
             <label for="TMDbID">TMDb ID</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TMDbID)
+            <input class="text-box single-line" data-val="true" data-val-required="The TMDbID field is required." id="TMDbID" name="TMDbID" type="text" value="">
             @Html.ValidationMessageFor(model => model.TMDbID)
         </div>
 
