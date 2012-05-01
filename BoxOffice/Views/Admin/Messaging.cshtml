@@ -1,52 +1,48 @@
 ﻿@using System.Web.Mvc.Html
 @model BoxOffice.Models.Message
-
 @{
     ViewBag.Title = "MessageUser";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 @section js
 {
     <script type="text/javascript">
-        var page = "#msg";
-        $(document).ready(function () {
-            $(page).addClass("selected");
-            
-            // username completion
-            $("#Username").autocomplete({
-                source: function (request, response) {
-                    // define a function to call your Action (assuming UserController)
-                    $.ajax({
-                        url: 'Users/Usernames',
-                        type: "GET",
-                        dataType: "json",
+    var page = "#msg";
+    $(document).ready(function () {
+        $(page).addClass("selected");
 
-                        // query will be the param used by your action method
-                        data: { q: request.term },
-                        success: function(data) {
-                            response($.map(data, function(item) {
-                                return { label: item, value: item };
-                            }));
-                        }
-                    });
-                },
-                result: function (event, data, formatted) { // result is a separate function
-                    alert(data);
-                },
-                minLength: 1, // require at least one character from the user
-            });
+        // username completion
+        $("#Username").autocomplete({
+            source: function (request, response) {
+                // define a function to call your Action (assuming UserController)
+                $.ajax({
+                    url: '/Users/Usernames',
+                    type: "GET",
+                    dataType: "json",
+
+                    // query will be the param used by your action method
+                    data: { q: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item, value: item };
+                        }));
+                    }
+                });
+            },
+            result: function (event, data, formatted) { // result is a separate function
+                alert(data);
+            },
+            minLength: 1, // require at least one character from the user
         });
+    });
     </script>
 }
-
-<h2>MessageUser</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+<div id="messagingForm">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
 
         <div class="editor-label">
             @Html.Label("To:")
@@ -80,8 +76,10 @@
         </div>
 
         <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
-        <div class="ui-dialog-buttonset">
-            <input type="submit" value="Send" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
-        </div>
-    </section>
-}
+            <div class="ui-dialog-buttonset">
+                <input type="submit" value="Send" class="ui-button ui-widget ui-state-default ui-corner-all"
+                    role="button" aria-disabled="false" />
+            </div>
+        </section>
+    }
+</div>
