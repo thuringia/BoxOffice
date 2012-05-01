@@ -143,7 +143,8 @@ body {
     text-align: center; }
 
 #profileForm {
-  width: 26em; }
+  width: 26em;
+  margin: 0 auto; }
   #profileForm label {
     width: 10em;
     margin-top: 1em;
@@ -290,24 +291,29 @@ body {
     /* pseudo anti-aliasing for fonts */
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     text-decoration: none; }
+.metroList .comment {
+  margin-left: 1em;
+  margin-bottom: 1em; }
+  .metroList .comment label {
+    font-weight: 100; }
+  .metroList .comment .link {
+    font-size: 1em;
+    font-weight: 900; }
+  .metroList .comment p {
+    font-weight: 500; }
+  .metroList .comment #commentField {
+    left: 17em !important; }
+    .metroList .comment #commentField span {
+      color: rgba(250, 250, 250, 0.9) !important;
+      font-size: 1em !important; }
 
 #queuePage #queue {
   width: 15em; }
 #queuePage #messages {
   margin-left: 5em;
   width: 35em; }
-#queuePage .containerQueue img {
-  height: 3em; }
-#queuePage .containerQueue h4, #queuePage .containerQueue p {
-  font-size: 0.75em !important;
-  font-family: museo-sans !important; }
-#queuePage .containerQueue .taglineDiv {
-  width: 5em; }
-#queuePage .containerQueue .ratingDiv {
-  width: 5em; }
-  #queuePage .containerQueue .ratingDiv img {
-    height: 0.5em;
-    width: 0.5em !important; }
+#queuePage .group div {
+  height: 4em !important; }
 
 /* HELPERS */
 .link {

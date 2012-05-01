@@ -187,6 +187,7 @@ body {
 
 #profileForm {
 	width: 26em;
+	margin: 0 auto;
 
 	label {
 					width: 10em;
@@ -390,7 +391,35 @@ body {
 			text-decoration: none;
 		}
 	}
-}
+			.comment {
+				margin-left: 1em;
+				margin-bottom: 1em;
+
+				label {
+					font-weight: 100;
+				}
+
+				.link {
+					font: {
+						size: 1em;
+						weight: 900;
+					}
+				}
+
+				p {
+					font-weight: 500;
+				}
+
+				#commentField {
+					left: 17em !important;
+					span {
+			color: rgba(250,250,250,0.9) !important;
+			font-size: 1em !important;
+		}
+				}
+			}
+		}
+
 
 #queuePage {
 	$queueWidth: 15em;
@@ -403,27 +432,9 @@ body {
 		width: ($pageWidth - $queueWidth) - 10em;
 	}
 
-	.containerQueue {
-		img {
-			height: 3em;
-		}
-
-		h4, p {
-			font-size: 0.75em !important;
-			font-family: museo-sans !important;
-		}
-
-		.taglineDiv {
-			width: 5em;
-		}
-
-		.ratingDiv {
-			width: 5em;
-
-			img {
-				height: 0.5em;
-				width: 0.5em !important;
-			}
+	.group {
+		div {
+			height: 4em !important;
 		}
 	}
 }
