@@ -40,23 +40,23 @@
           /* pseudo anti-aliasing for fonts */
           text-shadow: 0 0 1px rgba(0, 0, 0, 0.3); }
 
-#addMovieForm {
+#addMovieForm, #messagingForm {
   width: 26em;
   height: 18em;
   margin: 0 auto; }
-  #addMovieForm label {
+  #addMovieForm label, #messagingForm label {
     width: 10em;
     margin-top: 1em;
     margin-left: 1em;
     float: left;
     text-transform: lowercase; }
-  #addMovieForm input[type=text] {
+  #addMovieForm input[type=text], #messagingForm input[type=text] {
     width: 16em !important;
     float: left;
     margin: 1em; }
-  #addMovieForm input[type=checkbox] {
+  #addMovieForm input[type=checkbox], #messagingForm input[type=checkbox] {
     width: 16em !important;
     float: left;
     margin: 1em; }
-  #addMovieForm input[type=submit] {
+  #addMovieForm input[type=submit], #messagingForm input[type=submit] {
     margin: 1em; }
