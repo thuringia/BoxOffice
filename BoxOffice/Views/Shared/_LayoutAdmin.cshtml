@@ -9,13 +9,14 @@
     <script type="text/javascript" src="http://use.typekit.com/irl4iyd.js"></script>
     <script type="text/javascript">    try { Typekit.load(); } catch (e) { }</script>
     
-    <!-- Load bundled JS -->
-    <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")"></script>
-    
-    <!-- load other JS -->
+    <!-- Load JS -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/Scripts/modernizr-2.0.6-development-only.js"></script>
     <script type="text/javascript" src="/Scripts/AjaxLogin.js"></script>
     <script type="text/javascript" src="/Scripts/admin.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.masonry.min.js"></script>
+    <script type="text/javascript" src="http://www.bitstorm.org/jquery/color-animation/jquery.animate-colors-min.js"></script>
     <script type="text/javascript" src="/Scripts/cssfx.min.js"></script>
 
     <!-- provide standard conforming functionality to IE -->
@@ -39,6 +40,9 @@
 <body>
 
     <h1 id="logo">BoxOffice</h1>
+    <section id="login">
+        @Html.Partial("_LoginPartial")
+    </section>
 
     <header>
         <nav>
