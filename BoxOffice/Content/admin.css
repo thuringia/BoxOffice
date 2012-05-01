@@ -43,12 +43,13 @@
 #addMovieForm {
   width: 26em;
   height: 18em;
-  margin: 0 auto label;
-    margin-width: 10em;
-    margin-margin-top: 1em;
-    margin-margin-left: 1em;
-    margin-float: left;
-    margin-text-transform: lowercase; }
+  margin: 0 auto; }
+  #addMovieForm label {
+    width: 10em;
+    margin-top: 1em;
+    margin-left: 1em;
+    float: left;
+    text-transform: lowercase; }
   #addMovieForm input[type=text] {
     width: 16em !important;
     float: left;
