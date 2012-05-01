@@ -170,6 +170,7 @@ function unqueue(id) {
                         backgroundColor: "#063559"
                     }, 500);
                 });
+                window.location.href = "/Users/Queue";
             } else {
                 $($selector).animate({
                     backgroundColor: "#FF0000"

@@ -73,5 +73,10 @@ namespace BoxOffice.Models
         /// null = not in queue, i.e. rental returned
         /// </summary>
         public int? QueuePosition { get; set; }
+
+        /// <summary>
+        /// Hides this rental => delete
+        /// </summary>
+        public bool Hide { get; set; }
     }
 }

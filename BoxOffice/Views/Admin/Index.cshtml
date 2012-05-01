@@ -1,22 +1,19 @@
 ﻿@using BoxOffice.Models;
-
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "BoxOffice Administrative Interface";
 }
-
 @section js {
     <script type="text/javascript">
     var page = "#home";
     $(document).ready(function () {
         $("#home").addClass("selected");
         $("#search").css({
-                opacity: 0.1
-            });
+            opacity: 0.1
+        });
     });
     </script>
 }
-
 @section subMenu
 {
     <ul id="subMenu">
@@ -25,15 +22,11 @@
         <li><a href='#flaggedCommentsSection'>Flagged Comments</a></li>
     </ul>
 }
-
 @Html.Partial(partialViewName: "MovieOfTheWeekPartial")
-
 @Html.Partial(partialViewName: "HotMoviesPartial")
-
 @{
     var comments = (List<BoxOffice.Models.Comment>)ViewData["flaggedComments"];
 }
-
 @if (comments == null)
 {
     <section id="flaggedCommentsSection">
@@ -49,31 +42,36 @@ else
             <thead>
                 <tr>
                     <td>Username</td>
-                </tr>
-                <tr>
                     <td>Movie</td>
-                </tr>
-                <tr>
                     <td>Comment</td>
-                </tr>
-                <tr>
                     <td>Flags</td>
+                    <td>Actions</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in comments)
                 {
                     <tr>
-                        <td>@Html.Display(item.User.Username)</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.Display(item.Movie.Name)</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.Display(item.Message)</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.Display(item.Flag.ToString())</td>
+                        <td>@item.User.Username</td>
+                        <td>@item.Movie.Name</td>
+                        <td>@item.Message</td>
+                        <td>@item.Flag</td>
+                        <td>
+                            <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix item">
+                                <div class="ui-dialog-buttonset">
+                                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                                        role="button" aria-disabled="false" id="@string.Format("deleteComment{0})", item.UserID)">
+                                        <a href="javascript:deleteComment(@item.CommentID);"><span class="ui-button-text">delete
+                                            comment</span></a>
+                                    </button>
+                                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                                        role="button" aria-disabled="false" id="@string.Format("deleteUser{0})", item.UserID)">
+                                        <a href="javascript:deleteUser(@item.UserID);"><span class="ui-button-text">ban user
+                                            </span></a>
+                                    </button>
+                                </div>
+                            </section>
+                        </td>
                     </tr>
                 }
             </tbody>

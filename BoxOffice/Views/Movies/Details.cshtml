@@ -78,14 +78,8 @@
                 <p>@Model.Overview</p>
             </div>
         </section>
-        @* Show buttons only for logged in users *@
-        @if (Request.IsAuthenticated)
-        {
-            <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <div class="ui-dialog-buttonset">
-                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                        role="button" aria-disabled="false" id="addToQueue">
-                        @{
+    @* Show buttons only for logged in users *@
+        @{
             // compute, whether the user already watched the movie
             var db = new BoxOfficeContext();
             var theUser = new User();
@@ -111,7 +105,13 @@
                     break;
                 }
             }
-                        }
+        }
+        @if (Request.IsAuthenticated)
+        {
+            <section id="actions" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-dialog-buttonset">
+                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        role="button" aria-disabled="false" id="addToQueue">
                         @if (Model.isRentable && db.Users.Any(u => u.Username == User.Identity.Name))
                         {
                             <a href="javascript:addToQueue(@Model.MovieID);"><span class="ui-button-text">Add to
@@ -169,7 +169,7 @@
         }
         <section id="comments">
             <label>Comments</label>
-            @foreach (var comment in Model.Comments.ToList())
+            @foreach (var comment in Model.Comments.Where(c => c.Hide == false).ToList())
             {
                 <section class="comment">
                     <label>@comment.User.Username (@comment.Date)</label>

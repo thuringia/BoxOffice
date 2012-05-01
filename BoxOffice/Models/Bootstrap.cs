@@ -107,7 +107,9 @@ namespace BoxOffice.Models
                 Dvd = dvds.First(),
                 User = users.First(),
                 Movie = movie,
-                MovieID = movie.MovieID
+                MovieID = movie.MovieID,
+                Hide = false,
+                QueuePosition = 0
             };
             context.Rentals.Add(rental);
 
@@ -162,7 +164,8 @@ namespace BoxOffice.Models
                 Date = DateTime.Now,
                 Movie = context.Movies.Find(187),
                 User = context.Users.Find(1),
-                Flag = 0
+                Flag = 0,
+                Hide = false
             };
             context.Comments.Add(comment);
 

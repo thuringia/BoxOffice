@@ -55,8 +55,8 @@ The kind of functionality required for the administrator to perform is as follow
 * <del>Investigate comments flagged by members</del>
 * Moderate (potentially remove) comments made by members
 * Remove or suspend members from the site
-* Message individual members (picked up the next time the member logs in)
-* Message all members (picked up on next log in)
+* <del>Message individual members (picked up the next time the member logs in)</del>
+* <del>Message all members (picked up on next log in)</del>
 
 ### General
 

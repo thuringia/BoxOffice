@@ -59,7 +59,7 @@
 @if (Model.Comments.Any())
 {
     <ul class="metroList">
-        @foreach (var item in Model.Comments)
+        @foreach (var item in Model.Comments.Where(c => c.Hide == false).ToList())
         {
             <li>
                 <section class="comment @string.Format("section{0}", item.CommentID)">

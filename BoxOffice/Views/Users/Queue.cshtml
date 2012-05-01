@@ -56,7 +56,7 @@
         <div id="accordion">
             @if (Model.Queue.Any())
             {
-                foreach (var rental in Model.Queue.Where(r => r.DateSent == null).OrderBy(r => r.QueuePosition))
+                foreach (var rental in Model.Queue.Where(r => r.DateSent == null && r.Hide == false).OrderBy(r => r.QueuePosition))
                 {
                 <div class="group">
                     <h3>@Html.ActionLink(@rental.Movie.Name, "Details", "Movies")</h3>

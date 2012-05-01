@@ -60,6 +60,72 @@ $(document).ready(function () {
 
 });
 
+function deleteComment(id) {
+    $.ajax({
+        url: '/Admin/DeleteComment',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id },
+        success: function (data) {
+            var sel = "#deleteComment" + id;
+            var $selector = $(sel);
+            if (data.success) {
+                $($selector).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+                window.location.href = "/Admin/Index";
+            } else {
+                $($selector).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            }
+        }
+    });
+}
+
+function deleteUser(id) {
+    $.ajax({
+        url: '/Admin/DeleteUser',
+        type: "GET",
+        dataType: "json",
+
+        // query will be the param used by your action method
+        data: { id: id },
+        success: function (data) {
+            var sel = "#deleteUser" + id;
+            var $selector = $(sel);
+            if (data.success) {
+                $($selector).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+                window.location.href = "/Admin/Index";
+            } else {
+                $($selector).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $($selector).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            }
+        }
+    });
+}
+
 function promoteMovie(id) {
     $.ajax({
         url: '/Admin/Promote/',

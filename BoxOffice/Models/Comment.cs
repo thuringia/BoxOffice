@@ -50,5 +50,10 @@ namespace BoxOffice.Models
         /// the number of times this comment was flagged by other users
         /// </summary>
         public int Flag { get; set; }
+
+        /// <summary>
+        /// Hides this comment
+        /// </summary>
+        public bool Hide { get; set; }
     }
 }

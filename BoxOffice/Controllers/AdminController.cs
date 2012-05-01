@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using BoxOffice.Models;
 using BoxOffice.ActionFilters;
 using System.Xml.Linq;
@@ -327,7 +328,7 @@ namespace BoxOffice.Controllers
         [HttpGet]
         public JsonResult Usernames(string q)
         {
-            var names = db.Users.Where(user => user.Username.Contains(q));
+            var names = db.Users.Where(user => user.Username.Contains(q) && user.Hide == false);
 
             if (names.Any())
             {
@@ -337,6 +338,60 @@ namespace BoxOffice.Controllers
                                                         }).ToList());
             }
             return Json(new {});
+        }
+
+        /// <summary>
+        /// Processes the Admin's request to "delete" a comment.
+        /// => Comment will be marked as hidden
+        /// </summary>
+        /// <param name="id">The CommentID to be deleted</param>
+        /// <returns>
+        /// {"success" = true} if successful,
+        /// {"fail" = true} if unsuccessful
+        /// </returns>
+        [HttpGet]
+        public JsonResult DeleteUser(int id)
+        {
+            try
+            {
+                var userToDelete = db.Users.First(m => m.UserID == id);
+
+                Membership.DeleteUser(username: userToDelete.Username);
+                userToDelete.Hide = true;
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { fail = true, message = e.Message });
+            }
+        }
+
+        /// <summary>
+        /// Processes the Admin's request to "delete" a comment.
+        /// => Comment will be marked as hidden
+        /// </summary>
+        /// <param name="id">The MovieID to be deleted</param>
+        /// <returns>
+        /// {"success" = true} if successful,
+        /// {"fail" = true} if unsuccessful
+        /// </returns>
+        [HttpGet]
+        public JsonResult DeleteComment(int id)
+        {
+            try
+            {
+                var commentToDelete = db.Comments.First(m => m.CommentID == id);
+                commentToDelete.Hide = false;
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { fail = true, message = e.Message });
+            }
         }
 
         /// <summary>

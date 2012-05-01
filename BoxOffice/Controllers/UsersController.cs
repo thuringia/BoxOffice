@@ -114,7 +114,7 @@ namespace BoxOffice.Controllers
 
             return
                 View(
-                    theUser.Queue.Where(rental => rental.QueuePosition == null).OrderBy(rental => rental.DateReturned).
+                    theUser.Queue.Where(rental => rental.QueuePosition == null && rental.Hide == false).OrderBy(rental => rental.DateSent).
                         ToList());
         }
 
@@ -132,23 +132,18 @@ namespace BoxOffice.Controllers
             try
             {
                 var rental = db.Rentals.First(r => r.RentalID == id);
-                var movie = rental.Movie;
-                var usr = rental.User;
 
                 // unqueue
-                movie.Rentals.Remove(rental);
-                usr.Queue.Remove(rental);
+                rental.Hide = true;
                 db.SaveChanges();
-
-                db.Rentals.Remove(rental);
-                db.SaveChanges();
+                
             }
             catch (Exception e)
             {
                 return Json(new {success = false, error = e.Message});
             }
 
-            return RedirectToAction("Queue");
+            return Json(new { success = true });
         }
 
         //

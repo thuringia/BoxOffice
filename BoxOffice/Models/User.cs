@@ -91,5 +91,10 @@ namespace BoxOffice.Models
         /// The user's rental queue
         /// </summary>
         public virtual ICollection<Rental> Queue { get; set; }
+
+        /// <summary>
+        /// marks user as deleted
+        /// </summary>
+        public bool Hide { get; set; }
     }
 }
