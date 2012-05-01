@@ -381,7 +381,7 @@ function addToQueue(id) {
         success: function (data) {
             if (data.success) {
                 $("#addToQueue").animate({
-                    backgroundColor: green
+                    backgroundColor: "#008000"
                 }, 500, function () {
                     $("#addToQueue").animate({
                         backgroundColor: "#063559"
@@ -391,7 +391,7 @@ function addToQueue(id) {
                 });
             } else if (data.fail) {
                 $("#addToQueue").animate({
-                    backgroundColor: red
+                    backgroundColor: "#FF0000"
                 }, 500, function () {
                     $("#addToQueue").animate({
                         backgroundColor: "#063559"

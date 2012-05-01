@@ -160,11 +160,7 @@ namespace BoxOffice.Controllers
         {
             var theReturn = db.Rentals.First(d => d.RentalID == id);
 
-            if (Dispatch.ReturnDVD(theReturn))
-            {
-                return Json(new {success = true});
-            }
-            return Json(new {success = false});
+            return Json(Dispatch.ReturnDVD(theReturn) ? new {success = true} : new {success = false});
         }
 
         //

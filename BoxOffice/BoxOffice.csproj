@@ -135,6 +135,7 @@
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Events\Dispatch.cs" />
     <Compile Include="Exceptions\RequestFailedException.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Exceptions\AddToQueueFailedException.cs" />

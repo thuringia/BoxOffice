@@ -25,7 +25,7 @@ The kind of functionality required for members/visitors is as follows (see marki
 * <del>View DVD of the week</del>
 * <del>Add a DVD to a personal rental list (requires log in)</del>
 * <ins>Change the order of DVD s in personal rental list (requires log in)</ins>
-* Remove a DVD from a personal rental list (requires log in)
+* <del>Remove a DVD from a personal rental list (requires log in)</del>
 * <del>View a personal history of DVD rentals including the dates when the DVD s were rented (requires log in)</del>
 * <del>Rate a DVD that has been rented or is currently rented (requires log in)</del>
 * <del>Post comments on a DVD that has been rented or is currently rented  (requires log in)</del>
