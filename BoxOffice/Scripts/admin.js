@@ -14,20 +14,20 @@ $(document).ready(function () {
 
                 // query will be the param used by your action method
                 data: request.term,
-                success: function (data) {
-                    response($.map(data, function (item) {
+                success: function(data) {
+                    response($.map(data, function(item) {
                         return { label: item.Name, value: item.Name };
-                    }))
+                    }));
                 }
-            })
+            });
         },
         minLength: 1, // require at least one character from the user
         select: function (event, ui) {
-            alert(eve.item);
+            alert(event.item);
         }
     });
 
-    var $container = $(".section");
+    var $container = $(".container");
     if ($container) {
         $container.imagesLoaded(function () {
             $container.masonry({
@@ -69,23 +69,67 @@ function promoteMovie(id) {
           id: id  
         },
         success: function (data) {
-            var selector = "promoteButton" + id;
-            if (data.success == true) {
-                $(selector).animate({
-                    backgroundColor: "#00FF00"
-                }, 500);
-            } else if (data.fail = true) {
-                $(selector).animate({
-                    backgroundColor: "#FF0000"
-                }, 500, function(selector) {
-                    $(selector).animate({
+            var sel = "#promoteButton" + id;
+            if (data.success) {
+                $(sel).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $(sel).animate({
                         backgroundColor: "#063559"
-                    }, 500)
+                    }, 500);
+                });
+            } else {
+                $(sel).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $(sel).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
                 });
             }
         },
         error: function (data) {
-            var selector = "promoteButton" + id;
+            var selector = "#promoteButton" + id;
+            $(selector).animate({
+                backgroundColor: '#FF0000'
+            }, 500);
+            $(selector).animate({
+                backgroundColor: '#063559'
+            }, 500);
+        }
+    });
+}
+
+function deleteMovie(id) {
+    $.ajax({
+        url: '/Admin/Delete/',
+        type: "GET",
+        dataType: "json",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            var sel = "#deleteButton" + id;
+            if (data.success) {
+                $(sel).animate({
+                    backgroundColor: "#008000"
+                }, 500, function () {
+                    $(sel).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            } else {
+                $(sel).animate({
+                    backgroundColor: "#FF0000"
+                }, 500, function () {
+                    $(sel).animate({
+                        backgroundColor: "#063559"
+                    }, 500);
+                });
+            }
+        },
+        error: function (data) {
+            var selector = "#deleteButton" + id;
             $(selector).animate({
                 backgroundColor: '#FF0000'
             }, 500);
